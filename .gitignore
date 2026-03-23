@@ -1,0 +1,24 @@
+# macOS metadata
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows thumbnail cache
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+
+# Editor directories
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Environment files
+.env
+.env.*
+!.env.example
