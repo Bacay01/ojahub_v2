@@ -1,195 +1,506 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-ancestors 'none';"> -->
-    <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
     <title>Ojahub V2</title>
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
-    
-</head>
-<body>
 
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg ojahub-navbar">
-  <div class="container">
+      <div class="container">
+        <!-- LOGO (TEXT NOW) -->
+        <a class="navbar-brand ojahub-logo" href="#">
+          <span class="logo-blue">Oja</span><span class="logo-orange">Hub</span>
+        </a>
 
-    <!-- LOGO (TEXT NOW) -->
-    <a class="navbar-brand ojahub-logo" href="#">
-      <span class="logo-blue">Oja</span><span class="logo-orange">Hub</span>
-    </a>
-
-    <!-- TOGGLER -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <!-- NAV CONTENT -->
-    <div class="collapse navbar-collapse" id="navbarContent">
-
-      <!-- PUSH EVERYTHING RIGHT -->
-      <div class="ms-auto d-flex align-items-center gap-4">
-
-        <!-- LINKS -->
-        <ul class="navbar-nav d-flex flex-row gap-4">
-          <li class="nav-item">
-            <a class="nav-link" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Marketplace</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Categories</a>
-          </li>
-        </ul>
-
-        <!-- BROWSE -->
-        <a href="#" class="btn browse-btn">Browse Vendors</a>
-
-        <!-- CTA -->
-        <a href="#" class="btn cta-btn">List Your Business</a>
-
-      </div>
-
-    </div>
-  </div>
-</nav>
-
-
-
-
-<!-- Hero Section -->
-
-
-<section class="hero-section">
-  <div class="container hero-container">
-
-    <!-- LEFT -->
-    <div class="hero-content">
-
-      <h1 class="hero-title">
-        Find Trusted Vendors Near You in Seconds
-      </h1>
-
-      <p class="hero-subtext">
-        OjaHub connects you with reliable vendors for food, fashion,
-        beauty, gadgets, and services — all in one place.
-      </p>
-
-      <!-- SEARCH -->
-      <div class="search-box">
-
-        <input 
-          type="text"
-          placeholder="Search vendors e.g. 'caterer'"
-          class="search-input js-search-input"
+        <!-- TOGGLER -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarContent"
         >
-
-        <button class="search-btn js-search-btn">
-          Search
+          <span class="navbar-toggler-icon"></span>
         </button>
 
+        <!-- NAV CONTENT -->
+        <div class="collapse navbar-collapse" id="navbarContent">
+          <!-- PUSH EVERYTHING RIGHT -->
+          <div class="ms-auto d-flex align-items-center gap-4">
+            <!-- LINKS -->
+            <ul class="navbar-nav d-flex flex-row gap-4">
+              <li class="nav-item">
+                <a class="nav-link" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Marketplace</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Categories</a>
+              </li>
+            </ul>
+
+            <!-- BROWSE -->
+            <a href="#" class="btn browse-btn">Browse Vendors</a>
+
+            <!-- CTA -->
+            <a href="#" class="btn cta-btn">List Your Business</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+
+    <section class="hero-section">
+      <div class="container hero-container">
+        <!-- LEFT -->
+        <div class="hero-content">
+          <h1 class="hero-title">Find Trusted Vendors Near You in Seconds</h1>
+
+          <p class="hero-subtext">
+            OjaHub connects you with reliable vendors for food, fashion, beauty,
+            gadgets, and services — all in one place.
+          </p>
+
+          <!-- SEARCH -->
+          <div class="search-box">
+            <input
+              type="text"
+              placeholder="Search vendors e.g. 'caterer'"
+              class="search-input js-search-input"
+            />
+
+            <button class="search-btn js-search-btn">Search</button>
+          </div>
+
+          <!-- BUTTONS -->
+          <div class="hero-actions">
+            <a href="#" class="btn browse-btn js-browse-vendors">
+              Browse Vendors <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+            <a href="#" class="btn cta-btn js-become-vendor">
+              Become a Vendor
+            </a>
+          </div>
+
+          <small class="hero-note">
+            Trusted by local businesses and everyday users
+          </small>
+        </div>
+
+        <!-- RIGHT -->
+        <div class="hero-visual">
+          <div class="hero-card">
+            <img src="images/hero-img.png" alt="Vendors" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!--CATEGORY -->
+
+    <section class="category-section">
+      <div class="container">
+        <!-- HEADER -->
+        <div class="category-header">
+          <h2>Browse by Category</h2>
+          <p>Find the right vendor for whatever you need</p>
+        </div>
+
+        <!-- CARDS -->
+        <div class="category-grid">
+          <div class="category-card js-category" data-category="food">
+            <div class="category-icon">🍽️</div>
+            <h3>Food Vendors</h3>
+            <span>28 vendors</span>
+          </div>
+
+          <div class="category-card js-category" data-category="fashion">
+            <div class="category-icon">👕</div>
+            <h3>Fashion & Clothing</h3>
+            <span>79 vendors</span>
+          </div>
+
+          <div class="category-card js-category" data-category="beauty">
+            <div class="category-icon">✨</div>
+            <h3>Beauty & Cosmetic</h3>
+            <span>47 vendors</span>
+          </div>
+
+          <div class="category-card js-category" data-category="gadgets">
+            <div class="category-icon">📱</div>
+            <h3>Phones & Gadgets</h3>
+            <span>10 vendors</span>
+          </div>
+
+          <div class="category-card js-category" data-category="services">
+            <div class="category-icon">🔧</div>
+            <h3>Services & Repair</h3>
+            <span>11 vendors</span>
+          </div>
+
+          <div class="category-card js-category" data-category="home">
+            <div class="category-icon">🏠</div>
+            <h3>Home & Living / Others</h3>
+            <span>38 vendors</span>
+          </div>
+        </div>
+
+        <!-- VIEW ALL -->
+        <div class="view-all">
+          <a href="#">View All Categories →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Vendors Section -->
+    <section class="section">
+      <div class="featured-header">
+        <h2>Featured Vendors</h2>
+        <p>Trusted businesses people are connecting with</p>
       </div>
 
-      <!-- BUTTONS -->
-      <div class="hero-actions">
-        <a href="#" class="btn browse-btn js-browse-vendors">
-          Browse Vendors →
-        </a>
-
-        <a href="#" class="btn cta-btn js-become-vendor">
-          Become a Vendor
-        </a>
+      <div class="section-header">
+        <p>A few trusted picks. Want more? Browse all vendors.</p>
+        <a href="#" class="btn-outline">Browse all vendors</a>
       </div>
 
-      <small class="hero-note">
-        Trusted by local businesses and everyday users
-      </small>
+      <div class="vendor-grid">
+        <!-- Card 1 -->
+        <div class="featured-vendors-card">
+          <img
+            class="featured-vendors-card-img"
+            src="images/TIJ LAUDRY.jpg"
+            alt="Laundry"
+          />
+          <div class="featured-vendors-card-body">
+            <span class="verified-badge">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+              >
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Verified · Ogbomosho
+            </span>
+            <p class="featured-vendors-card-name">TIJ Laundry</p>
+            <p class="featured-vendors-card-category">Services · Laundry</p>
+            <p class="featured-vendors-card-location">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+              Ogbomosho
+            </p>
+            <div class="featured-vendors-card-tags">
+              <span class="tag replies-tag">Replies on WhatsApp</span>
+              <span class="tag price-tag">Price on request</span>
+            </div>
+          </div>
+          <div class="featured-vendors-card-footer">
+            <a href="#" class="btn-whatsapp">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+                />
+              </svg>
+              Chat on WhatsApp
+            </a>
+          </div>
+        </div>
 
-    </div>
+        <!-- Card 2 -->
+        <div class="featured-vendors-card">
+          <img
+            class="featured-vendors-card-img"
+            src="images/wealth 1.jpg"
+            alt="Phones"
+          />
+          <div class="featured-vendors-card-body">
+            <span class="verified-badge">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+              >
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Verified · Ogbomosho
+            </span>
+            <p class="featured-vendors-card-name">Wealth Phone &amp; Gadgets</p>
+            <p class="featured-vendors-card-category">Phones &amp; Gadgets</p>
+            <p class="featured-vendors-card-location">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+              Stadium Road, Ogbomosho
+            </p>
+            <div class="featured-vendors-card-tags">
+              <span class="tag replies-tag">Replies on WhatsApp</span>
+              <span class="tag price-tag">Price on request</span>
+            </div>
+          </div>
+          <div class="featured-vendors-card-footer">
+            <a href="#" class="btn-whatsapp">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+                />
+              </svg>
+              Chat on WhatsApp
+            </a>
+          </div>
+        </div>
 
-    <!-- RIGHT -->
-    <div class="hero-visual">
-      <div class="hero-card">
-        <img src="images/hero-marketplace-ByS-j8VR.jpg" alt="Vendors">
+        <!-- Card 3 -->
+        <div class="featured-vendors-card">
+          <img
+            class="featured-vendors-card-img"
+            src="images/chen 2.jpg"
+            alt="Fashion"
+          />
+          <div class="featured-vendors-card-body">
+            <span class="verified-badge">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+              >
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Verified · Ogbomosho
+            </span>
+            <p class="featured-vendors-card-name">Trendy Luxe By Chen</p>
+            <p class="featured-vendors-card-category">
+              Fashion · Clothing Brand
+            </p>
+            <p class="featured-vendors-card-location">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+              Yoaco Phase 2
+            </p>
+            <div class="featured-vendors-card-tags">
+              <span class="tag replies-tag">Replies on WhatsApp</span>
+              <span class="tag price-tag">Price on request</span>
+            </div>
+          </div>
+          <div class="featured-vendors-card-footer">
+            <a href="#" class="btn-whatsapp">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+                />
+              </svg>
+              Chat on WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="featured-vendors-card">
+          <img
+            class="featured-vendors-card-img"
+            src="images/NK'S AURUM.jpg"
+            alt="Beauty"
+          />
+          <div class="featured-vendors-card-body">
+            <span class="verified-badge">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+              >
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Verified · Ogbomosho
+            </span>
+            <p class="featured-vendors-card-name">Nurturing Nature Beauty</p>
+            <p class="featured-vendors-card-category">Beauty · Skincare</p>
+            <p class="featured-vendors-card-location">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+              Ogbomosho
+            </p>
+            <div class="featured-vendors-card-tags">
+              <span class="tag replies-tag">Replies on WhatsApp</span>
+              <span class="tag price-tag">Price on request</span>
+            </div>
+          </div>
+          <div class="featured-vendors-card-footer">
+            <a href="#" class="btn-whatsapp">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+                />
+              </svg>
+              Chat on WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="featured-vendors-card">
+          <img
+            class="featured-vendors-card-img"
+            src="images/Bee’s cafe and bistro (bees treat).jpeg"
+            alt="Cafe"
+          />
+          <div class="featured-vendors-card-body">
+            <span class="verified-badge">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+              >
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Verified · Ogbomosho
+            </span>
+            <p class="featured-vendors-card-name">The Cafe and Bistro</p>
+            <p class="featured-vendors-card-category">
+              Food &amp; Drinks · Restaurant
+            </p>
+            <p class="featured-vendors-card-location">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+              Ogbomosho
+            </p>
+            <div class="featured-vendors-card-tags">
+              <span class="tag replies-tag">Replies on WhatsApp</span>
+              <span class="tag price-tag">Price on request</span>
+            </div>
+          </div>
+          <div class="featured-vendors-card-footer">
+            <a href="#" class="btn-whatsapp">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+                />
+              </svg>
+              Chat on WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="featured-vendors-card">
+          <img
+            class="featured-vendors-card-img"
+            src="images/AKIN DECOR.jpg"
+            alt="Food"
+          />
+          <div class="featured-vendors-card-body">
+            <span class="verified-badge">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+              >
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              Verified · Ogbomosho
+            </span>
+            <p class="featured-vendors-card-name">Mama's Kitchen</p>
+            <p class="featured-vendors-card-category">
+              Food &amp; Drinks · Home Cooking
+            </p>
+            <p class="featured-vendors-card-location">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+              Ring Road, Ogbomosho
+            </p>
+            <div class="featured-vendors-card-tags">
+              <span class="tag replies-tag">Replies on WhatsApp</span>
+              <span class="tag price-tag">Price on request</span>
+            </div>
+          </div>
+          <div class="featured-vendors-card-footer">
+            <a href="#" class="btn-whatsapp">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+                />
+              </svg>
+              Chat on WhatsApp
+            </a>
+          </div>
+        </div>
       </div>
-    </div>
-
-  </div>
-</section>
-
-
-
-<!--CATEGORY -->
-
-
-<section class="category-section">
-  <div class="container">
-
-    <!-- HEADER -->
-    <div class="category-header">
-      <h2>Browse by Category</h2>
-      <p>Find the right vendor for whatever you need</p>
-    </div>
-
-    <!-- CARDS -->
-    <div class="category-grid">
-
-      <div class="category-card js-category" data-category="food">
-        <div class="category-icon">🍽️</div>
-        <h3>Food Vendors</h3>
-        <span>28 vendors</span>
-      </div>
-
-      <div class="category-card js-category" data-category="fashion">
-        <div class="category-icon">👕</div>
-        <h3>Fashion & Clothing</h3>
-        <span>79 vendors</span>
-      </div>
-
-      <div class="category-card js-category" data-category="beauty">
-        <div class="category-icon">✨</div>
-        <h3>Beauty & Cosmetic</h3>
-        <span>47 vendors</span>
-      </div>
-
-      <div class="category-card js-category" data-category="gadgets">
-        <div class="category-icon">📱</div>
-        <h3>Phones & Gadgets</h3>
-        <span>10 vendors</span>
-      </div>
-
-      <div class="category-card js-category" data-category="services">
-        <div class="category-icon">🔧</div>
-        <h3>Services & Repair</h3>
-        <span>11 vendors</span>
-      </div>
-
-      <div class="category-card js-category" data-category="home">
-        <div class="category-icon">🏠</div>
-        <h3>Home & Living / Others</h3>
-        <span>38 vendors</span>
-      </div>
-
-    </div>
-
-    <!-- VIEW ALL -->
-    <div class="view-all">
-      <a href="#">View All Categories →</a>
-    </div>
-
-  </div>
-</section>
-    
-
-
-
+    </section>
 
     <script src="main.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-</body>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
