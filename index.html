@@ -25,50 +25,8 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg ojahub-navbar sticky-top">
-      <div class="container">
-        <!-- LOGO (TEXT NOW) -->
-        <a class="navbar-brand ojahub-logo" href="#">
-          <span class="logo-blue">Oja</span><span class="logo-orange">Hub</span>
-        </a>
-
-        <!-- TOGGLER -->
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarContent"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <!-- NAV CONTENT -->
-        <div class="collapse navbar-collapse" id="navbarContent">
-          <!-- PUSH EVERYTHING RIGHT -->
-          <div class="ms-auto d-flex align-items-center gap-4">
-            <!-- LINKS -->
-            <ul class="navbar-nav d-flex flex-row gap-4">
-              <li class="nav-item">
-                <a class="nav-link" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="marketplace.html">Marketplace</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="categories.html">Categories</a>
-              </li>
-            </ul>
-
-            <!-- BROWSE -->
-            <a href="#" class="btn browse-btn">Browse Vendors</a>
-
-            <!-- CTA -->
-            <a href="signup.html" class="btn cta-btn">List Your Business</a>
-          </div>
-        </div>
-      </div>
-    </nav>
+    <!-- Header placeholder -->
+    <div id="header"></div>
 
     <!-- Hero Section -->
 
@@ -125,6 +83,7 @@
       <div class="container">
         <!-- HEADER -->
         <div class="category-header">
+          <p class="section-tag">Categories</p>
           <h2>Browse by Category</h2>
           <p>Find the right vendor for whatever you need</p>
         </div>
@@ -170,7 +129,7 @@
 
         <!-- VIEW ALL -->
         <div class="view-all">
-          <a href="#">View All Categories →</a>
+          <a href="categories.html">View All Categories →</a>
         </div>
       </div>
     </section>
@@ -178,13 +137,14 @@
     <!-- Featured Vendors Section -->
     <section class="section">
       <div class="featured-header">
+        <p class="section-tag">Top Vendors</p>
         <h2>Featured Vendors</h2>
         <p>Trusted businesses people are connecting with</p>
       </div>
 
       <div class="section-header">
         <p>A few trusted picks. Want more? Browse all vendors.</p>
-        <a href="#" class="btn-outline">Browse all vendors</a>
+        <a href="marketplace.html" class="btn-outline">Browse all vendors</a>
       </div>
 
       <div class="vendor-grid">
@@ -227,13 +187,9 @@
             </div>
           </div>
           <div class="featured-vendors-card-footer">
-            <a href="#" class="btn-whatsapp">
-              <svg viewBox="0 0 24 24">
-                <path
-                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
-                />
-              </svg>
-              Chat on WhatsApp
+            <a href="#" class="btn-veiw-details">
+              <i class="fa-regular fa-eye"></i>
+              View Details
             </a>
           </div>
         </div>
@@ -277,13 +233,9 @@
             </div>
           </div>
           <div class="featured-vendors-card-footer">
-            <a href="#" class="btn-whatsapp">
-              <svg viewBox="0 0 24 24">
-                <path
-                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
-                />
-              </svg>
-              Chat on WhatsApp
+            <a href="#" class="btn-veiw-details">
+              <i class="fa-regular fa-eye"></i>
+              View Details
             </a>
           </div>
         </div>
@@ -329,13 +281,9 @@
             </div>
           </div>
           <div class="featured-vendors-card-footer">
-            <a href="#" class="btn-whatsapp">
-              <svg viewBox="0 0 24 24">
-                <path
-                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
-                />
-              </svg>
-              Chat on WhatsApp
+            <a href="#" class="btn-veiw-details">
+              <i class="fa-regular fa-eye"></i>
+              View Details
             </a>
           </div>
         </div>
@@ -379,13 +327,9 @@
             </div>
           </div>
           <div class="featured-vendors-card-footer">
-            <a href="#" class="btn-whatsapp">
-              <svg viewBox="0 0 24 24">
-                <path
-                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
-                />
-              </svg>
-              Chat on WhatsApp
+            <a href="#" class="btn-veiw-details">
+              <i class="fa-regular fa-eye"></i>
+              View Details
             </a>
           </div>
         </div>
@@ -431,13 +375,9 @@
             </div>
           </div>
           <div class="featured-vendors-card-footer">
-            <a href="#" class="btn-whatsapp">
-              <svg viewBox="0 0 24 24">
-                <path
-                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
-                />
-              </svg>
-              Chat on WhatsApp
+            <a href="#" class="btn-veiw-details">
+              <i class="fa-regular fa-eye"></i>
+              View Details
             </a>
           </div>
         </div>
@@ -483,275 +423,177 @@
             </div>
           </div>
           <div class="featured-vendors-card-footer">
-            <a href="#" class="btn-whatsapp">
-              <svg viewBox="0 0 24 24">
-                <path
-                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
-                />
-              </svg>
-              Chat on WhatsApp
+            <a href="#" class="btn-veiw-details">
+              <i class="fa-regular fa-eye"></i>
+              View Details
             </a>
           </div>
         </div>
       </div>
     </section>
 
-
-
-
     <!-- How it Works -->
 
-
     <section class="how-it-works">
-  <div class="container">
-
-    <!-- HEADER -->
-    <div class="how-header">
-      <h2>How Oja Hub Works</h2>
-    </div>
-
-    <!-- STEPS -->
-    <div class="how-steps">
-
-      <!-- STEP 1 -->
-      <div class="how-step">
-        <div class="how-icon">
-          <i class="fa-solid fa-magnifying-glass"></i>
+      <div class="container">
+        <!-- HEADER -->
+        <div class="how-header">
+          <p class="section-tag">Simple Process</p>
+          <h2>How Oja Hub Works</h2>
+          <p class="section-subtitle">
+            A simple step-by-step guide to finding, connecting, and working with
+            vendors.
+          </p>
         </div>
-        <span class="step-label">Step 1</span>
-        <h3>Search or Browse</h3>
-        <p>Find vendors by category or search for what you need</p>
-      </div>
 
-      <!-- STEP 2 -->
-      <div class="how-step">
-        <div class="how-icon">
-          <i class="fa-regular fa-eye"></i>
+        <!-- STEPS -->
+        <div class="how-steps">
+          <!-- STEP 1 -->
+          <div class="how-step">
+            <div class="how-icon">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <span class="step-label">Step 1</span>
+            <h3>Search or Browse</h3>
+            <p>Find vendors by category or search for what you need</p>
+          </div>
+
+          <!-- STEP 2 -->
+          <div class="how-step">
+            <div class="how-icon">
+              <i class="fa-regular fa-eye"></i>
+            </div>
+            <span class="step-label">Step 2</span>
+            <h3>View Vendor Details</h3>
+            <p>Check their services, reviews, and business info.</p>
+          </div>
+
+          <!-- STEP 3 -->
+          <div class="how-step">
+            <div class="how-icon">
+              <i class="fa-regular fa-comment-dots"></i>
+            </div>
+            <span class="step-label">Step 3</span>
+            <h3>Chat on WhatsApp</h3>
+            <p>Contact the vendor directly and get what you need fast.</p>
+          </div>
         </div>
-        <span class="step-label">Step 2</span>
-        <h3>View Vendor Details</h3>
-        <p>Check their services, reviews, and business info.</p>
       </div>
+    </section>
 
-      <!-- STEP 3 -->
-      <div class="how-step">
-        <div class="how-icon">
-          <i class="fa-regular fa-comment-dots"></i>
+    <!-- WHY USE OJAHUB -->
+
+    <section class="why-section">
+      <div class="container">
+        <!-- HEADER -->
+        <div class="why-header">
+          <p class="section-tag">Why Choose Us</p>
+          <h2>Why Use Oja Hub?</h2>
+          <p class="section-subtitle">
+            We make it easy to connect with reliable vendors, saving you time
+            and ensuring quality service.
+          </p>
         </div>
-        <span class="step-label">Step 3</span>
-        <h3>Chat on WhatsApp</h3>
-        <p>Contact the vendor directly and get what you need fast.</p>
-      </div>
 
-    </div>
+        <!-- CARDS -->
+        <div class="why-grid">
+          <!-- CARD 1 -->
+          <div class="why-card">
+            <div class="why-icon">
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <h3>Verified Vendors</h3>
+            <p>We highlight trusted and reliable businesses</p>
+          </div>
 
-  </div>
-</section>
+          <!-- CARD 2 -->
+          <div class="why-card">
+            <div class="why-icon">
+              <i class="fa-solid fa-bolt"></i>
+            </div>
+            <h3>Fast & Easy</h3>
+            <p>No stress — find and contact vendors in minutes</p>
+          </div>
 
-
-
-
-
-<!-- WHY USE OJAHUB -->
-
-
-<section class="why-section">
-  <div class="container">
-
-    <!-- HEADER -->
-    <div class="why-header">
-      <h2>Why Use Oja Hub?</h2>
-    </div>
-
-    <!-- CARDS -->
-    <div class="why-grid">
-
-      <!-- CARD 1 -->
-      <div class="why-card">
-        <div class="why-icon">
-          <i class="fa-solid fa-shield-halved"></i>
+          <!-- CARD 3 -->
+          <div class="why-card">
+            <div class="why-icon">
+              <i class="fa-regular fa-comment-dots"></i>
+            </div>
+            <h3>Direct Communication</h3>
+            <p>Chat instantly via WhatsApp — no middleman</p>
+          </div>
         </div>
-        <h3>Verified Vendors</h3>
-        <p>We highlight trusted and reliable businesses</p>
       </div>
+    </section>
 
-      <!-- CARD 2 -->
-      <div class="why-card">
-        <div class="why-icon">
-          <i class="fa-solid fa-bolt"></i>
+    <!-- BRWOSE AND LIST -->
+
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-grid">
+          <!-- LEFT CARD -->
+          <div class="cta-card cta-blue">
+            <h2>Ready to Find the Right Vendor?</h2>
+            <p>Browse hundreds of trusted businesses near you.</p>
+
+            <a href="marketplace.html" class="cta-btn-white">
+              Browse Vendors <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+
+          <!-- RIGHT CARD -->
+          <div class="cta-card cta-orange">
+            <h2>Do You Own a Business?</h2>
+            <p>Join Oja Hub and connect with more customers</p>
+
+            <a href="signup.html" class="cta-btn-white">
+              List Your Business <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
         </div>
-        <h3>Fast & Easy</h3>
-        <p>No stress — find and contact vendors in minutes</p>
       </div>
+    </section>
 
-      <!-- CARD 3 -->
-      <div class="why-card">
-        <div class="why-icon">
-          <i class="fa-regular fa-comment-dots"></i>
+    <!-- HELP US IMPROVE OJA HUB -->
+    <section class="help-us-improve">
+      <div class="container text-center">
+        <p class="section-tag">Feedback</p>
+        <h2 class="section-title">Help Us Improve OjaHub</h2>
+        <p class="section-subtitle">
+          Your experience matters. Share quick feedback to help us improve how
+          buyers and vendors connect.
+        </p>
+
+        <!-- OPTIONS -->
+        <div class="feedback-options">
+          <div class="feedback-card">
+            <i class="fas fa-check-circle"></i>
+            <p>I found what I needed</p>
+          </div>
+
+          <div class="feedback-card">
+            <i class="fas fa-user-check"></i>
+            <p>Vendor was responsive</p>
+          </div>
+
+          <div class="feedback-card">
+            <i class="fas fa-exclamation-circle"></i>
+            <p>Needs improvement</p>
+          </div>
         </div>
-        <h3>Direct Communication</h3>
-        <p>Chat instantly via WhatsApp — no middleman</p>
+
+        <!-- BUTTON -->
+        <button class="feedback-btn">
+          <i class="fa-brands fa-whatsapp"></i>
+          Send Feedback
+        </button>
       </div>
+    </section>
 
-    </div>
-
-  </div>
-</section>
-
-
-
-
-<!-- BRWOSE AND LIST -->
-
-
-<section class="cta-section">
-  <div class="container">
-    
-    <div class="cta-grid">
-
-      <!-- LEFT CARD -->
-      <div class="cta-card cta-blue">
-        <h2>Ready to Find the Right Vendor?</h2>
-        <p>Browse hundreds of trusted businesses near you.</p>
-
-       <a href="marketplace.html" class="cta-btn-white">
-         Browse Vendors <i class="fa-solid fa-arrow-right"></i>
-       </a>
-      </div>
-
-      <!-- RIGHT CARD -->
-      <div class="cta-card cta-orange">
-        <h2>Do You Own a Business?</h2>
-        <p>Join Oja Hub and connect with more customers</p>
-
-        <a href="signup.html" class="cta-btn-white">
-          List Your Business <i class="fa-solid fa-arrow-right"></i>
-        </a>
-      </div>
-
-    </div>
-
-  </div>
-</section>
-
-
-
-
-<!-- Help us improve -->
-
-
-<section class="feedback-section">
-  <div class="container">
-
-    <!-- HEADER -->
-    <div class="feedback-header">
-      <h2>Help Us Improve OjaHub</h2>
-      <p>Your feedback helps us make OjaHub better for everyone.</p>
-    </div>
-
-    <!-- FORM BOX -->
-    <div class="feedback-box">
-
-      <label class="feedback-item">
-        <input type="checkbox" class="js-feedback-option" value="Found what I needed">
-        Did you find what you needed?
-      </label>
-
-      <label class="feedback-item">
-        <input type="checkbox" class="js-feedback-option" value="Vendor was responsive">
-        Was the vendor responsive?
-      </label>
-
-      <label class="feedback-item">
-        <input type="checkbox" class="js-feedback-option" value="Improve experience">
-        How can we improve your experience?
-      </label>
-
-    </div>
-
-    <!-- BUTTON -->
-    <div class="feedback-action">
-      <button class="feedback-btn js-feedback-btn">
-        <i class="fa-brands fa-whatsapp"></i>
-        Send Feedback on WhatsApp
-      </button>
-    </div>
-
-  </div>
-</section>
-
-
-
-<!-- FOOTER -->
-
-<footer class="footer">
-  <div class="container">
-
-    <!-- TOP GRID -->
-    <div class="footer-grid">
-
-      <!-- ABOUT -->
-      <div class="footer-col">
-        <h4>About OjaHub</h4>
-                <a href="about.html">What is OjaHub</a>
-
-        <a href="how-it-works.html">How it Works</a>
-
-        <a href="https://wa.me/2348165410790?text=Hello%20OjaHub" target="_blank">
-          Contact Us
-        </a>
-      </div>
-
-      <!-- BUYERS -->
-      <div class="footer-col">
-        <h4>For Buyers</h4>
-        <a href="marketplace.html">Browse Vendors</a>
-        <a href="categories.html">Categories</a>
-        <a href="buying-safe.html">Buying Safely on OjaHub</a>
-        <a href="faqs.html">FAQs</a>
-      </div>
-
-      <!-- VENDORS -->
-      <div class="footer-col">
-        <h4>For Vendors</h4>
-        <a href="signup.html">List Your Business</a>
-        <a href="vendor-guidelines.html">Vendor Guidelines</a>
-        <a href="vendor-support.html">Vendor Support</a>
-      </div>
-
-      <!-- SUPPORT -->
-      <div class="footer-col">
-        <h4>Support</h4>
-        <a href="help-center.html">Help Center</a>
-        <a href="terms.html">Terms of Use</a>
-        <a href="privacy.html">Privacy Policy</a>
-      </div>
-
-    </div>
-
-    <!-- LINE -->
-    <div class="footer-divider"></div>
-
-    <!-- BOTTOM TEXT -->
-    <div class="footer-bottom">
-      <p class="footer-desc">
-        OjaHub connects you with trusted vendors. All transactions and communication
-        happen directly between users and vendors.
-      </p>
-
-      <p class="footer-small">
-        OjaHub is a marketplace that connects users with independent vendors. OjaHub does not
-        handle payments or guarantee transactions. Users are advised to verify vendors and transact responsibly.
-      </p>
-
-      <p class="footer-copy">
-        © 2026 OjaHub. All rights reserved.
-      </p>
-    </div>
-
-  </div>
-</footer>
-
+    <!-- Footer placeholder -->
+    <div id="footer"></div>
+    <!-- <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> -->
     <script src="main.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
