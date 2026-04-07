@@ -1,183 +1,161 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Buying Safely on OjaHub</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Buying Safely on OjaHub</title>
 
-  <!-- BOOTSTRAP -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- BOOTSTRAP -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
 
-  <!-- FONT AWESOME -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" rel="stylesheet">
+    <!-- FONT AWESOME -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      rel="stylesheet"
+    />
 
-  <!-- YOUR CSS -->
-  <link rel="stylesheet" href="style.css">
-</head>
+    <!-- YOUR CSS -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-<body>
+  <body>
+    <!-- Header placeholder -->
+    <div id="header"></div>
 
-  <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg ojahub-navbar sticky-top">
-      <div class="container">
-        <!-- LOGO (TEXT NOW) -->
-        <a class="navbar-brand ojahub-logo" href="#">
-          <span class="logo-blue">Oja</span><span class="logo-orange">Hub</span>
-        </a>
+    <section class="buying-safe-hero">
+      <p class="buying-safe-hero-label">Buyer's Guide</p>
+      <h1>Buying Safely on OjaHub</h1>
+      <p>
+        Your safety matters to us. Follow these tips to have a smooth and secure
+        experience on OjaHub.
+      </p>
+    </section>
 
-        <!-- TOGGLER -->
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarContent"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <!-- NAV CONTENT -->
-        <div class="collapse navbar-collapse" id="navbarContent">
-          <!-- PUSH EVERYTHING RIGHT -->
-          <div class="ms-auto d-flex align-items-center gap-4">
-            <!-- LINKS -->
-            <ul class="navbar-nav d-flex flex-row gap-4">
-              <li class="nav-item">
-                <a class="nav-link" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="marketplace.html">Marketplace</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="categories.html">Categories</a>
-              </li>
-            </ul>
-
-            <!-- BROWSE -->
-            <a href="#" class="btn browse-btn">Browse Vendors</a>
-
-            <!-- CTA -->
-            <a href="signup.html" class="btn cta-btn">List Your Business</a>
+    <!-- Cards -->
+    <section class="buying-safe-cards-section">
+      <div class="buying-safe-cards-grid">
+        <!-- Verify Vendor -->
+        <div class="buying-safe-card">
+          <div class="buying-safe-card-icon">
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="8" r="4" />
+              <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+              <path d="M16 6l1.5 1.5L20 5" />
+            </svg>
           </div>
+          <h3>Verify the Vendor</h3>
+          <p>
+            Before making any purchase, check the vendor's profile for ratings,
+            reviews, and verification badges. A verified vendor has been
+            reviewed by OjaHub for authenticity.
+          </p>
+        </div>
+
+        <!-- WhatsApp -->
+        <div class="buying-safe-card">
+          <div class="buying-safe-card-icon">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+              />
+            </svg>
+          </div>
+          <h3>Communicate Clearly on WhatsApp</h3>
+          <p>
+            Always discuss product details, pricing, delivery terms, and
+            timelines directly with the vendor before committing. Keep records
+            of your conversations for reference.
+          </p>
+        </div>
+
+        <!-- Photos & Videos -->
+        <div class="buying-safe-card">
+          <div class="buying-safe-card-icon">
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="3" />
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+            </svg>
+          </div>
+          <h3>Ask for Photos &amp; Videos</h3>
+          <p>
+            Request real images or videos of the product or service before
+            paying. Avoid vendors who are unwilling to share proof of what
+            they're offering.
+          </p>
+        </div>
+
+        <!-- Payments -->
+        <div class="buying-safe-card">
+          <div class="buying-safe-card-icon">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"
+              />
+              <line x1="12" y1="9" x2="12" y2="13" />
+              <line x1="12" y1="17" x2="12.01" y2="17" />
+            </svg>
+          </div>
+          <h3>Be Cautious with Payments</h3>
+          <p>
+            Avoid paying the full amount upfront for high-value items. If
+            possible, arrange payment on delivery or split payments to minimize
+            risk.
+          </p>
+        </div>
+
+        <!-- Safe Locations -->
+        <div class="buying-safe-card">
+          <div class="buying-safe-card-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+          </div>
+          <h3>Meet in Safe Locations</h3>
+          <p>
+            For in-person transactions, choose a public and well-lit location.
+            Bring someone along if you can, and avoid sharing your home address
+            with strangers.
+          </p>
+        </div>
+
+        <!-- Reviews -->
+        <div class="buying-safe-card">
+          <div class="buying-safe-card-icon">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"
+              />
+              <path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3" />
+            </svg>
+          </div>
+          <h3>Leave Honest Reviews</h3>
+          <p>
+            After your transaction, leave a review to help other buyers make
+            informed decisions. Your feedback keeps the OjaHub community safe
+            and trustworthy.
+          </p>
         </div>
       </div>
-    </nav>
+    </section>
 
-
-  <!-- PAGE -->
-  <section class="page-section">
-    <div class="container">
-
-      <!-- HEADER -->
-      <div class="page-header">
-        <h1>Buying Safely on OjaHub</h1>
-        <p>Follow these tips to have a safe and smooth experience</p>
-      </div>
-
-      <!-- CONTENT -->
-      <div class="page-content">
-
-        <h5>🔍 Verify Vendors</h5>
+    <!-- Important Reminder -->
+    <div class="reminder-wrap">
+      <div class="reminder">
+        <h2>Important Reminder</h2>
         <p>
-          Always check vendor details, location, and profile before making any decision.
+          OjaHub is a directory platform that connects buyers with independent
+          vendors. We do not process payments, handle deliveries, or guarantee
+          transactions. Always exercise caution and transact responsibly.
         </p>
-
-        <h5>💬 Communicate Clearly</h5>
-        <p>
-          Chat with the vendor first. Ask questions and confirm availability before payment.
-        </p>
-
-        <h5>💸 Be Careful with Payments</h5>
-        <p>
-          Avoid sending money without clear agreement. Make sure you trust the vendor before paying.
-        </p>
-
-        <h5>📍 Meet Safely (if necessary)</h5>
-        <p>
-          If meeting in person, choose a safe public location.
-        </p>
-
-        <h5>⚠️ Report Suspicious Activity</h5>
-        <p>
-          If something feels wrong, do not proceed. Report the vendor immediately.
-        </p>
-
       </div>
-
-    </div>
-  </section>
-
-
-  <!-- FOOTER -->
-
-<footer class="footer">
-  <div class="container">
-
-    <!-- TOP GRID -->
-    <div class="footer-grid">
-
-      <!-- ABOUT -->
-      <div class="footer-col">
-        <h4>About OjaHub</h4>
-                <a href="about.html">What is OjaHub</a>
-
-        <a href="how-it-works.html">How it Works</a>
-
-        <a href="https://wa.me/2348165410790?text=Hello%20OjaHub" target="_blank">
-          Contact Us
-        </a>
-      </div>
-
-      <!-- BUYERS -->
-      <div class="footer-col">
-        <h4>For Buyers</h4>
-        <a href="marketplace.html">Browse Vendors</a>
-        <a href="categories.html">Categories</a>
-        <a href="buying-safe.html">Buying Safely on OjaHub</a>
-        <a href="faqs.html">FAQs</a>
-      </div>
-
-      <!-- VENDORS -->
-      <div class="footer-col">
-        <h4>For Vendors</h4>
-        <a href="signup.html">List Your Business</a>
-        <a href="vendor-guidelines.html">Vendor Guidelines</a>
-        <a href="vendor-support.html">Vendor Support</a>
-      </div>
-
-      <!-- SUPPORT -->
-      <div class="footer-col">
-        <h4>Support</h4>
-        <a href="help-center.html">Help Center</a>
-        <a href="terms.html">Terms of Use</a>
-        <a href="privacy.html">Privacy Policy</a>
-      </div>
-
     </div>
 
-    <!-- LINE -->
-    <div class="footer-divider"></div>
-
-    <!-- BOTTOM TEXT -->
-    <div class="footer-bottom">
-      <p class="footer-desc">
-        OjaHub connects you with trusted vendors. All transactions and communication
-        happen directly between users and vendors.
-      </p>
-
-      <p class="footer-small">
-        OjaHub is a marketplace that connects users with independent vendors. OjaHub does not
-        handle payments or guarantee transactions. Users are advised to verify vendors and transact responsibly.
-      </p>
-
-      <p class="footer-copy">
-        © 2026 OjaHub. All rights reserved.
-      </p>
-    </div>
-
-  </div>
-</footer>
-
-
-
-</body>
+    <!-- Footer placeholder -->
+    <div id="footer"></div>
+    <!-- <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> -->
+    <script src="main.js"></script>
+  </body>
 </html>

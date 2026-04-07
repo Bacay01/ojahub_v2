@@ -1551,3 +1551,294 @@ body {
     max-width: 300px;
   }
 }
+
+/* CONTACT SECTION */
+.contact-hero {
+  background: #f9fafb;
+  text-align: center;
+  padding: 64px 24px 72px;
+}
+
+.contact-hero .eyebrow {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: #ff6b00;
+  margin-bottom: 12px;
+}
+
+.contact-hero h1 {
+  font-size: clamp(28px, 5vw, 40px);
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 14px;
+}
+
+.contact-hero p {
+  font-size: 15px;
+  color: #555;
+  line-height: 1.65;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.contact-body {
+  background: #fff;
+  padding: 64px 24px 72px;
+}
+
+/* Channel cards */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  max-width: 880px;
+  margin: 0 auto 40px;
+}
+
+.contact-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 28px 26px 26px;
+  background: #fff;
+}
+
+.icon-wrap {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #fef0e6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.icon-wrap svg {
+  width: 20px;
+  height: 20px;
+  stroke: #d4700a;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.contact-card h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+}
+
+.contact-card p {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.65;
+  margin-bottom: 20px;
+}
+
+.card-link {
+  font-size: 14px;
+  font-weight: 500;
+  color: #ff6b00;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: opacity 0.15s;
+}
+
+.card-link:hover {
+  opacity: 0.75;
+  text-decoration: underline;
+}
+
+/* Info strip */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+.info-card {
+  background: #f7f8fa;
+  border-radius: 10px;
+  padding: 20px 22px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.info-card svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  stroke: #2563eb;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  margin-top: 2px;
+}
+
+.info-card strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 4px;
+}
+
+.info-card span {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.55;
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  .contact-hero {
+    padding: 40px 16px 48px;
+  }
+
+  .contact-body {
+    padding: 40px 16px 48px;
+  }
+
+  .cards-grid,
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* BUYING SAFE SECTION */
+.buying-safe-hero {
+  background: #f9fafb;
+  text-align: center;
+  padding: 80px 24px 100px;
+}
+
+.buying-safe-hero-label {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: #ff6b00;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.buying-safe-hero h1 {
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 16px;
+}
+
+.buying-safe-hero p {
+  font-size: 16px;
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Cards section */
+.buying-safe-cards-section {
+  background: #fff;
+  padding: 60px 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.buying-safe-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 900px) {
+  .buying-safe-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 580px) {
+  .buying-safe-cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.buying-safe-card {
+  background: #fff;
+  border: 1px solid #e8eaed;
+  border-radius: 16px;
+  padding: 28px 24px;
+}
+
+.buying-safe-card-icon {
+  width: 52px;
+  height: 52px;
+  background: #fff4ec;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.buying-safe-card-icon svg {
+  width: 24px;
+  height: 24px;
+  stroke: #ff6b00;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.buying-safe-card h3 {
+  font-size: 17px;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 10px;
+}
+
+.buying-safe-card p {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.7;
+}
+
+/* Reminder */
+.reminder-wrap {
+  background: #fff;
+  padding: 0 24px 80px;
+}
+
+.reminder {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: #fff9f5;
+  border: 1px solid #ffdcc4;
+  border-radius: 16px;
+  padding: 40px 32px;
+  text-align: center;
+}
+
+.reminder h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 14px;
+}
+
+.reminder p {
+  font-size: 15px;
+  color: #555;
+  max-width: 640px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
