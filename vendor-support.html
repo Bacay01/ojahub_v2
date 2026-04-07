@@ -13,6 +13,138 @@
 
   <!-- YOUR CSS -->
   <link rel="stylesheet" href="style.css">
+
+  <style>
+      .guidelines-hero {
+  background: #f3f4f6;
+  padding: 80px 20px;
+}
+
+.guidelines-tag {
+  color: #ff7a00;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+.guidelines-title {
+  font-size: 42px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 15px;
+}
+
+.guidelines-subtext {
+  max-width: 600px;
+  margin: 0 auto;
+  font-size: 16px;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+
+.vendor-support {
+  padding: 60px 20px;
+  background: #ffffff;
+}
+
+/* GRID */
+.support-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+/* CARD */
+.support-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 25px;
+  background: #ffffff;
+  transition: 0.3s ease;
+}
+
+/* ICON */
+.support-icon {
+  width: 40px;
+  height: 40px;
+  background: #fff3eb;
+  color: #ff7a00;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+/* TEXT */
+.support-card h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #111827;
+}
+
+.support-card p {
+  font-size: 14px;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+
+/* SUPPORT */
+
+.support-cta {
+  padding: 50px 20px;
+}
+
+.support-cta .container {
+  background: linear-gradient(135deg, #1a5cff, #002f9e);
+  border-radius: 20px;
+  padding: 50px 20px;
+  max-width: 1000px;
+}
+
+/* TITLE */
+.support-cta-title {
+  color: #ffffff;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+/* TEXT */
+.support-cta-text {
+  color: rgba(255,255,255,0.8);
+  font-size: 14px;
+  max-width: 550px;
+  margin: 0 auto 25px;
+}
+
+/* BUTTON */
+.support-cta-btn {
+  display: inline-block;
+  background: #ff7a00;
+  color: #fff;
+  padding: 12px 28px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .support-cta-title {
+    font-size: 22px;
+  }
+
+  .support-cta-text {
+    font-size: 13px;
+  }
+}
+  </style>
 </head>
 
 <body>
@@ -64,52 +196,120 @@
 
 
   <!-- PAGE -->
-  <section class="page-section">
-    <div class="container">
+  
 
       <!-- HEADER -->
-      <div class="page-header">
-        <h1>Vendor Support</h1>
-        <p>We’re here to help you grow your business on OjaHub</p>
-      </div>
+       <section class="guidelines-hero">
+  <div class="container text-center">
+
+    <p class="guidelines-tag">
+      Vendor Help
+    </p>
+
+    <h1 class="guidelines-title">
+      Vendor Support
+    </h1>
+
+    <p class="guidelines-subtext">
+      We're here to help you get the most out of OjaHub. 
+      Browse support topics or reach out directly.
+    </p>
+
+  </div>
+</section>
 
       <!-- CONTENT -->
-      <div class="page-content">
+    <section class="vendor-support">
+  <div class="container">
 
-        <h5>📦 Need Help Listing Your Products?</h5>
+    <div class="support-grid">
+
+      <!-- CARD 1 -->
+      <div class="support-card">
+        <div class="support-icon">⚙️</div>
+        <h3>Update My Profile</h3>
         <p>
-          If you're having trouble adding your products or updating your details,
-          our support team is ready to assist you.
+          Need to change your business name, services, location, or WhatsApp number?
+          Send us the updated details and we’ll make the changes.
         </p>
+      </div>
 
-        <h5>📈 Want to Improve Your Visibility?</h5>
+      <!-- CARD 2 -->
+      <div class="support-card">
+        <div class="support-icon">⭐</div>
+        <h3>Manage Reviews</h3>
         <p>
-          Use clear images, accurate descriptions, and respond quickly to customers
-          to increase your chances of getting more clients.
+          Received an unfair or fake review? Contact us with the details and we’ll
+          investigate and take appropriate action.
         </p>
+      </div>
 
-        <h5>⚙️ Experiencing Technical Issues?</h5>
+      <!-- CARD 3 -->
+      <div class="support-card">
+        <div class="support-icon">🔄</div>
+        <h3>Reactivate My Listing</h3>
         <p>
-          If something isn’t working properly, report the issue and we’ll help resolve it quickly.
+          If your listing was suspended or deactivated, reach out to understand why
+          and how to get it back live.
         </p>
+      </div>
 
-        <h5>📞 Contact Vendor Support</h5>
+      <!-- CARD 4 -->
+      <div class="support-card">
+        <div class="support-icon">🛡️</div>
+        <h3>Report a Buyer</h3>
         <p>
-          Reach out to us directly on WhatsApp for quick assistance.
+          Experienced harassment or fraud from a buyer? Let us know so we can take
+          steps to protect you and the community.
         </p>
+      </div>
 
-        <!-- BUTTON -->
-        <div style="margin-top: 25px;">
-          <a href="https://wa.me/2348165410790?text=Hello%20OjaHub%20Vendor%20Support" target="_blank" class="btn cta-btn">
-            <i class="fa-brands fa-whatsapp"></i>
-            Chat with Vendor Support
-          </a>
-        </div>
+      <!-- CARD 5 -->
+      <div class="support-card">
+        <div class="support-icon">❓</div>
+        <h3>General Questions</h3>
+        <p>
+          Have any other questions about being a vendor on OjaHub? We’re here to
+          help you succeed.
+        </p>
+      </div>
 
+      <!-- CARD 6 -->
+      <div class="support-card">
+        <div class="support-icon">💬</div>
+        <h3>Feature Requests</h3>
+        <p>
+          Got ideas on how we can improve OjaHub for vendors? We’d love to hear your
+          suggestions.
+        </p>
       </div>
 
     </div>
-  </section>
+
+  </div>
+</section>
+
+
+<!-- SUPPORT -->
+
+<section class="support-cta">
+  <div class="container text-center">
+
+    <h2 class="support-cta-title">
+      Need Help Right Now?
+    </h2>
+
+    <p class="support-cta-text">
+      Our vendor support team is available on WhatsApp. Send us a message and
+      we’ll respond as quickly as possible.
+    </p>
+
+    <a href="https://wa.me/2348165410790?text=Hello%20OjaHub" class="support-cta-btn">
+      Contact Vendor Support
+    </a>
+
+  </div>
+</section>
 
 
   <!-- FOOTER -->
