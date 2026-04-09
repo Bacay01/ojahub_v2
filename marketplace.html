@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Marketplace</title>
+
+    <!-- BOOTSTRAP -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- FONT AWESOME -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- YOUR CSS -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-- Header placeholder -->
+    <div id="header"></div>
+
+    <!-- HOW IT WORKS SECTION -->
+    
+      <section class="how-it-works-section">
+
+        <div class="how-it-works-container">
+        <!-- HEADER -->
+        <div class="marketplace-hero">
+          <div class="marketplace-eyebrow">
+            Simple process
+          </div>
+          <h1 class="marketplace">How OjaHub Works</h1>
+          <p class="marketplace">
+            A simple guide to finding and connecting with vendors
+          </p>
+        </div>
+
+        <!-- ===== PAGE HEADER ===== -->
+<div class="page-header">
+  <a href="#" class="back-link">← Back to Home</a>
+  <h1>All Vendors</h1>
+  <p>Browse every vendor listed on OjaHub.</p>
+  <div class="filter-bar" id="filterBar">
+    <button class="filter-pill active" data-cat="All">All</button>
+    <button class="filter-pill" data-cat="Food">Food</button>
+    <button class="filter-pill" data-cat="Fashion">Fashion</button>
+    <button class="filter-pill" data-cat="Beauty">Beauty</button>
+    <button class="filter-pill" data-cat="Phones">Phones</button>
+    <button class="filter-pill" data-cat="Services">Services</button>
+    <button class="filter-pill" data-cat="Others">Others</button>
+  </div>
+</div>
+ 
+<!-- ===== SEARCH BAR ===== -->
+<div class="search-wrap">
+  <div class="search-input-wrap">
+    <span class="search-icon">🔍</span>
+    <input class="search-input" id="searchInput" type="text" placeholder="Search all vendors..." />
+  </div>
+</div>
+ 
+<!-- ===== MAIN LAYOUT ===== -->
+<div class="main-layout">
+ 
+  <!-- LEFT: Vendor listing -->
+  <div class="vendors-panel" id="vendorsPanel">
+    <!-- JS renders category sections here -->
+  </div>
+ 
+  <!-- RIGHT: Detail panel -->
+  <aside class="detail-panel" id="detailPanel">
+    <!-- JS renders selected vendor details here -->
+  </aside>
+ 
+</div>
+ 
+<!-- ===== CTA BANNER ===== -->
+<div id="ctaBanner" style="display:none;">
+  <div class="cta-banner">
+    <div class="cta-banner-text">
+      <strong>Support local businesses</strong>
+      <span>Find trusted vendors in Ogbomosho and Ibadan</span>
+    </div>
+    <button class="btn-cta-browse">Browse Categories ▾</button>
+  </div>
+</div>
+
+        
+      </section>
+
+
+        
+
+       
+
+    <!-- Footer placeholder -->
+    <div id="footer"></div>
+    <!-- <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> -->
+    <script src="main.js"></script>
+  </body>
+</html>
