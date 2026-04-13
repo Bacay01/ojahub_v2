@@ -26,81 +26,256 @@
     <div id="header"></div>
 
     <!-- HOW IT WORKS SECTION -->
-    
-      <section class="how-it-works-section">
-
-        <div class="how-it-works-container">
+    <section class="marketplace-section">
+      <div class="marketplace-section-container">
         <!-- HEADER -->
         <div class="marketplace-hero">
-          <div class="marketplace-eyebrow">
-            Simple process
-          </div>
+          <div class="marketplace-eyebrow">Simple process</div>
+
           <h1 class="marketplace">How OjaHub Works</h1>
+
           <p class="marketplace">
             A simple guide to finding and connecting with vendors
           </p>
         </div>
 
-        <!-- ===== PAGE HEADER ===== -->
-<div class="page-header">
-  <a href="#" class="back-link">← Back to Home</a>
-  <h1>All Vendors</h1>
-  <p>Browse every vendor listed on OjaHub.</p>
-  <div class="filter-bar" id="filterBar">
-    <button class="filter-pill active" data-cat="All">All</button>
-    <button class="filter-pill" data-cat="Food">Food</button>
-    <button class="filter-pill" data-cat="Fashion">Fashion</button>
-    <button class="filter-pill" data-cat="Beauty">Beauty</button>
-    <button class="filter-pill" data-cat="Phones">Phones</button>
-    <button class="filter-pill" data-cat="Services">Services</button>
-    <button class="filter-pill" data-cat="Others">Others</button>
-  </div>
-</div>
- 
-<!-- ===== SEARCH BAR ===== -->
-<div class="search-wrap">
-  <div class="search-input-wrap">
-    <span class="search-icon">🔍</span>
-    <input class="search-input" id="searchInput" type="text" placeholder="Search all vendors..." />
-  </div>
-</div>
- 
-<!-- ===== MAIN LAYOUT ===== -->
-<div class="main-layout">
- 
-  <!-- LEFT: Vendor listing -->
-  <div class="vendors-panel" id="vendorsPanel">
-    <!-- JS renders category sections here -->
-  </div>
- 
-  <!-- RIGHT: Detail panel -->
-  <aside class="detail-panel" id="detailPanel">
-    <!-- JS renders selected vendor details here -->
-  </aside>
- 
-</div>
- 
-<!-- ===== CTA BANNER ===== -->
-<div id="ctaBanner" style="display:none;">
-  <div class="cta-banner">
-    <div class="cta-banner-text">
-      <strong>Support local businesses</strong>
-      <span>Find trusted vendors in Ogbomosho and Ibadan</span>
-    </div>
-    <button class="btn-cta-browse">Browse Categories ▾</button>
-  </div>
-</div>
+        <!-- FILTER SECTION -->
+        <section class="vendor-filter">
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Search for vendors..."
+          />
 
-        
-      </section>
+          <div class="categories">
+            <button class="category-btn active" data-category="all">All</button>
+            <button class="category-btn" data-category="food">Food</button>
+            <button class="category-btn" data-category="fashion">
+              Fashion
+            </button>
+            <button class="category-btn" data-category="beauty">Beauty</button>
+            <button class="category-btn" data-category="phones">Phones</button>
+            <button class="category-btn" data-category="services">
+              Services
+            </button>
+            <button class="category-btn" data-category="others">Others</button>
+          </div>
+        </section>
 
+        <!-- VENDORS GRID -->
+        <section class="vendors" id="vendorList">
+          <div class="vendor-grid">
+            <!-- 1 -->
+            <div
+              class="vendor-card"
+              data-category="services"
+              data-name="TIJ Laundry"
+              data-location="Ogbomosho"
+              data-desc="Fast and reliable laundry services for everyday clothing and fabrics including washing, ironing, and folding with doorstep pickup options."
+            >
+              <img src="images/TIJ-LAUDRY.jpg" />
+              <div class="card-content">
+                <span class="card-content-tag">Laundry</span>
+                <h3>TIJ Laundry</h3>
+                <p class="tagline">
+                  Fast and reliable laundry services for everyday clothing
+                </p>
+                <p class="location">📍 Ogbomosho</p>
+                <button class="view-btn">View Details</button>
+              </div>
+            </div>
 
-        
+            <!-- 2 -->
+            <div
+              class="vendor-card"
+              data-category="services"
+              data-name="Achievers Business Services"
+              data-location="Ogbomosho"
+              data-desc="Professional business support including admin tasks, documentation, and SME assistance services tailored to client needs."
+            >
+              <img src="images/achiever.jpg" />
+              <div class="card-content">
+                <span class="card-content-tag">Business</span>
+                <h3>Achievers Business Services</h3>
+                <p class="tagline">
+                  Reliable business support for individuals & SMEs
+                </p>
+                <p class="location">📍 Ogbomosho</p>
+                <button class="view-btn">View Details</button>
+              </div>
+            </div>
 
-       
+            <!-- 3 -->
+            <div
+              class="vendor-card"
+              data-category="services"
+              data-name="Pinexa Labs"
+              data-location="Hajj Faith, Ogbomosho"
+              data-desc="Tech innovation hub offering digital solutions, software development, and modern business technology systems."
+            >
+              <img src="images/Pinexa-Labs.jpeg" />
+              <div class="card-content">
+                <span class="card-content-tag">Tech</span>
+                <h3>Pinexa Labs</h3>
+                <p class="tagline">Tech innovation & digital solutions</p>
+                <p class="location">📍 Ogbomosho</p>
+                <button class="view-btn">View Details</button>
+              </div>
+            </div>
+
+            <!-- 4 -->
+            <div
+              class="vendor-card"
+              data-category="services"
+              data-name="SK Electrical Work"
+              data-location="Ogbomosho"
+              data-desc="Electrical installation, wiring, fault repair, and maintenance for homes and businesses."
+            >
+              <img src="images/SK-electrical.jpeg" />
+              <div class="card-content">
+                <span class="card-content-tag">Electrical</span>
+                <h3>SK Electrical Work</h3>
+                <p class="tagline">
+                  Professional electrical installation & repair
+                </p>
+                <p class="location">📍 Ogbomosho</p>
+                <button class="view-btn">View Details</button>
+              </div>
+            </div>
+
+            <!-- 5 -->
+            <div
+              class="vendor-card"
+              data-category="services"
+              data-name="May’rie Gift & Print World"
+              data-location="Ibadan & Ogbomosho"
+              data-desc="Custom printing, branding, gifts, and personalized merchandise for events and businesses."
+            >
+              <img src="images/mayrie-print.jpg" />
+              <div class="card-content">
+                <span class="card-content-tag">Printing</span>
+                <h3>May’rie Gift & Print World</h3>
+                <p class="tagline">Custom gifts & printing services</p>
+                <p class="location">📍 Ibadan & Ogbomosho</p>
+                <button class="view-btn">View Details</button>
+              </div>
+            </div>
+
+            <!-- 6 -->
+            <div
+              class="vendor-card"
+              data-category="phones"
+              data-name="Midefix I-repair"
+              data-location="Ogbomosho"
+              data-desc="Expert smartphone repair, diagnostics, and gadget fixing with quality assurance."
+            >
+              <img src="images/midefix-repair.jpg" />
+              <div class="card-content">
+                <span class="card-content-tag">Phones</span>
+                <h3>Midefix I-repair</h3>
+                <p class="tagline">Smartphone & gadget repair experts</p>
+                <p class="location">📍 Ogbomosho</p>
+                <button class="view-btn">View Details</button>
+              </div>
+            </div>
+
+            <!-- 7 -->
+            <div
+              class="vendor-card"
+              data-category="services"
+              data-name="Easy Creativity Laundry"
+              data-location="Ogbomosho"
+              data-desc="Express laundry services designed for fast turnaround and busy customers."
+            >
+              <img src="images/easycreativity.jpg" />
+              <div class="card-content">
+                <span class="card-content-tag">Laundry</span>
+                <h3>Easy Creativity Laundry</h3>
+                <p class="tagline">Fast express laundry services</p>
+                <p class="location">📍 Ogbomosho</p>
+                <button class="view-btn">View Details</button>
+              </div>
+            </div>
+
+            <!-- 8 -->
+            <div
+              class="vendor-card"
+              data-category="beauty"
+              data-name="Mild Interiors"
+              data-location="Ogbomosho"
+              data-desc="Modern interior design and home styling for residential and commercial spaces."
+            >
+              <img src="images/mild-interiors.jpg" />
+              <div class="card-content">
+                <span class="card-content-tag">Interior</span>
+                <h3>Mild Interiors</h3>
+                <p class="tagline">Modern interior design & styling</p>
+                <p class="location">📍 Ogbomosho</p>
+                <button class="view-btn">View Details</button>
+              </div>
+            </div>
+
+            <!-- 9 -->
+            <div
+              class="vendor-card"
+              data-category="services"
+              data-name="Soyemi Auto Electrician"
+              data-location="Ibadan"
+              data-desc="Automobile electrical diagnostics, wiring, and repair services for all vehicle types."
+            >
+              <img src="images/soyemi-automobile.jpg" />
+              <div class="card-content">
+                <span class="card-content-tag">Auto</span>
+                <h3>Soyemi Auto Electrician</h3>
+                <p class="tagline">Vehicle electrical repair specialist</p>
+                <p class="location">📍 Ibadan</p>
+                <button class="view-btn">View Details</button>
+              </div>
+            </div>
+
+            <!-- 10 -->
+            <div
+              class="vendor-card"
+              data-category="phones"
+              data-name="Wealth Phone & Gadgets"
+              data-location="Ogbomosho"
+              data-desc="Retail store for smartphones, gadgets, and accessories at affordable prices."
+            >
+              <img src="images/wealth-phones.jpg" />
+              <div class="card-content">
+                <span class="card-content-tag">Gadgets</span>
+                <h3>Wealth Phone & Gadgets</h3>
+                <p class="tagline">Phones, gadgets & accessories</p>
+                <p class="location">📍 Ogbomosho</p>
+                <button class="view-btn">View Details</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- FULL DETAIL VIEW -->
+        <section class="vendor-detail hidden" id="vendorDetail">
+          <button id="backBtn">← Back to Vendors</button>
+
+          <div class="detail-card">
+            <img id="detailImg" />
+
+            <div class="detail-content">
+              <span id="detailTag" class="card-content-tag"></span>
+              <h1 id="detailName"></h1>
+              <p id="detailDesc"></p>
+              <p id="detailLocation"></p>
+
+              <a id="detailWhatsapp" target="_blank">Contact Vendor</a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
 
     <!-- Footer placeholder -->
     <div id="footer"></div>
+
     <!-- <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> -->
     <script src="main.js"></script>
   </body>
