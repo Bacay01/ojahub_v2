@@ -1,12 +1,20 @@
+// ===============================
+// LOAD HEADER & FOOTER (SAFE)
+// ===============================
+
+document.addEventListener("DOMContentLoaded", () => {
+  loadComponent("header", "../components/header.html");
+  loadComponent("footer", "../components/footer.html");
+});
+
+// FIREBASE
 import { auth, db } from "../../js/firebase.js";
 
-import {
-  createUserWithEmailAndPassword
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
 import {
   doc,
-  setDoc
+  setDoc,
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const form = document.getElementById("signupForm");
@@ -29,9 +37,18 @@ form.addEventListener("submit", async function (e) {
   let terms = document.getElementById("terms").checked;
 
   if (
-    !businessName || !ownerName || !email || !password ||
-    !phone || !category || !subCategory || !description ||
-    !city || !state || !address || !whatsapp 
+    !businessName ||
+    !ownerName ||
+    !email ||
+    !password ||
+    !phone ||
+    !category ||
+    !subCategory ||
+    !description ||
+    !city ||
+    !state ||
+    !address ||
+    !whatsapp
   ) {
     alert("Please fill all fields");
     return;
@@ -52,7 +69,11 @@ form.addEventListener("submit", async function (e) {
 
   try {
     // 🔐 CREATE USER
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password,
+    );
     const user = userCredential.user;
 
     // 💾 SAVE TO FIRESTORE
@@ -70,18 +91,16 @@ form.addEventListener("submit", async function (e) {
       address,
       whatsapp,
       whatsappLink,
-      createdAt: new Date().toISOString()
+      createdAt: new Date().toISOString(),
     });
 
     alert("Account created successfully 🎉");
 
     form.reset();
-
   } catch (error) {
     alert(error.message);
   }
 });
-
 
 const togglePassword = document.getElementById("togglePassword");
 const passwordInput = document.getElementById("password");

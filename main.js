@@ -24,8 +24,18 @@ async function loadComponent(elementId, filePath) {
   }
 }
 
-loadComponent("header", "pages/components/header.html");
-loadComponent("footer", "pages/components/footer.html");
+async function loadComponent(elementId, filePath) {
+  const targetElement = document.getElementById(elementId);
+  if (!targetElement) return;
+
+  const response = await fetch(filePath);
+  const html = await response.text();
+
+  targetElement.innerHTML = html;
+}
+
+loadComponent("header", "/pages/components/header.html");
+loadComponent("footer", "/pages/components/footer.html");
 
 // ===============================
 // MAIN APP (SAFE INIT)

@@ -1,7 +1,17 @@
+// ===============================
+// LOAD HEADER & FOOTER (SAFE)
+// ===============================
+
+document.addEventListener("DOMContentLoaded", () => {
+  loadComponent("header", "../components/header.html");
+  loadComponent("footer", "../components/footer.html");
+});
+
+// FIREBASE
 import { auth } from "../../js/firebase.js";
 import {
   signInWithEmailAndPassword,
-  sendPasswordResetEmail
+  sendPasswordResetEmail,
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
 const loginForm = document.getElementById("loginForm");
@@ -58,8 +68,8 @@ if (forgotPasswordLink) {
       await sendPasswordResetEmail(auth, email);
       const message = document.getElementById("message");
 
-        message.textContent = "Reset link sent to your email";
-        message.style.color = "green";
+      message.textContent = "Reset link sent to your email";
+      message.style.color = "green";
     } catch (error) {
       alert(error.message);
     }
