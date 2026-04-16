@@ -1,32 +1,46 @@
-/* PAGE */
 body {
-  font-family: "Segoe UI", sans-serif;
-  background: #f9fafb;
+  font-family: Arial, sans-serif;
+  background: #f7f9fc;
   margin: 0;
-  padding: 30px;
+  padding: 20px;
 }
 
-/* TITLE */
-h2 {
-  font-size: 28px;
-  margin-bottom: 20px;
-  color: #0f172a;
+/* HEADER */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.add-btn {
+  background: #ff7a00;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.add-btn:hover {
+  opacity: 0.9;
 }
 
 /* GRID */
 #productsContainer {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 20px;
 }
 
 /* CARD */
 .product-card {
   background: #fff;
-  border-radius: 14px;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-  transition: 0.3s;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.05);
+  transition: 0.2s;
 }
 
 .product-card:hover {
@@ -42,39 +56,57 @@ h2 {
 
 /* CONTENT */
 .product-content {
-  padding: 15px;
+  padding: 12px;
 }
 
-.product-content h3 {
-  margin: 0;
-  font-size: 18px;
-  color: #111;
+.product-content h4 {
+  margin: 5px 0;
+  font-size: 16px;
 }
 
-.product-price {
-  color: #ff7a00;
-  font-weight: 600;
-  margin: 6px 0;
-}
-
-.product-desc {
-  font-size: 13px;
+.product-content p {
+  font-size: 14px;
   color: #555;
-  margin-bottom: 10px;
 }
 
-/* BUTTON */
+/* PRICE */
+.price {
+  font-weight: bold;
+  color: #ff7a00;
+}
+
+/* ACTION BUTTONS */
+.actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
 .delete-btn {
-  width: 100%;
-  padding: 10px;
+  background: red;
+  color: white;
   border: none;
-  background: #ef4444;
-  color: #fff;
-  border-radius: 8px;
+  padding: 6px 10px;
+  border-radius: 6px;
   cursor: pointer;
-  transition: 0.2s;
 }
 
 .delete-btn:hover {
-  background: #dc2626;
+  opacity: 0.8;
+}
+
+
+
+.back-btn {
+  background: #1a5cff; /* OjaHub blue */
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.back-btn:hover {
+  opacity: 0.9;
 }

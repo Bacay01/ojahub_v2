@@ -63,33 +63,39 @@ form.addEventListener("submit", async (e) => {
     // 🔥 CLOUDINARY UPLOAD
     let imageUrl = "";
 
-if (file) {
-  try {
-    console.log("Uploading image...");
-
-    const formData = new FormData();
-    formData.append("file", file);
-    formData.append("upload_preset", "ojahub_upload");
-
-    const res = await fetch("https://api.cloudinary.com/v1_1/ds3zdc11c/image/upload", {
-      method: "POST",
-      body: formData
-    });
-
-    const data = await res.json();
-    console.log(data);
-
-    if (data.secure_url) {
-      imageUrl = data.secure_url;
-    } else {
-      console.log("Cloudinary failed but continuing...");
-    }
-
-  } catch (error) {
-    console.log("Image upload error:", error);
-  }
+// 🔥 CLOUDINARY UPLOAD (STRICT VERSION)
+if (!file) {
+  alert("Please upload a business image");
+  return;
 }
 
+console.log("Uploading image...");
+
+const formData = new FormData();
+formData.append("file", file);
+formData.append("upload_preset", "ojahub_upload");
+
+try {
+  const res = await fetch("https://api.cloudinary.com/v1_1/ds3zdc11c/image/upload", {
+    method: "POST",
+    body: formData
+  });
+
+  const data = await res.json();
+  console.log("Cloudinary response:", data);
+
+  if (!data.secure_url) {
+    alert("Image upload failed. Try again.");
+    return;
+  }
+
+  imageUrl = data.secure_url;
+
+} catch (error) {
+  console.error("Image upload error:", error);
+  alert("Something went wrong uploading image");
+  return;
+}
     // 🔥 CREATE AUTH USER
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;

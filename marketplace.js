@@ -21,14 +21,14 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 // 🔥 TARGETS
-const vendorList = document.getElementById("vendorList");
-const detailSection = document.getElementById("vendorDetail");
-const backBtn = document.getElementById("backBtn");
+let vendorList;
+let detailSection;
+let backBtn;
 
-const detailImg = document.getElementById("detailImg");
-const detailName = document.getElementById("detailName");
-const detailDesc = document.getElementById("detailDesc");
-const detailLocation = document.getElementById("detailLocation");
+let detailImg;
+let detailName;
+let detailDesc;
+let detailLocation;
 
 // 🔥 LOAD EVERYTHING
 async function loadVendors() {
@@ -41,7 +41,7 @@ async function loadVendors() {
     products.push(doc.data());
   });
 
-  let html = '<div class="vendor-grid">';
+  let html = "";
 
   vendorSnapshot.forEach((doc) => {
     const data = doc.data();
@@ -77,13 +77,13 @@ async function loadVendors() {
     `;
   });
 
-  html += "</div>";
+  
   vendorList.innerHTML = html;
 
   attachViewDetails();
 }
 
-loadVendors();
+
 
 // 🔥 VIEW DETAILS
 function attachViewDetails() {
@@ -91,7 +91,6 @@ function attachViewDetails() {
 
   cards.forEach((card) => {
     const button = card.querySelector(".view-btn");
-
     if (!button) return;
 
     button.addEventListener("click", () => {
@@ -100,7 +99,6 @@ function attachViewDetails() {
       const vendorName = card.dataset.name || "";
       let phone = (card.dataset.whatsapp || "").replace(/\D/g, "");
 
-      // 🔥 FIX NIGERIAN NUMBER
       if (phone.startsWith("0")) {
         phone = "234" + phone.substring(1);
       }
@@ -118,7 +116,11 @@ function attachViewDetails() {
       if (products.length === 0) {
         productHTML += "<p>No products yet</p>";
       } else {
-        productHTML += `<div class="product-grid">`;
+        productHTML += `
+  <div class="product-wrapper">
+    <button class="scroll-btn left">‹</button>
+    <div class="product-scroll">
+`;
 
         products.forEach((p) => {
           const message = `Hello, I saw this product on OjaHub.
@@ -134,38 +136,53 @@ Is it still available?`;
 
           productHTML += `
             <div class="product-card">
-              <img src="${p.imageUrl || "https://via.placeholder.com/300x200?text=No+Image"}" alt="${p.name || "Product"}" />
-
+              <img src="${p.imageUrl || "https://via.placeholder.com/300x200?text=No+Image"}" />
+              <span class="product-tag">${p.category || "Product"}</span>
               <h4>${p.name || "No Name"}</h4>
-              <p>₦${p.price || "0"}</p>
+              <p class="price">₦${p.price || "0"}</p>
+              <p class="desc">${p.description || "No description"}</p>
 
               ${
                 phone
                   ? `<a href="${link}" target="_blank" class="chat-btn">Chat on WhatsApp</a>`
-                  : `<button type="button" class="chat-btn disabled">No WhatsApp</button>`
+                  : `<button class="chat-btn disabled">No WhatsApp</button>`
               }
             </div>
           `;
         });
 
-        productHTML += "</div>";
+        productHTML += `
+    </div>
+    <button class="scroll-btn right">›</button>
+  </div>
+`;
       }
 
       detailDesc.innerHTML += productHTML;
+      const scrollContainer = document.querySelector(".product-scroll");
+const leftBtn = document.querySelector(".scroll-btn.left");
+const rightBtn = document.querySelector(".scroll-btn.right");
 
+if (leftBtn && rightBtn && scrollContainer) {
+  leftBtn.onclick = () => {
+    scrollContainer.scrollBy({ left: -200, behavior: "smooth" });
+  };
+
+  rightBtn.onclick = () => {
+    scrollContainer.scrollBy({ left: 200, behavior: "smooth" });
+  };
+}
+
+      // 👇 SWITCH VIEW
       vendorList.style.display = "none";
       detailSection.classList.remove("hidden");
     });
   });
 }
 
+
 // 🔥 BACK BUTTON
-if (backBtn) {
-  backBtn.addEventListener("click", () => {
-    detailSection.classList.add("hidden");
-    vendorList.style.display = "block";
-  });
-}
+
 
 // 🔥 FILTER
 function filterVendors(category) {
@@ -193,4 +210,32 @@ buttons.forEach((btn) => {
     const category = (btn.dataset.category || "all").toLowerCase();
     filterVendors(category);
   });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  vendorList = document.getElementById("vendorList");
+  detailSection = document.getElementById("vendorDetail");
+  backBtn = document.getElementById("backBtn");
+
+  detailImg = document.getElementById("detailImg");
+  detailName = document.getElementById("detailName");
+  detailDesc = document.getElementById("detailDesc");
+  detailLocation = document.getElementById("detailLocation");
+
+  loadVendors(); // 🔥 now safe
+});
+
+
+// 🔥 BACK BUTTON (GLOBAL — ONLY ONCE)
+document.addEventListener("DOMContentLoaded", () => {
+
+  const backBtn = document.getElementById("backBtn");
+
+  if (backBtn) {
+    backBtn.addEventListener("click", () => {
+      document.getElementById("vendorDetail").classList.add("hidden");
+      document.getElementById("vendorList").style.display = "flex";
+    });
+  }
+
 });

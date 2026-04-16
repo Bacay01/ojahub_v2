@@ -2094,3 +2094,119 @@ body {
   border-radius: 8px;
   text-decoration: none;
 }
+
+/* SECTION */
+.vendors-section {
+  padding: 20px;
+}
+
+.vendors-section h2 {
+  margin-bottom: 15px;
+  font-size: 22px;
+}
+
+/* 🔥 HORIZONTAL SCROLL */
+.vendors-scroll {
+  display: flex;
+  overflow-x: auto;
+  gap: 16px;
+  padding-bottom: 10px;
+  scroll-behavior: smooth;
+}
+
+.vendors-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* 🔥 CARD */
+.vendor-card {
+  min-width: 250px;  /* THIS FORCES SIDE BY SIDE */
+  flex-shrink: 0;    /* VERY IMPORTANT */
+}
+
+.vendor-card:hover {
+  transform: translateY(-5px);
+}
+
+/* IMAGE */
+.vendor-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+/* TEXT */
+.card-content {
+  padding: 12px;
+}
+
+.card-content h3 {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+.location {
+  font-size: 13px;
+  color: gray;
+}
+
+/* BUTTON */
+.view-btn {
+  margin-top: 10px;
+  width: 100%;
+  padding: 8px;
+  border: none;
+  background: orange;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+
+
+/* 🔥 PRODUCTS HORIZONTAL SCROLL */
+.product-scroll {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-top: 10px;
+}
+
+/* 🔥 PRODUCT CARD SIZE */
+.product-card {
+  min-width: 220px;
+  max-width: 220px;
+  flex-shrink: 0;
+  background: #fff;
+  border-radius: 12px;
+  padding: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.product-card img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.product-card h4 {
+  font-size: 14px;
+  margin: 8px 0 4px;
+}
+
+.product-card p {
+  font-weight: bold;
+  color: #ff7a00;
+}
+
+.chat-btn {
+  display: block;
+  text-align: center;
+  background: #ff7a00;
+  color: #fff;
+  padding: 6px;
+  border-radius: 8px;
+  margin-top: 8px;
+  text-decoration: none;
+}

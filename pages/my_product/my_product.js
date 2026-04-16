@@ -1,19 +1,11 @@
-// 🔥 FIREBASE IMPORTS
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
 import {
   getFirestore,
   collection,
   getDocs,
-  query,
-  where,
   deleteDoc,
   doc
 } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-firestore.js";
-
-import {
-  getAuth,
-  onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/12.12.0/firebase-auth.js";
 
 // 🔥 CONFIG
 const firebaseConfig = {
@@ -25,85 +17,88 @@ const firebaseConfig = {
   appId: "1:896902243220:web:7259724fe7865c281aa581"
 };
 
-// 🔥 INIT
+// INIT
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-const auth = getAuth(app);
 
-// 🔥 TARGET
-const container = document.getElementById("productsContainer");
+// 🔥 GET CURRENT USER
+const currentUser = JSON.parse(localStorage.getItem("currentuser"));
 
-// 🔥 AUTH CHECK
-onAuthStateChanged(auth, async (user) => {
-  if (!user) {
-    window.location.href = "../login/login.html";
+if (!currentUser) {
+  console.log("No user found");
+}
+// 🔥 LOAD PRODUCTS
+async function loadMyProducts() {
+  const container = document.getElementById("productsContainer");
+
+  if (!currentUser) {
+    container.innerHTML = "<p>Please login first</p>";
     return;
   }
 
-  loadProducts(user.uid);
-});
+  const snapshot = await getDocs(collection(db, "products"));
 
-// 🔥 LOAD PRODUCTS
-async function loadProducts(uid) {
-  container.innerHTML = "Loading...";
+  let html = "";
+
+  snapshot.forEach((doc) => {
+  const data = doc.data();
+
+  // 🔥 ADD THESE LINES HERE
+  console.log("PRODUCT:", data);
+  console.log("USER:", currentUser);
+
+  console.log("Checking:", data.vendorName, currentUser.businessName);
+
+  if (
+  !data.vendorName || 
+  data.vendorName.trim().toLowerCase() ===
+  (currentUser.businessName || "").trim().toLowerCase()
+) {
+      html += `
+  <div class="product-card">
+    <img src="${data.imageUrl || ""}" />
+
+    <div class="product-content">
+      <h4>${data.name || ""}</h4>
+      <p class="price">₦${data.price || ""}</p>
+      <p>${data.description || ""}</p>
+
+      <div class="actions">
+        <button class="delete-btn" onclick="deleteProduct('${doc.id}')">
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+`;
+    }
+  });
+
+  container.innerHTML = html || "<p>No products found</p>";
+}
+
+// LOAD
+loadMyProducts();
+
+
+window.deleteProduct = async function (id) {
+  const confirmDelete = confirm("Delete this product?");
+
+  if (!confirmDelete) return;
 
   try {
-    const q = query(collection(db, "products"), where("vendorId", "==", uid));
-    const snapshot = await getDocs(q);
+    await deleteDoc(doc(db, "products", id));
 
-    if (snapshot.empty) {
-      container.innerHTML = "<p>No products yet</p>";
-      return;
-    }
+    alert("Deleted successfully");
 
-    let html = "";
-
-    snapshot.forEach((docSnap) => {
-      const data = docSnap.data();
-
-      html += `
-        <div class="product-card">
-          <img src="${data.imageUrl || 'https://via.placeholder.com/400x300'}" />
-
-          <div class="product-content">
-            <h3>${data.name || "No Name"}</h3>
-
-            <p class="product-price">₦${data.price || "0"}</p>
-
-            <p class="product-desc">${data.desc || ""}</p>
-
-            <button class="delete-btn" data-id="${docSnap.id}">
-              Delete
-            </button>
-          </div>
-        </div>
-      `;
-    });
-
-    container.innerHTML = html;
-
-    // 🔥 DELETE LOGIC
-    document.querySelectorAll(".delete-btn").forEach((btn) => {
-      btn.addEventListener("click", async () => {
-        const id = btn.getAttribute("data-id");
-
-        const confirmDelete = confirm("Delete this product?");
-        if (!confirmDelete) return;
-
-        try {
-          await deleteDoc(doc(db, "products", id));
-          alert("Deleted!");
-
-          loadProducts(auth.currentUser.uid); // reload
-        } catch (err) {
-          alert("Error deleting product");
-          console.error(err);
-        }
-      });
-    });
-
+    loadMyProducts(); // reload products
   } catch (error) {
     console.error(error);
-    container.innerHTML = "Error loading products";
+    alert("Error deleting product");
   }
-}
+};
+
+
+window.goBack = function () {
+  window.location.href = "pages/dashboard/dashboard.html";
+};

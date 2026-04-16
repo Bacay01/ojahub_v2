@@ -19,11 +19,17 @@ const db = getFirestore(app);
 // 🔥 SELECT ELEMENTS
 const form = document.getElementById("productForm");
 const loading = document.getElementById("loading");
-const preview = document.getElementById("preview");
+
+// 👉 SUPPORT BOTH PREVIEW IDS (NO BREAK)
+const preview = document.getElementById("preview") || document.getElementById("previewDisplay");
+
+const imageInput = document.getElementById("image");
+const submitBtn = form.querySelector("button");
 
 // 🔥 IMAGE PREVIEW
-document.getElementById("image").addEventListener("change", (e) => {
+imageInput.addEventListener("change", (e) => {
   const file = e.target.files[0];
+
   if (file) {
     preview.src = URL.createObjectURL(file);
     preview.style.display = "block";
@@ -35,6 +41,8 @@ form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   loading.innerText = "Uploading... ⏳";
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Uploading...";
 
   try {
     // 🔥 GET FORM VALUES
@@ -42,20 +50,22 @@ form.addEventListener("submit", async (e) => {
     const price = document.getElementById("price").value;
     const desc = document.getElementById("desc").value;
     const category = document.getElementById("category").value;
-    const file = document.getElementById("image").files[0];
+    const file = imageInput.files[0];
 
     // 🚨 VALIDATION
     if (!file) {
       alert("Please select an image");
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Upload Product";
       return;
     }
 
     // 🔥 CLOUDINARY UPLOAD
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("upload_preset", "ojahub_upload"); // 🔥 your preset
+    formData.append("upload_preset", "ojahub_upload");
 
-    const cloudName = "ds3zdc11c"; // 🔥 your cloud name
+    const cloudName = "ds3zdc11c";
 
     const response = await fetch(
       `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
@@ -66,24 +76,24 @@ form.addEventListener("submit", async (e) => {
     );
 
     const data = await response.json();
-
     console.log("Cloudinary response:", data);
 
-    // 🚨 CHECK UPLOAD SUCCESS
     if (!data.secure_url) {
       throw new Error("Image upload failed");
     }
 
     const imageUrl = data.secure_url;
-    const vendorName = localStorage.getItem("vendorName");
+    const currentUser = JSON.parse(localStorage.getItem("currentuser"));
+    const vendorName = currentUser?.businessName || "";
 
-await addDoc(collection(db, "products"), {
-  name: name,
+    // 🔥 SAVE TO FIRESTORE
+    await addDoc(collection(db, "products"), {
+  name,
   price: Number(price),
   description: desc,
-  category: category,
-  imageUrl: imageUrl,
-  vendorName: vendorName,
+  category,
+  imageUrl,
+  vendorName: vendorName, // ✅ FIXED
   createdAt: new Date()
 });
 
@@ -96,9 +106,26 @@ await addDoc(collection(db, "products"), {
     form.reset();
     preview.style.display = "none";
 
+    // 🔥 OPTIONAL REDIRECT
+    setTimeout(() => {
+      window.location.href = "pages/my_product/my_product.html";
+    }, 800);
+
   } catch (error) {
     console.error("Error:", error);
     loading.innerText = "";
     alert("Upload failed ❌");
   }
+
+  // 🔥 RESET BUTTON
+  submitBtn.disabled = false;
+  submitBtn.textContent = "Upload Product";
 });
+
+// 🔥 BACK FUNCTION
+
+
+
+window.goBack = function () {
+  window.location.href = "pages/dashboard/dashboard.html";
+};

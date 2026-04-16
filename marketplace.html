@@ -19,6 +19,20 @@
 
     <!-- YOUR CSS -->
     <link rel="stylesheet" href="style.css" />
+
+
+    <style>
+    .vendors-scroll {
+      display: flex;
+      overflow-x: auto;
+      gap: 16px;
+    }
+
+    .vendor-card {
+      min-width: 250px;
+      flex-shrink: 0;
+    }
+</style>
   </head>
 
   <body>
@@ -63,9 +77,11 @@
         </section>
 
         <!-- VENDORS GRID -->
-        <section class="vendors" id="vendorList">
-          <div class="vendor-grid" id="vendorsContainer">
-            
+       <section class="vendors-section">
+          <h2>Featured Vendors</h2>
+
+          <div class="vendors-scroll" id="vendorList"></div>
+   
           </div>
         </section>
 
