@@ -100,5 +100,5 @@ window.deleteProduct = async function (id) {
 
 
 window.goBack = function () {
-  window.location.href = "pages/dashboard/dashboard.html";
+  window.location.href = "/pages/dashboard/dashboard.html";
 };

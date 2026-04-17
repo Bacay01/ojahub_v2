@@ -25,6 +25,7 @@ const message = document.getElementById("message");
 if (toggleLoginPassword && loginPassword) {
   toggleLoginPassword.addEventListener("click", () => {
     const type = loginPassword.getAttribute("type");
+
     loginPassword.setAttribute(
       "type",
       type === "password" ? "text" : "password"
@@ -46,34 +47,36 @@ if (loginForm) {
     }
 
     try {
-      // 🔥 LOGIN USER
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
-      // 🔥 GET VENDOR DATA FROM FIRESTORE
       const snapshot = await getDocs(collection(db, "vendors"));
 
       let currentVendor = null;
 
-      snapshot.forEach((doc) => {
-        const data = doc.data();
+      snapshot.forEach((item) => {
+        const data = item.data();
 
-        // MATCH BY EMAIL
         if ((data.email || "").toLowerCase() === user.email.toLowerCase()) {
           currentVendor = data;
         }
       });
 
-      // 🔥 SAVE USER
       if (currentVendor) {
-        localStorage.setItem("currentuser", JSON.stringify(currentVendor));
+        localStorage.setItem(
+          "currentuser",
+          JSON.stringify({
+            ...currentVendor,
+            uid: user.uid
+          })
+        );
       } else {
-        // fallback (if vendor not found)
         localStorage.setItem(
           "currentuser",
           JSON.stringify({
             email: user.email,
-            businessName: "Unknown Vendor"
+            businessName: "Unknown Vendor",
+            uid: user.uid
           })
         );
       }
