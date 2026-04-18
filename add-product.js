@@ -1,6 +1,14 @@
 // 🔥 FIREBASE IMPORT
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
-import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-firestore.js";
+import {
+  getFirestore,
+  collection,
+  addDoc
+} from "https://www.gstatic.com/firebasejs/12.12.0/firebase-firestore.js";
+
+import {
+  getAuth
+} from "https://www.gstatic.com/firebasejs/12.12.0/firebase-auth.js";
 
 // 🔥 FIREBASE CONFIG
 const firebaseConfig = {
@@ -15,13 +23,14 @@ const firebaseConfig = {
 // 🔥 INIT
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const auth = getAuth(app);
 
-// 🔥 SELECT ELEMENTS
+// 🔥 ELEMENTS
 const form = document.getElementById("productForm");
 const loading = document.getElementById("loading");
-
-// 👉 SUPPORT BOTH PREVIEW IDS (NO BREAK)
-const preview = document.getElementById("preview") || document.getElementById("previewDisplay");
+const preview =
+  document.getElementById("preview") ||
+  document.getElementById("previewDisplay");
 
 const imageInput = document.getElementById("image");
 const submitBtn = form.querySelector("button");
@@ -45,30 +54,35 @@ form.addEventListener("submit", async (e) => {
   submitBtn.textContent = "Uploading...";
 
   try {
-    // 🔥 GET FORM VALUES
-    const name = document.getElementById("name").value;
-    const price = document.getElementById("price").value;
-    const desc = document.getElementById("desc").value;
+    const name = document.getElementById("name").value.trim();
+    const price = document.getElementById("price").value.trim();
+    const desc = document.getElementById("desc").value.trim();
     const category = document.getElementById("category").value;
     const file = imageInput.files[0];
 
-    // 🚨 VALIDATION
+    // 🔥 VALIDATION
     if (!file) {
       alert("Please select an image");
-      submitBtn.disabled = false;
-      submitBtn.textContent = "Upload Product";
-      return;
+      throw new Error("No image selected");
     }
+
+    const user = auth.currentUser;
+
+    if (!user) {
+      alert("Please login first");
+      throw new Error("User not logged in");
+    }
+
+    const currentUser =
+      JSON.parse(localStorage.getItem("currentuser")) || {};
 
     // 🔥 CLOUDINARY UPLOAD
     const formData = new FormData();
     formData.append("file", file);
     formData.append("upload_preset", "ojahub_upload");
 
-    const cloudName = "ds3zdc11c";
-
     const response = await fetch(
-      `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+      "https://api.cloudinary.com/v1_1/ds3zdc11c/image/upload",
       {
         method: "POST",
         body: formData
@@ -76,56 +90,49 @@ form.addEventListener("submit", async (e) => {
     );
 
     const data = await response.json();
-    console.log("Cloudinary response:", data);
 
     if (!data.secure_url) {
       throw new Error("Image upload failed");
     }
 
     const imageUrl = data.secure_url;
-    const currentUser = JSON.parse(localStorage.getItem("currentuser"));
-    const vendorName = currentUser?.businessName || "";
 
-    // 🔥 SAVE TO FIRESTORE
+    // 🔥 SAVE PRODUCT
     await addDoc(collection(db, "products"), {
-  name,
-  price: Number(price),
-  description: desc,
-  category,
-  imageUrl,
-  vendorName: vendorName, // ✅ FIXED
-  createdAt: new Date()
-});
+      name: name,
+      price: Number(price),
+      description: desc,
+      category: category,
+      imageUrl: imageUrl,
 
-    console.log("Saved to Firestore ✅");
+      vendorId: user.uid,
+      vendorName: currentUser.businessName || "",
 
-    // ✅ SUCCESS UI
+      createdAt: new Date()
+    });
+
     loading.innerText = "";
     alert("Product uploaded successfully 🚀");
 
     form.reset();
     preview.style.display = "none";
 
-    // 🔥 OPTIONAL REDIRECT
     setTimeout(() => {
-      window.location.href = "pages/my_product/my_product.html";
+      window.location.href =
+        "pages/my_product/my_product.html";
     }, 800);
 
   } catch (error) {
-    console.error("Error:", error);
+    console.error(error);
     loading.innerText = "";
-    alert("Upload failed ❌");
   }
 
-  // 🔥 RESET BUTTON
   submitBtn.disabled = false;
   submitBtn.textContent = "Upload Product";
 });
 
-// 🔥 BACK FUNCTION
-
-
-
+// 🔥 BACK
 window.goBack = function () {
-  window.location.href = "pages/dashboard/dashboard.html";
+  window.location.href =
+    "pages/dashboard/dashboard.html";
 };
