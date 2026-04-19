@@ -41,12 +41,33 @@ async function loadVendors() {
       products.push(productDoc.data());
     });
 
-    let html = "";
+    const vendors = [];
 
     vendorSnapshot.forEach((vendorDoc) => {
-      const data = vendorDoc.data();
+      vendors.push({
+        id: vendorDoc.id,
+        ...vendorDoc.data()
+      });
+    });
 
-      // 🔥 MATCH PRODUCTS
+    // 🔥 SORT CATEGORY + ALPHABETICAL
+    vendors.sort((a, b) => {
+      const categoryA = (a.category || "").toLowerCase();
+      const categoryB = (b.category || "").toLowerCase();
+
+      if (categoryA < categoryB) return -1;
+      if (categoryA > categoryB) return 1;
+
+      const nameA = (a.businessName || "").toLowerCase();
+      const nameB = (b.businessName || "").toLowerCase();
+
+      return nameA.localeCompare(nameB);
+    });
+
+    let html = "";
+
+    vendors.forEach((data) => {
+
       const vendorProducts = products.filter((p) => {
         const productVendor =
           (p.vendorName || "").trim().toLowerCase();
@@ -55,7 +76,7 @@ async function loadVendors() {
           (data.businessName || "").trim().toLowerCase();
 
         return (
-          p.vendorId === vendorDoc.id ||
+          p.vendorId === data.id ||
           productVendor === businessVendor ||
           productVendor.includes(businessVendor) ||
           businessVendor.includes(productVendor)
