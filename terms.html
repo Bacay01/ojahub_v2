@@ -1,321 +1,203 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Terms of Use - OjaHub</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Terms of Use - OjaHub</title>
 
-  <!-- BOOTSTRAP -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- BOOTSTRAP -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
 
-  <!-- YOUR CSS -->
-  <link rel="stylesheet" href="style.css">
+    <!-- YOUR CSS -->
+    <link rel="stylesheet" href="style.css" />
 
-  <style>
+    <style>
       .guidelines-hero {
-  background: #f3f4f6;
-  padding: 80px 20px;
-}
+        background: #f3f4f6;
+        padding: 80px 20px;
+      }
 
-.guidelines-tag {
-  color: #ff7a00;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 2px;
-  margin-bottom: 10px;
-}
+      .guidelines-tag {
+        color: #ff7a00;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 2px;
+        margin-bottom: 10px;
+      }
 
-.guidelines-title {
-  font-size: 42px;
-  font-weight: 700;
-  color: #111827;
-  margin-bottom: 15px;
-}
+      .guidelines-title {
+        font-size: 42px;
+        font-weight: 700;
+        color: #111827;
+        margin-bottom: 15px;
+      }
 
-.guidelines-subtext {
-  max-width: 600px;
-  margin: 0 auto;
-  font-size: 16px;
-  color: #6b7280;
-  line-height: 1.6;
-}
+      .guidelines-subtext {
+        max-width: 600px;
+        margin: 0 auto;
+        font-size: 16px;
+        color: #6b7280;
+        line-height: 1.6;
+      }
 
+      /* ===== TERMS SECTION ===== */
+      .terms-section {
+        padding: 80px 0;
+        background: #ffffff;
+      }
 
+      /* ===== CONTAINER WIDTH ===== */
+      .terms-container {
+        max-width: 800px;
+        margin: auto;
+      }
 
+      /* ===== HEADINGS ===== */
+      .terms-container h2 {
+        font-size: 18px;
+        font-weight: 600;
+        margin-top: 30px;
+        margin-bottom: 10px;
+      }
 
-    /* ===== TERMS SECTION ===== */
-.terms-section {
-  padding: 80px 0;
-  background: #ffffff;
-}
+      /* ===== PARAGRAPHS ===== */
+      .terms-container p {
+        font-size: 14px;
+        color: #6b7280;
+        line-height: 1.7;
+      }
 
-/* ===== CONTAINER WIDTH ===== */
-.terms-container {
-  max-width: 800px;
-  margin: auto;
-}
+      /* ===== LAST UPDATED ===== */
+      .last-updated {
+        margin-top: 40px;
+        font-size: 13px;
+        color: #9ca3af;
+        text-align: center;
+      }
 
-/* ===== HEADINGS ===== */
-.terms-container h2 {
-  font-size: 18px;
-  font-weight: 600;
-  margin-top: 30px;
-  margin-bottom: 10px;
-}
+      /* ===== RESPONSIVENESS ===== */
 
-/* ===== PARAGRAPHS ===== */
-.terms-container p {
-  font-size: 14px;
-  color: #6b7280;
-  line-height: 1.7;
-}
+      /* 320px */
+      @media (max-width: 320px) {
+        .terms-section {
+          padding: 50px 15px;
+        }
+      }
 
-/* ===== LAST UPDATED ===== */
-.last-updated {
-  margin-top: 40px;
-  font-size: 13px;
-  color: #9ca3af;
-  text-align: center;
-}
+      /* 425px */
+      @media (max-width: 425px) {
+        .terms-section {
+          padding: 60px 15px;
+        }
+      }
 
-/* ===== RESPONSIVENESS ===== */
+      /* 768px */
+      @media (max-width: 768px) {
+        .terms-container {
+          max-width: 100%;
+        }
+      }
+    </style>
+  </head>
 
-/* 320px */
-@media (max-width: 320px) {
-  .terms-section {
-    padding: 50px 15px;
-  }
-}
+  <body>
+    <!-- Header placeholder -->
+    <div id="header"></div>
 
-/* 425px */
-@media (max-width: 425px) {
-  .terms-section {
-    padding: 60px 15px;
-  }
-}
+    <!-- HEADER -->
+    <section class="guidelines-hero">
+      <div class="container text-center">
+        <p class="guidelines-tag">Support Hub</p>
 
-/* 768px */
-@media (max-width: 768px) {
-  .terms-container {
-    max-width: 100%;
-  }
-}
-  </style>
-</head>
+        <h1 class="guidelines-title">Help Center</h1>
 
-<body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg ojahub-navbar sticky-top">
-      <div class="container">
-        <!-- LOGO (TEXT NOW) -->
-        <a class="navbar-brand ojahub-logo" href="#">
-          <span class="logo-blue">Oja</span><span class="logo-orange">Hub</span>
-        </a>
-
-        <!-- TOGGLER -->
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarContent"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <!-- NAV CONTENT -->
-        <div class="collapse navbar-collapse" id="navbarContent">
-          <!-- PUSH EVERYTHING RIGHT -->
-          <div class="ms-auto d-flex align-items-center gap-4">
-            <!-- LINKS -->
-            <ul class="navbar-nav d-flex flex-row gap-4">
-              <li class="nav-item">
-                <a class="nav-link" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="marketplace.html">Marketplace</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="categories.html">Categories</a>
-              </li>
-            </ul>
-
-            <!-- BROWSE -->
-            <a href="#" class="btn browse-btn">Browse Vendors</a>
-
-            <!-- CTA -->
-            <a href="signup.html" class="btn cta-btn">List Your Business</a>
-          </div>
-        </div>
+        <p class="guidelines-subtext">
+          Find guides, answers, and resources to help you navigate OjaHub with
+          confidence.
+        </p>
       </div>
-    </nav>
+    </section>
 
+    <!-- CONTENT -->
 
-  
-      <!-- HEADER -->
-   <section class="guidelines-hero">
-  <div class="container text-center">
+    <section class="terms-section">
+      <div class="container terms-container">
+        <h2>1. Acceptance of Terms</h2>
+        <p>
+          By accessing or using OjaHub, you agree to be bound by these Terms of
+          Use. If you do not agree to these terms, please do not use the
+          platform.
+        </p>
 
-    <p class="guidelines-tag">
-      Support Hub
-    </p>
+        <h2>2. About OjaHub</h2>
+        <p>
+          OjaHub is a vendor discovery platform that connects buyers with
+          independent vendors. OjaHub does not sell products or services
+          directly, does not process payments, and does not guarantee any
+          transactions between users and vendors.
+        </p>
 
-    <h1 class="guidelines-title">
-      Help Center
-    </h1>
+        <h2>3. User Responsibilities</h2>
+        <p>
+          Users are responsible for verifying vendor information, negotiating
+          terms, and conducting transactions safely. OjaHub is not liable for
+          any disputes, losses, or damages arising from interactions between
+          buyers and vendors.
+        </p>
 
-    <p class="guidelines-subtext">
-    Find guides, answers, and resources to help you navigate OjaHub with confidence.
-    </p>
+        <h2>4. Vendor Listings</h2>
+        <p>
+          Vendors are responsible for the accuracy of their business
+          information, including services, pricing, and contact details. OjaHub
+          reserves the right to remove or suspend any listing that violates our
+          guidelines or is reported for fraudulent activity.
+        </p>
 
-  </div>
-</section>
+        <h2>5. Intellectual Property</h2>
+        <p>
+          All content on OjaHub, including logos, text, graphics, and design, is
+          the property of OjaHub and is protected by applicable intellectual
+          property laws. You may not reproduce or distribute any content without
+          prior written permission.
+        </p>
 
-      <!-- CONTENT -->
+        <h2>6. Limitation of Liability</h2>
+        <p>
+          OjaHub provides the platform on an "as is" basis. We make no
+          warranties regarding the reliability, accuracy, or quality of vendor
+          listings. OjaHub shall not be held liable for any direct, indirect, or
+          consequential damages arising from the use of the platform.
+        </p>
 
-      <section class="terms-section">
-  <div class="container terms-container">
+        <h2>7. Privacy</h2>
+        <p>
+          Your use of OjaHub is also governed by our Privacy Policy, which
+          describes how we collect, use, and protect your personal information.
+        </p>
 
-    <h2>1. Acceptance of Terms</h2>
-    <p>
-      By accessing or using OjaHub, you agree to be bound by these Terms of Use.
-      If you do not agree to these terms, please do not use the platform.
-    </p>
+        <h2>8. Modifications</h2>
+        <p>
+          OjaHub reserves the right to modify these Terms of Use at any time.
+          Changes will be effective immediately upon posting. Continued use of
+          the platform constitutes acceptance of the updated terms.
+        </p>
 
-    <h2>2. About OjaHub</h2>
-    <p>
-      OjaHub is a vendor discovery platform that connects buyers with independent vendors.
-      OjaHub does not sell products or services directly, does not process payments,
-      and does not guarantee any transactions between users and vendors.
-    </p>
+        <h2>9. Contact</h2>
+        <p>
+          If you have any questions about these Terms of Use, please contact us
+          via WhatsApp or through our Contact Us page.
+        </p>
 
-    <h2>3. User Responsibilities</h2>
-    <p>
-      Users are responsible for verifying vendor information, negotiating terms,
-      and conducting transactions safely. OjaHub is not liable for any disputes,
-      losses, or damages arising from interactions between buyers and vendors.
-    </p>
-
-    <h2>4. Vendor Listings</h2>
-    <p>
-      Vendors are responsible for the accuracy of their business information,
-      including services, pricing, and contact details. OjaHub reserves the right
-      to remove or suspend any listing that violates our guidelines or is reported
-      for fraudulent activity.
-    </p>
-
-    <h2>5. Intellectual Property</h2>
-    <p>
-      All content on OjaHub, including logos, text, graphics, and design,
-      is the property of OjaHub and is protected by applicable intellectual
-      property laws. You may not reproduce or distribute any content without
-      prior written permission.
-    </p>
-
-    <h2>6. Limitation of Liability</h2>
-    <p>
-      OjaHub provides the platform on an "as is" basis. We make no warranties
-      regarding the reliability, accuracy, or quality of vendor listings.
-      OjaHub shall not be held liable for any direct, indirect, or consequential
-      damages arising from the use of the platform.
-    </p>
-
-    <h2>7. Privacy</h2>
-    <p>
-      Your use of OjaHub is also governed by our Privacy Policy,
-      which describes how we collect, use, and protect your personal information.
-    </p>
-
-    <h2>8. Modifications</h2>
-    <p>
-      OjaHub reserves the right to modify these Terms of Use at any time.
-      Changes will be effective immediately upon posting.
-      Continued use of the platform constitutes acceptance of the updated terms.
-    </p>
-
-    <h2>9. Contact</h2>
-    <p>
-      If you have any questions about these Terms of Use, please contact us via WhatsApp
-      or through our Contact Us page.
-    </p>
-
-    <p class="last-updated"> <i>Last updated: April 2026 </i></p>
-
-  </div>
-</section>
-
-
-
-  <!-- FOOTER -->
-
-<footer class="footer">
-  <div class="container">
-
-    <!-- TOP GRID -->
-    <div class="footer-grid">
-
-      <!-- ABOUT -->
-      <div class="footer-col">
-        <h4>About OjaHub</h4>
-                <a href="about.html">What is OjaHub</a>
-
-        <a href="how-it-works.html">How it Works</a>
-
-        <a href="https://wa.me/2348165410790?text=Hello%20OjaHub" target="_blank">
-          Contact Us
-        </a>
+        <p class="last-updated"><i>Last updated: April 2026 </i></p>
       </div>
+    </section>
 
-      <!-- BUYERS -->
-      <div class="footer-col">
-        <h4>For Buyers</h4>
-        <a href="marketplace.html">Browse Vendors</a>
-        <a href="categories.html">Categories</a>
-        <a href="buying-safe.html">Buying Safely on OjaHub</a>
-        <a href="faqs.html">FAQs</a>
-      </div>
-
-      <!-- VENDORS -->
-      <div class="footer-col">
-        <h4>For Vendors</h4>
-        <a href="signup.html">List Your Business</a>
-        <a href="vendor-guidelines.html">Vendor Guidelines</a>
-        <a href="vendor-support.html">Vendor Support</a>
-      </div>
-
-      <!-- SUPPORT -->
-      <div class="footer-col">
-        <h4>Support</h4>
-        <a href="help-center.html">Help Center</a>
-        <a href="terms.html">Terms of Use</a>
-        <a href="privacy.html">Privacy Policy</a>
-      </div>
-
-    </div>
-
-    <!-- LINE -->
-    <div class="footer-divider"></div>
-
-    <!-- BOTTOM TEXT -->
-    <div class="footer-bottom">
-      <p class="footer-desc">
-        OjaHub connects you with trusted vendors. All transactions and communication
-        happen directly between users and vendors.
-      </p>
-
-      <p class="footer-small">
-        OjaHub is a marketplace that connects users with independent vendors. OjaHub does not
-        handle payments or guarantee transactions. Users are advised to verify vendors and transact responsibly.
-      </p>
-
-      <p class="footer-copy">
-        © 2026 OjaHub. All rights reserved.
-      </p>
-    </div>
-
-  </div>
-</footer>
-
-
-
-</body>
+    <!-- Footer placeholder -->
+    <div id="footer"></div>
+    <!-- <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> -->
+    <script src="main.js"></script>
+  </body>
 </html>

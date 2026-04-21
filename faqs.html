@@ -1,186 +1,147 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FAQs - OjaHub</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FAQs - OjaHub</title>
 
-  <!-- BOOTSTRAP -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- BOOTSTRAP -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
 
-  <!-- FONT AWESOME -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" rel="stylesheet">
+    <!-- FONT AWESOME -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      rel="stylesheet"
+    />
 
-  <!-- YOUR CSS -->
-  <link rel="stylesheet" href="style.css">
+    <!-- YOUR CSS -->
+    <link rel="stylesheet" href="style.css" />
 
-  <style>
-    /* SECTION */
-.faq-section {
-  padding: 100px 0;
-  background: #f9fafb;
-}
+    <style>
+      /* SECTION */
+      .faq-section {
+        padding: 100px 0;
+        background: #f9fafb;
+      }
 
-/* HEADER */
-.faq-tag {
-  color: #ff7a00;
-  font-size: 12px;
-  letter-spacing: 2px;
-  font-weight: 600;
-}
+      /* HEADER */
+      .faq-tag {
+        color: #ff7a00;
+        font-size: 12px;
+        letter-spacing: 2px;
+        font-weight: 600;
+      }
 
-.faq-header h2 {
-  font-size: 40px;
-  font-weight: 700;
-  margin: 10px 0;
-}
+      .faq-header h2 {
+        font-size: 40px;
+        font-weight: 700;
+        margin: 10px 0;
+      }
 
-.faq-sub {
-  color: #6b7280;
-  max-width: 500px;
-  margin: auto;
-}
+      .faq-sub {
+        color: #6b7280;
+        max-width: 500px;
+        margin: auto;
+      }
 
-/* LIST */
-.faq-list {
-  max-width: 700px;
-  margin: 50px auto;
-}
+      /* LIST */
+      .faq-list {
+        max-width: 700px;
+        margin: 50px auto;
+      }
 
-/* ITEM */
-.faq-item {
-  background: #fff;
-  border-radius: 12px;
-  padding: 18px 20px;
-  margin-bottom: 15px;
-  border: 1px solid #eee;
-  cursor: pointer;
-  transition: 0.3s;
-}
+      /* ITEM */
+      .faq-item {
+        background: #fff;
+        border-radius: 12px;
+        padding: 18px 20px;
+        margin-bottom: 15px;
+        border: 1px solid #eee;
+        cursor: pointer;
+        transition: 0.3s;
+      }
 
-/* QUESTION */
-.faq-question {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-weight: 500;
-}
+      /* QUESTION */
+      .faq-question {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: 500;
+      }
 
-/* ICON */
-.faq-icon {
-  transition: 0.3s;
-}
+      /* ICON */
+      .faq-icon {
+        transition: 0.3s;
+      }
 
-/* ANSWER */
-.faq-answer {
-  margin-top: 12px;
-  color: #6b7280;
-  display: none;
-}
+      /* ANSWER */
+      .faq-answer {
+        margin-top: 12px;
+        color: #6b7280;
+        display: none;
+      }
 
-/* ACTIVE STATE */
-.faq-item.active .faq-answer {
-  display: block;
-}
+      /* ACTIVE STATE */
+      .faq-item.active .faq-answer {
+        display: block;
+      }
 
-.faq-item.active .faq-icon {
-  transform: rotate(180deg);
-}
+      .faq-item.active .faq-icon {
+        transform: rotate(180deg);
+      }
 
-/* CTA */
-.faq-cta-box {
-  max-width: 1120px;
-  margin: 40px auto 0;
-  padding: 48px 20px;
-  background: #fff7f1;
-  border: 1px solid #f3e3d6;
-  border-radius: 18px;
-  text-align: center;
-}
+      /* CTA */
+      .faq-cta-box {
+        max-width: 1120px;
+        margin: 40px auto 0;
+        padding: 48px 20px;
+        background: #fff7f1;
+        border: 1px solid #f3e3d6;
+        border-radius: 18px;
+        text-align: center;
+      }
 
-.faq-cta-box h4 {
-  font-size: 20px;
-  font-weight: 700;
-  color: #111827;
-  margin-bottom: 8px;
-}
+      .faq-cta-box h4 {
+        font-size: 20px;
+        font-weight: 700;
+        color: #111827;
+        margin-bottom: 8px;
+      }
 
-.faq-cta-box p {
-  font-size: 15px;
-  color: #6b7280;
-  margin-bottom: 22px;
-}
+      .faq-cta-box p {
+        font-size: 15px;
+        color: #6b7280;
+        margin-bottom: 22px;
+      }
 
-.faq-cta-btn {
-  display: inline-block;
-  background: #f97316;
-  color: #fff;
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 500;
-  padding: 12px 24px;
-  border-radius: 999px;
-  transition: 0.3s ease;
-}
+      .faq-cta-btn {
+        display: inline-block;
+        background: #f97316;
+        color: #fff;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
+        padding: 12px 24px;
+        border-radius: 999px;
+        transition: 0.3s ease;
+      }
 
-.faq-cta-btn:hover {
-  background: #ea580c;
-  color: #fff;
-}
-  </style>
-</head>
+      .faq-cta-btn:hover {
+        background: #ea580c;
+        color: #fff;
+      }
+    </style>
+  </head>
 
-<body>
+  <body>
+    <!-- Header placeholder -->
+    <div id="header"></div>
 
-  <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg ojahub-navbar sticky-top">
-      <div class="container">
-        <!-- LOGO (TEXT NOW) -->
-        <a class="navbar-brand ojahub-logo" href="#">
-          <span class="logo-blue">Oja</span><span class="logo-orange">Hub</span>
-        </a>
-
-        <!-- TOGGLER -->
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarContent"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <!-- NAV CONTENT -->
-        <div class="collapse navbar-collapse" id="navbarContent">
-          <!-- PUSH EVERYTHING RIGHT -->
-          <div class="ms-auto d-flex align-items-center gap-4">
-            <!-- LINKS -->
-            <ul class="navbar-nav d-flex flex-row gap-4">
-              <li class="nav-item">
-                <a class="nav-link" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="marketplace.html">Marketplace</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="categories.html">Categories</a>
-              </li>
-            </ul>
-
-            <!-- BROWSE -->
-            <a href="#" class="btn browse-btn">Browse Vendors</a>
-
-            <!-- CTA -->
-            <a href="signup.html" class="btn cta-btn">List Your Business</a>
-          </div>
-        </div>
-      </div>
-    </nav>
-
-
-  <!-- PAGE -->
-      <div class="faq-list">
-
+    <!-- PAGE -->
+    <div class="faq-list">
       <!-- ITEM -->
       <div class="faq-item active">
         <div class="faq-question">
@@ -188,7 +149,9 @@
           <span class="faq-icon">⌄</span>
         </div>
         <div class="faq-answer">
-          OjaHub is a vendor marketplace that connects buyers with trusted local vendors across categories like food, fashion, beauty, gadgets, and services. We make it easy to discover and contact vendors directly.
+          OjaHub is a vendor marketplace that connects buyers with trusted local
+          vendors across categories like food, fashion, beauty, gadgets, and
+          services. We make it easy to discover and contact vendors directly.
         </div>
       </div>
 
@@ -198,7 +161,8 @@
           <span class="faq-icon">⌄</span>
         </div>
         <div class="faq-answer">
-          Yes! Browsing vendors, viewing profiles, and contacting them via WhatsApp is completely free for buyers.
+          Yes! Browsing vendors, viewing profiles, and contacting them via
+          WhatsApp is completely free for buyers.
         </div>
       </div>
 
@@ -208,9 +172,9 @@
           <span class="faq-icon">⌄</span>
         </div>
         <div class="faq-answer">
-          
-        Simply find a vendor you're interested in, visit their profile, 
-        and click the 'Chat on WhatsApp' button. You'll be connected directly with the vendor.
+          Simply find a vendor you're interested in, visit their profile, and
+          click the 'Chat on WhatsApp' button. You'll be connected directly with
+          the vendor.
         </div>
       </div>
 
@@ -220,9 +184,9 @@
           <span class="faq-icon">⌄</span>
         </div>
         <div class="faq-answer">
-          
-        No. OjaHub is a directory and discovery platform. All transactions, payments, 
-        and deliveries happen directly between you and the vendor. We recommend discussing all terms before making payments.
+          No. OjaHub is a directory and discovery platform. All transactions,
+          payments, and deliveries happen directly between you and the vendor.
+          We recommend discussing all terms before making payments.
         </div>
       </div>
 
@@ -232,8 +196,9 @@
           <span class="faq-icon">⌄</span>
         </div>
         <div class="faq-answer">
-          Look for verified badges, ratings, and reviews on vendor profiles. 
-          We also recommend reading our 'Buying Safely on OjaHub' guide for tips on safe transactions.
+          Look for verified badges, ratings, and reviews on vendor profiles. We
+          also recommend reading our 'Buying Safely on OjaHub' guide for tips on
+          safe transactions.
         </div>
       </div>
 
@@ -243,12 +208,11 @@
           <span class="faq-icon">⌄</span>
         </div>
         <div class="faq-answer">
-          Absolutely! Click 'List Your Business' to 
-          submit your business details. Our team will review your submission and get your profile live
+          Absolutely! Click 'List Your Business' to submit your business
+          details. Our team will review your submission and get your profile
+          live
         </div>
       </div>
-
-
 
       <div class="faq-item">
         <div class="faq-question">
@@ -256,14 +220,11 @@
           <span class="faq-icon">⌄</span>
         </div>
         <div class="faq-answer">
-          
-We currently support Food Vendors, 
-Fashion & Clothing, Beauty & Cosmetics, Phone & Gadgets, Services & Repair, and Home & Living.
- More categories are being added regularly
+          We currently support Food Vendors, Fashion & Clothing, Beauty &
+          Cosmetics, Phone & Gadgets, Services & Repair, and Home & Living. More
+          categories are being added regularly
         </div>
       </div>
-
-
 
       <div class="faq-item">
         <div class="faq-question">
@@ -271,124 +232,49 @@ Fashion & Clothing, Beauty & Cosmetics, Phone & Gadgets, Services & Repair, and 
           <span class="faq-icon">⌄</span>
         </div>
         <div class="faq-answer">
-          
-
-If you've had a bad experience, please contact us via WhatsApp or email with the vendor's name and details. 
-We take reports seriously and will investigate.
+          If you've had a bad experience, please contact us via WhatsApp or
+          email with the vendor's name and details. We take reports seriously
+          and will investigate.
         </div>
       </div>
-
     </div>
 
     <!-- CTA -->
-   <section class="faq-cta-section">
-  <div class="container">
+    <section class="faq-cta-section">
+      <div class="container">
+        <div class="faq-cta-box">
+          <h4>Still have questions?</h4>
+          <p>We're here to help. Reach out to us anytime.</p>
 
-    <div class="faq-cta-box">
-  <h4>Still have questions?</h4>
-  <p>We're here to help. Reach out to us anytime.</p>
-
-  <a href="#" class="faq-cta-btn">
-    Chat with Us on WhatsApp
-  </a>
-</div>
-
-  </div>
-</section>
-
-
-<br>
-<br><br>
-
-
-  <!-- FOOTER -->
-
-<footer class="footer">
-  <div class="container">
-
-    <!-- TOP GRID -->
-    <div class="footer-grid">
-
-      <!-- ABOUT -->
-      <div class="footer-col">
-        <h4>About OjaHub</h4>
-                <a href="about.html">What is OjaHub</a>
-
-        <a href="how-it-works.html">How it Works</a>
-
-        <a href="https://wa.me/2348165410790?text=Hello%20OjaHub" target="_blank">
-          Contact Us
-        </a>
+          <a href="#" class="faq-cta-btn"> Chat with Us on WhatsApp </a>
+        </div>
       </div>
+    </section>
 
-      <!-- BUYERS -->
-      <div class="footer-col">
-        <h4>For Buyers</h4>
-        <a href="marketplace.html">Browse Vendors</a>
-        <a href="categories.html">Categories</a>
-        <a href="buying-safe.html">Buying Safely on OjaHub</a>
-        <a href="faqs.html">FAQs</a>
-      </div>
+    <br />
+    <br /><br />
 
-      <!-- VENDORS -->
-      <div class="footer-col">
-        <h4>For Vendors</h4>
-        <a href="signup.html">List Your Business</a>
-        <a href="vendor-guidelines.html">Vendor Guidelines</a>
-        <a href="vendor-support.html">Vendor Support</a>
-      </div>
+    <!-- Footer placeholder -->
+    <div id="footer"></div>
+    <!-- <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> -->
+    <script src="main.js"></script>
 
-      <!-- SUPPORT -->
-      <div class="footer-col">
-        <h4>Support</h4>
-        <a href="help-center.html">Help Center</a>
-        <a href="terms.html">Terms of Use</a>
-        <a href="privacy.html">Privacy Policy</a>
-      </div>
+    <script>
+      const faqItems = document.querySelectorAll(".faq-item");
 
-    </div>
+      faqItems.forEach((item) => {
+        item.addEventListener("click", () => {
+          // close others
+          faqItems.forEach((i) => {
+            if (i !== item) {
+              i.classList.remove("active");
+            }
+          });
 
-    <!-- LINE -->
-    <div class="footer-divider"></div>
-
-    <!-- BOTTOM TEXT -->
-    <div class="footer-bottom">
-      <p class="footer-desc">
-        OjaHub connects you with trusted vendors. All transactions and communication
-        happen directly between users and vendors.
-      </p>
-
-      <p class="footer-small">
-        OjaHub is a marketplace that connects users with independent vendors. OjaHub does not
-        handle payments or guarantee transactions. Users are advised to verify vendors and transact responsibly.
-      </p>
-
-      <p class="footer-copy">
-        © 2026 OjaHub. All rights reserved.
-      </p>
-    </div>
-
-  </div>
-</footer>
-
-
-<script>
-  const faqItems = document.querySelectorAll(".faq-item");
-
-faqItems.forEach(item => {
-  item.addEventListener("click", () => {
-
-    // close others
-    faqItems.forEach(i => {
-      if (i !== item) {
-        i.classList.remove("active");
-      }
-    });
-
-    // toggle current
-    item.classList.toggle("active");
-  });
-});
-</script>
-</body>
+          // toggle current
+          item.classList.toggle("active");
+        });
+      });
+    </script>
+  </body>
 </html>

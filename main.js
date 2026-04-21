@@ -1,41 +1,69 @@
 // ===============================
 // LOAD HEADER & FOOTER (SAFE)
 // ===============================
+// async function loadComponent(elementId, filePath) {
+//   try {
+//     const targetElement = document.getElementById(elementId);
+//     if (!targetElement) return;
+
+//     const response = await fetch(filePath);
+//     if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
+
+//     const html = await response.text();
+
+//     const temp = document.createElement("div");
+//     temp.innerHTML = html;
+
+//     const component = temp.firstElementChild;
+
+//     if (component) {
+//       targetElement.replaceWith(component);
+//     }
+//   } catch (error) {
+//     console.error(`Error loading ${filePath}:`, error);
+//   }
+// }
+
+// async function loadComponent(elementId, filePath) {
+//   const targetElement = document.getElementById(elementId);
+//   if (!targetElement) return;
+
+//   const response = await fetch(filePath);
+//   const html = await response.text();
+
+//   targetElement.innerHTML = html;
+// }
+
+// loadComponent("header", "/pages/components/header.html");
+// loadComponent("footer", "/pages/components/footer.html");
+
+// ===============================
+// LOAD HEADER & FOOTER (ROBUST)
+// ===============================
+
 async function loadComponent(elementId, filePath) {
   try {
-    const targetElement = document.getElementById(elementId);
-    if (!targetElement) return;
+    const target = document.getElementById(elementId);
+    if (!target) return;
 
-    const response = await fetch(filePath);
-    if (!response.ok) throw new Error(`HTTP error: ${response.status}`);
+    const res = await fetch(filePath);
+    if (!res.ok) throw new Error(res.status);
 
-    const html = await response.text();
-
-    const temp = document.createElement("div");
-    temp.innerHTML = html;
-
-    const component = temp.firstElementChild;
-
-    if (component) {
-      targetElement.replaceWith(component);
-    }
-  } catch (error) {
-    console.error(`Error loading ${filePath}:`, error);
+    const html = await res.text();
+    target.innerHTML = html;
+  } catch (err) {
+    console.error(`Failed to load ${filePath}:`, err);
   }
 }
 
-async function loadComponent(elementId, filePath) {
-  const targetElement = document.getElementById(elementId);
-  if (!targetElement) return;
-
-  const response = await fetch(filePath);
-  const html = await response.text();
-
-  targetElement.innerHTML = html;
-}
-
-loadComponent("header", "/pages/components/header.html");
-loadComponent("footer", "/pages/components/footer.html");
+// Load components first
+Promise.all([
+  loadComponent("header", "/pages/components/header.html"),
+  loadComponent("footer", "/pages/components/footer.html"),
+]).then(() => {
+  // Fire event AFTER both are injected
+  document.dispatchEvent(new Event("componentsLoaded"));
+});
 
 // ===============================
 // MAIN APP (SAFE INIT)
@@ -68,34 +96,82 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ===============================
-  // CATEGORY FILTER (SAFE + CLEAN)
+  // CATEGORY + SEARCH FILTER
+  // WITH PERSISTENT ACTIVE CATEGORY
   // ===============================
   const categoryButtons = document.querySelectorAll(".category-btn");
+  const searchInput = document.getElementById("searchInput");
+
+  let currentCategory = "all";
 
   function getCards() {
     return document.querySelectorAll(".vendor-card");
   }
 
-  if (categoryButtons.length > 0) {
-    categoryButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        categoryButtons.forEach((btn) => btn.classList.remove("active"));
-        button.classList.add("active");
+  function applyFilters() {
+    const searchTerm = searchInput.value.toLowerCase().trim();
 
-        const category = button.dataset.category;
+    categoryButtons.forEach((btn) => {
+      btn.classList.remove("active");
 
-        getCards().forEach((card) => {
-          const cardCategory = card.dataset.category;
+      if (btn.dataset.category === currentCategory) {
+        btn.classList.add("active");
+      }
+    });
 
-          if (category === "all" || category === cardCategory) {
-            card.style.display = "block";
-          } else {
-            card.style.display = "none";
-          }
-        });
-      });
+    getCards().forEach((card) => {
+      const cardCategory = card.dataset.category.toLowerCase();
+      const cardName = card.dataset.name.toLowerCase();
+      const cardLocation = card.dataset.location.toLowerCase();
+      const cardDesc = card.dataset.desc.toLowerCase();
+
+      const matchesCategory =
+        currentCategory === "all" || currentCategory === cardCategory;
+
+      const matchesSearch =
+        cardName.includes(searchTerm) ||
+        cardLocation.includes(searchTerm) ||
+        cardDesc.includes(searchTerm);
+
+      if (matchesCategory && matchesSearch) {
+        card.style.display = "block";
+      } else {
+        card.style.display = "none";
+      }
     });
   }
+
+  // CATEGORY BUTTON CLICK
+  categoryButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      currentCategory = button.dataset.category;
+
+      // SAVE selected category
+      localStorage.setItem("selectedCategory", currentCategory);
+
+      applyFilters();
+    });
+  });
+
+  // SEARCH INPUT
+  searchInput.addEventListener("input", () => {
+    applyFilters();
+  });
+
+  // AUTO LOAD CATEGORY
+  window.addEventListener("DOMContentLoaded", () => {
+    const params = new URLSearchParams(window.location.search);
+    const categoryFromURL = params.get("category");
+
+    // Priority:
+    // 1. URL category
+    // 2. localStorage category
+    // 3. default "all"
+    currentCategory =
+      categoryFromURL || localStorage.getItem("selectedCategory") || "all";
+
+    applyFilters();
+  });
 
   // ===============================
   // FULL PAGE DETAIL VIEW (MAIN FEATURE)
