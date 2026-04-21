@@ -4,11 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // FIREBASE
-import { auth } from "../../js/firebase.js";
-import {
-  signInWithEmailAndPassword,
-  sendPasswordResetEmail,
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
 
 // 🔥 FIREBASE AUTH
 import { auth } from "../../js/firebase.js";

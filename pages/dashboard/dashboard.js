@@ -2,96 +2,146 @@ import { auth, db } from "../../js/firebase.js";
 
 import {
   onAuthStateChanged,
-  signOut,
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+  signOut
+} from "https://www.gstatic.com/firebasejs/12.12.0/firebase-auth.js";
 
 import {
   doc,
-  getDoc,
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+  getDoc
+} from "https://www.gstatic.com/firebasejs/12.12.0/firebase-firestore.js";
 
-// 🔥 GET ELEMENTS
+// 🔥 ELEMENTS
 const vendorEmail = document.getElementById("vendorEmail");
 const logoutBtn = document.getElementById("logoutBtn");
 
 const businessName = document.getElementById("businessName");
 const businessNameCard = document.getElementById("businessNameCard");
-const category = document.getElementById("category");
-const city = document.getElementById("city");
-const whatsappLink = document.getElementById("whatsappLink");
 
 const ownerName = document.getElementById("ownerName");
+const category = document.getElementById("category");
+const city = document.getElementById("city");
 const phone = document.getElementById("phone");
 const state = document.getElementById("state");
 const address = document.getElementById("address");
 const subCategory = document.getElementById("subCategory");
 const description = document.getElementById("description");
 
-onAuthStateChanged(auth, async function (user) {
-  if (user) {
-    vendorEmail.textContent = user.email;
+const whatsappLink = document.getElementById("whatsappLink");
+const vendorImage = document.getElementById("vendorImage");
 
+// 🔥 AUTH CHECK
+onAuthStateChanged(auth, async (user) => {
+  if (!user) {
+    window.location.href = "../login/login.html";
+    return;
+  }
+
+  try {
+    // Email
+    if (vendorEmail) {
+      vendorEmail.textContent = user.email;
+    }
+
+    // Fetch vendor profile
     const docRef = doc(db, "vendors", user.uid);
     const docSnap = await getDoc(docRef);
 
-    if (docSnap.exists()) {
-      const data = docSnap.data();
+    if (!docSnap.exists()) {
+      alert("Vendor profile not found");
+      return;
+    }
 
-      console.log("Vendor Data:", data);
+    const data = docSnap.data();
 
-      // 🔥 BASIC INFO
-      businessName.textContent = data.businessName || "N/A";
-      businessNameCard.textContent = data.businessName || "N/A";
-      category.textContent = data.category || "N/A";
-      city.textContent = data.city || "N/A";
+    // 🔥 BASIC INFO
+    if (businessName) {
+      businessName.textContent =
+        data.businessName || "N/A";
+    }
 
-      // 🔥 DETAILS
-      ownerName.textContent = data.ownerName || "N/A";
-      phone.textContent = data.phone || "N/A";
-      state.textContent = data.state || "N/A";
-      address.textContent = data.address || "N/A";
-      subCategory.textContent = data.subCategory || "N/A";
-      description.textContent = data.description || "No description yet.";
+    if (businessNameCard) {
+      businessNameCard.textContent =
+        data.businessName || "N/A";
+    }
 
-      if (data.whatsappLink) {
-        whatsappLink.textContent = "Chat on WhatsApp";
-        whatsappLink.href = data.whatsappLink;
+    if (ownerName) {
+      ownerName.textContent =
+        data.ownerName || "N/A";
+    }
+
+    if (category) {
+      category.textContent =
+        data.category || "N/A";
+    }
+
+    if (city) {
+      city.textContent =
+        data.city || "N/A";
+    }
+
+    if (phone) {
+      phone.textContent =
+        data.phone || "N/A";
+    }
+
+    if (state) {
+      state.textContent =
+        data.state || "N/A";
+    }
+
+    if (address) {
+      address.textContent =
+        data.address || "N/A";
+    }
+
+    if (subCategory) {
+      subCategory.textContent =
+        data.subCategory || "N/A";
+    }
+
+    if (description) {
+      description.textContent =
+        data.description ||
+        "No description yet.";
+    }
+
+    // 🔥 WhatsApp
+    if (whatsappLink) {
+      if (data.whatsapp) {
+        whatsappLink.href = data.whatsapp;
+        whatsappLink.target = "_blank";
+        whatsappLink.textContent =
+          "Chat on WhatsApp";
       } else {
-        whatsappLink.textContent = "N/A";
         whatsappLink.removeAttribute("href");
-      }
-
-      // 🔥 IMAGE FIX
-      if (vendorImage) {
-        vendorImage.removeAttribute("src");
-
-        const img =
-          data.imageUrl ||
-          data.logoUrl ||
-          `https://ui-avatars.com/api/?name=${encodeURIComponent(data.businessName || "OjaHub")}`;
-
-        setTimeout(() => {
-          vendorImage.src = img + "?v=" + Date.now();
-        }, 100);
-      }
-    } else {
-      console.log("No vendor document found");
-
-      if (vendorImage) {
-        vendorImage.src = `https://ui-avatars.com/api/?name=OjaHub&background=1a5cff&color=fff`;
+        whatsappLink.textContent =
+          "No WhatsApp";
       }
     }
-  } else {
-    window.location.href = "../login/login.html";
+
+    // 🔥 Vendor Image
+    if (vendorImage) {
+      vendorImage.src =
+        data.imageUrl ||
+        "https://via.placeholder.com/300x300?text=OjaHub";
+    }
+
+  } catch (error) {
+    console.error("Dashboard Error:", error);
+    alert("Failed to load dashboard");
   }
 });
 
-logoutBtn.addEventListener("click", async function () {
-  try {
-    await signOut(auth);
-    alert("Logged out successfully");
-    window.location.href = "../login/login.html";
-  } catch (error) {
-    alert("Logout failed");
-  }
-});
+// 🔥 LOGOUT
+if (logoutBtn) {
+  logoutBtn.addEventListener("click", async () => {
+    try {
+      await signOut(auth);
+      window.location.href =
+        "../login/login.html";
+    } catch (error) {
+      console.error(error);
+      alert("Logout failed");
+    }
+  });
+}
