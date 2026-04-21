@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile Settings - OjaHub</title>
+
+  <link rel="stylesheet" href="profile_settings.css">
+</head>
+<body>
+
+  <!-- 🔥 TOPBAR -->
+  <div class="topbar">
+    <button onclick="goBack()">←</button>
+    <h2>Profile Settings</h2>
+  </div>
+
+  <!-- 🔥 FORM -->
+  <div class="container">
+    <form id="profileForm">
+
+      <div class="form-group">
+        <label>Business Name</label>
+        <input type="text" id="businessName">
+      </div>
+
+      <div class="form-group">
+        <label>Owner Name</label>
+        <input type="text" id="ownerName">
+      </div>
+
+      <div class="form-group">
+        <label>Phone</label>
+        <input type="text" id="phone">
+      </div>
+
+      <div class="form-group">
+        <label>WhatsApp</label>
+        <input type="text" id="whatsapp">
+      </div>
+
+      <div class="form-group">
+        <label>State</label>
+        <input type="text" id="state">
+      </div>
+
+      <div class="form-group">
+        <label>Address</label>
+        <input type="text" id="address">
+      </div>
+
+      <div class="form-group">
+        <label>Description</label>
+        <textarea id="description"></textarea>
+      </div>
+
+      <div class="form-group">
+  <label>Business Logo</label>
+
+  <img id="logoPreview" class="preview-img">
+
+  <input type="file" id="logoFile" accept="image/*">
+</div>
+
+<div class="form-group">
+  <label>Cover Image</label>
+
+  <img id="coverPreview" class="preview-cover">
+
+  <input type="file" id="coverFile" accept="image/*">
+</div>
+
+      <button type="submit">Update Profile</button>
+
+      <p id="loading"></p>
+
+    </form>
+  </div>
+
+  <script type="module" src="profile_settings.js"></script>
+</body>
+</html>

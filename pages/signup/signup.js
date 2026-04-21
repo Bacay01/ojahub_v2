@@ -1,74 +1,109 @@
-// ===============================
-// LOAD HEADER & FOOTER (SAFE)
-// ===============================
-
-document.addEventListener("DOMContentLoaded", () => {
-  loadComponent("header", "../components/header.html");
-  loadComponent("footer", "../components/footer.html");
-});
-
-// FIREBASE
-import { auth, db } from "../../js/firebase.js";
-
-import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-
+// 🔥 IMPORTS
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
 import {
+  getFirestore,
   doc,
   setDoc,
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/12.12.0/firebase-firestore.js";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+} from "https://www.gstatic.com/firebasejs/12.12.0/firebase-auth.js";
 
+// 🔥 FIREBASE CONFIG
+const firebaseConfig = {
+  apiKey: "AIzaSyAZRPoc-FkbdQ8ZNSkGIYFukU1TG-FJF6s",
+  authDomain: "ojahub-c10d9.firebaseapp.com",
+  projectId: "ojahub-c10d9",
+  storageBucket: "ojahub-c10d9.firebasestorage.app",
+  messagingSenderId: "896902243220",
+  appId: "1:896902243220:web:7259724fe7865c281aa581",
+};
+
+// 🔥 INIT
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+
+// 🔥 PASSWORD TOGGLE (FIXED FOR YOUR HTML)
+const togglePassword = document.getElementById("togglePassword");
+const passwordInput = document.getElementById("password");
+
+if (togglePassword && passwordInput) {
+  togglePassword.addEventListener("click", () => {
+    const type = passwordInput.type;
+
+    if (type === "password") {
+      passwordInput.type = "text";
+      togglePassword.textContent = "🙈";
+    } else {
+      passwordInput.type = "password";
+      togglePassword.textContent = "👁️";
+    }
+  });
+}
+
+// 🔥 FORM
 const form = document.getElementById("signupForm");
 
-form.addEventListener("submit", async function (e) {
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  let businessName = document.getElementById("businessName").value.trim();
-  let ownerName = document.getElementById("ownerName").value.trim();
-  let email = document.getElementById("email").value.trim();
-  let password = document.getElementById("password").value.trim();
-  let phone = document.getElementById("phone").value.trim();
-  let category = document.getElementById("category").value;
-  let subCategory = document.getElementById("subCategory").value.trim();
-  let description = document.getElementById("description").value.trim();
-  let city = document.getElementById("city").value.trim();
-  let state = document.getElementById("state").value.trim();
-  let address = document.getElementById("address").value.trim();
-  let whatsapp = document.getElementById("whatsapp").value.trim();
-  let terms = document.getElementById("terms").checked;
-
-  if (
-    !businessName ||
-    !ownerName ||
-    !email ||
-    !password ||
-    !phone ||
-    !category ||
-    !subCategory ||
-    !description ||
-    !city ||
-    !state ||
-    !address ||
-    !whatsapp
-  ) {
-    alert("Please fill all fields");
-    return;
-  }
-
-  if (!terms) {
-    alert("Please agree to the terms");
-    return;
-  }
-
-  let formatted = whatsapp.replace(/\s+/g, "");
-
-  if (formatted.startsWith("0")) {
-    formatted = "234" + formatted.slice(1);
-  }
-
-  let whatsappLink = `https://wa.me/${formatted}?text=${encodeURIComponent("Hello, I saw your business on OjaHub")}`;
-
   try {
-    // 🔐 CREATE USER
+    // 📥 GET INPUTS
+    const businessName = document.getElementById("businessName").value;
+    const ownerName = document.getElementById("ownerName").value;
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const phone = document.getElementById("phone").value;
+    const whatsapp = document.getElementById("whatsapp").value;
+    const category = document.getElementById("category").value;
+    const description = document.getElementById("description").value;
+    const city = document.getElementById("city").value;
+    const state = document.getElementById("state").value;
+    const address = document.getElementById("address").value;
+
+    const file = document.getElementById("imageFile").files[0];
+
+    // 🔥 CLOUDINARY UPLOAD
+    let imageUrl = "";
+
+    // 🔥 CLOUDINARY UPLOAD (STRICT VERSION)
+    if (!file) {
+      alert("Please upload a business image");
+      return;
+    }
+
+    console.log("Uploading image...");
+
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "ojahub_upload");
+
+    try {
+      const res = await fetch(
+        "https://api.cloudinary.com/v1_1/ds3zdc11c/image/upload",
+        {
+          method: "POST",
+          body: formData,
+        },
+      );
+
+      const data = await res.json();
+      console.log("Cloudinary response:", data);
+
+      if (!data.secure_url) {
+        alert("Image upload failed. Try again.");
+        return;
+      }
+
+      imageUrl = data.secure_url;
+    } catch (error) {
+      console.error("Image upload error:", error);
+      alert("Something went wrong uploading image");
+      return;
+    }
+    // 🔥 CREATE AUTH USER
     const userCredential = await createUserWithEmailAndPassword(
       auth,
       email,
@@ -76,43 +111,49 @@ form.addEventListener("submit", async function (e) {
     );
     const user = userCredential.user;
 
-    // 💾 SAVE TO FIRESTORE
+    // 🔥 SAVE TO FIRESTORE (LINKED WITH UID)
     await setDoc(doc(db, "vendors", user.uid), {
-      uid: user.uid,
       businessName,
       ownerName,
       email,
       phone,
+      whatsapp,
       category,
-      subCategory,
       description,
       city,
       state,
       address,
-      whatsapp,
-      whatsappLink,
-      createdAt: new Date().toISOString(),
+      imageUrl,
+      createdAt: new Date(),
     });
 
-    alert("Account created successfully 🎉");
-
+    alert("Signup successful 🚀");
     form.reset();
+
+    window.location.href = "../dashboard/dashboard.html";
   } catch (error) {
+    console.error(error);
     alert(error.message);
   }
 });
 
-const togglePassword = document.getElementById("togglePassword");
-const passwordInput = document.getElementById("password");
+// 🔥 AUTO SAVE FORM DATA
+const inputs = document.querySelectorAll(
+  "#signupForm input, #signupForm textarea, #signupForm select",
+);
 
-togglePassword.addEventListener("click", function () {
-  const type = passwordInput.getAttribute("type");
+inputs.forEach((input) => {
+  input.addEventListener("input", () => {
+    localStorage.setItem(input.id, input.value);
+  });
+});
 
-  if (type === "password") {
-    passwordInput.setAttribute("type", "text");
-    togglePassword.textContent = "🙈";
-  } else {
-    passwordInput.setAttribute("type", "password");
-    togglePassword.textContent = "👁️";
-  }
+// 🔥 LOAD SAVED DATA
+window.addEventListener("load", () => {
+  inputs.forEach((input) => {
+    const savedValue = localStorage.getItem(input.id);
+    if (savedValue) {
+      input.value = savedValue;
+    }
+  });
 });
