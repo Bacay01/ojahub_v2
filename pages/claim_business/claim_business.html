@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Claim Business</title>
+<link rel="stylesheet" href="claim_business.css">
+</head>
+<body>
+
+<div class="claim-box">
+
+<h1>Claim Your Business</h1>
+<p class="small" id="businessTitle">Loading...</p>
+
+<form id="claimForm">
+
+<div class="group">
+<h3>Business Info</h3>
+
+<div class="grid">
+
+<input type="text" id="businessName" placeholder="Business Name" class="full">
+
+<input type="text" id="ownerName" placeholder="Owner Name">
+
+<input type="email" id="email" placeholder="Email Address">
+
+<input type="password" id="password" placeholder="Create Password">
+
+<input type="tel" id="phone" placeholder="Phone Number">
+
+<input type="tel" id="whatsapp" placeholder="WhatsApp Number">
+
+<input type="file" id="imageFile" accept="image/*" class="full">
+
+</div>
+</div>
+
+<div class="group">
+<h3>Business Details</h3>
+
+<div class="grid">
+
+<input type="text" id="category" placeholder="Category">
+
+<input type="text" id="subCategory" placeholder="Sub Category">
+
+<textarea id="description" placeholder="Business Description" class="full"></textarea>
+
+</div>
+</div>
+
+<div class="group">
+<h3>Location</h3>
+
+<div class="grid">
+
+<input type="text" id="city" placeholder="City">
+
+<input type="text" id="state" placeholder="State">
+
+<input type="text" id="address" placeholder="Full Address" class="full">
+
+</div>
+</div>
+
+<button type="submit">Claim Business</button>
+
+<p id="msg"></p>
+
+</form>
+
+</div>
+
+<script type="module" src="claim_business.js"></script>
+</body>
+</html>

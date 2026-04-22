@@ -7,7 +7,9 @@ import {
 
 import {
   doc,
-  getDoc
+  getDoc,
+  collection,
+  getDocs
 } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-firestore.js";
 
 // 🔥 ELEMENTS
@@ -31,27 +33,51 @@ const vendorImage = document.getElementById("vendorImage");
 
 // 🔥 AUTH CHECK
 onAuthStateChanged(auth, async (user) => {
+
   if (!user) {
     window.location.href = "../login/login.html";
     return;
   }
 
   try {
-    // Email
+
     if (vendorEmail) {
       vendorEmail.textContent = user.email;
     }
 
-    // Fetch vendor profile
-    const docRef = doc(db, "vendors", user.uid);
-    const docSnap = await getDoc(docRef);
+    let data = null;
 
-    if (!docSnap.exists()) {
+    // 🔥 FIRST CHECK NORMAL SIGNUP
+    const directRef = doc(db, "vendors", user.uid);
+    const directSnap = await getDoc(directRef);
+
+    if (directSnap.exists()) {
+
+      data = directSnap.data();
+
+    } else {
+
+      // 🔥 CHECK CLAIMED ACCOUNT
+      const snapshot = await getDocs(
+        collection(db, "vendors")
+      );
+
+      snapshot.forEach((item) => {
+
+        const vendor = item.data();
+
+        if (vendor.ownerUid === user.uid) {
+          data = vendor;
+        }
+
+      });
+
+    }
+
+    if (!data) {
       alert("Vendor profile not found");
       return;
     }
-
-    const data = docSnap.data();
 
     // 🔥 BASIC INFO
     if (businessName) {
@@ -105,43 +131,75 @@ onAuthStateChanged(auth, async (user) => {
         "No description yet.";
     }
 
-    // 🔥 WhatsApp
+    // 🔥 WHATSAPP FIX
     if (whatsappLink) {
+
       if (data.whatsapp) {
-        whatsappLink.href = data.whatsapp;
+
+        let number =
+          data.whatsapp.replace(/\D/g, "");
+
+        if (number.startsWith("0")) {
+          number =
+            "234" + number.substring(1);
+        }
+
+        whatsappLink.href =
+          "https://wa.me/" + number;
+
         whatsappLink.target = "_blank";
+
         whatsappLink.textContent =
           "Chat on WhatsApp";
+
       } else {
+
         whatsappLink.removeAttribute("href");
+
         whatsappLink.textContent =
           "No WhatsApp";
+
       }
+
     }
 
-    // 🔥 Vendor Image
-    if (vendorImage) {
-      vendorImage.src =
-        data.imageUrl ||
-        "https://via.placeholder.com/300x300?text=OjaHub";
-    }
+    // 🔥 IMAGE
+  if (vendorImage) {
+  vendorImage.src =
+    data.imageUrl ||
+    data.logoUrl ||
+    data.profileImage ||
+    "https://ui-avatars.com/api/?name=" +
+    encodeURIComponent(data.businessName || "OjaHub");
+}
 
   } catch (error) {
-    console.error("Dashboard Error:", error);
+
+    console.error(error);
     alert("Failed to load dashboard");
+
   }
+
 });
 
 // 🔥 LOGOUT
 if (logoutBtn) {
+
   logoutBtn.addEventListener("click", async () => {
+
     try {
+
       await signOut(auth);
+
       window.location.href =
         "../login/login.html";
+
     } catch (error) {
-      console.error(error);
+
       alert("Logout failed");
+
     }
+
   });
+
 }

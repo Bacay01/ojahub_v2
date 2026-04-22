@@ -50,18 +50,17 @@ async function loadVendors() {
       });
     });
 
-    // 🔥 SORT CATEGORY + ALPHABETICAL
+    // 🔥 CATEGORY + A-Z
     vendors.sort((a, b) => {
-      const categoryA = (a.category || "").toLowerCase();
-      const categoryB = (b.category || "").toLowerCase();
+      const catA = (a.category || "").toLowerCase();
+      const catB = (b.category || "").toLowerCase();
 
-      if (categoryA < categoryB) return -1;
-      if (categoryA > categoryB) return 1;
+      if (catA < catB) return -1;
+      if (catA > catB) return 1;
 
-      const nameA = (a.businessName || "").toLowerCase();
-      const nameB = (b.businessName || "").toLowerCase();
-
-      return nameA.localeCompare(nameB);
+      return (a.businessName || "").localeCompare(
+        b.businessName || ""
+      );
     });
 
     let html = "";
@@ -84,15 +83,17 @@ async function loadVendors() {
       });
 
       html += `
-        <div class="vendor-card"
-          data-category="${(data.category || "").toLowerCase()}"
-          data-name="${data.businessName || ""}"
-          data-desc="${data.description || ""}"
-          data-location="${data.city || ""}"
-          data-image="${data.imageUrl || ""}"
-          data-whatsapp="${data.whatsapp || ""}"
-          data-products='${JSON.stringify(vendorProducts)}'
-        >
+      <div class="vendor-card"
+      data-id="${data.id}"
+      data-category="${(data.category || "").toLowerCase()}"
+      data-name="${data.businessName || ""}"
+      data-desc="${data.description || ""}"
+      data-location="${data.city || ""}"
+      data-image="${data.imageUrl || ""}"
+      data-whatsapp="${data.whatsapp || ""}"
+      data-products='${JSON.stringify(vendorProducts)}'
+      >
+
 
           <img
             src="${
@@ -147,6 +148,7 @@ function attachViewDetails() {
     if (!button) return;
 
     button.addEventListener("click", () => {
+
       detailDesc.innerHTML = "";
 
       const vendorName = card.dataset.name || "";
@@ -168,7 +170,12 @@ function attachViewDetails() {
         "📍 " + (card.dataset.location || "");
 
       detailDesc.innerHTML = `
-        <p>${card.dataset.desc || "No description"}</p>
+      <p>${card.dataset.desc || "No description"}</p>
+
+      <a href="../pages/claim_business/claim_business.html?vendorId=${card.dataset.id}"
+      class="claim-btn">
+      Claim This Business
+      </a>
       `;
 
       const products = JSON.parse(
@@ -181,13 +188,14 @@ function attachViewDetails() {
       if (products.length === 0) {
         productHTML += "<p>No products yet</p>";
       } else {
+
+        // 🔥 4 PER ROW GRID
         productHTML += `
-          <div class="product-wrapper">
-            <button class="scroll-btn left">‹</button>
-            <div class="product-scroll">
+          <div class="product-grid">
         `;
 
         products.forEach((p) => {
+
           const message = `Hello, I saw this product on OjaHub.
 
 Product: ${p.name || ""}
@@ -209,7 +217,7 @@ Is it still available?`;
               <img src="${
                 p.imageUrl ||
                 "https://via.placeholder.com/300x200?text=No+Image"
-              }" />
+              }">
 
               <span class="product-tag">
                 ${p.category || "Product"}
@@ -236,55 +244,27 @@ Is it still available?`;
         });
 
         productHTML += `
-            </div>
-            <button class="scroll-btn right">›</button>
           </div>
         `;
       }
 
       detailDesc.innerHTML += productHTML;
 
-      const scrollContainer =
-        document.querySelector(".product-scroll");
-
-      const leftBtn =
-        document.querySelector(".scroll-btn.left");
-
-      const rightBtn =
-        document.querySelector(".scroll-btn.right");
-
-      if (
-        leftBtn &&
-        rightBtn &&
-        scrollContainer
-      ) {
-        leftBtn.onclick = () => {
-          scrollContainer.scrollBy({
-            left: -220,
-            behavior: "smooth"
-          });
-        };
-
-        rightBtn.onclick = () => {
-          scrollContainer.scrollBy({
-            left: 220,
-            behavior: "smooth"
-          });
-        };
-      }
-
       vendorList.style.display = "none";
       detailSection.classList.remove("hidden");
+
     });
   });
 }
 
 // 🔥 FILTER
 function filterVendors(category) {
+
   const cards =
     document.querySelectorAll(".vendor-card");
 
   cards.forEach((card) => {
+
     const cardCategory =
       card.dataset.category || "";
 
@@ -296,11 +276,13 @@ function filterVendors(category) {
     } else {
       card.style.display = "none";
     }
+
   });
 }
 
 // 🔥 DOM READY
 document.addEventListener("DOMContentLoaded", () => {
+
   vendorList =
     document.getElementById("vendorList");
 
@@ -326,7 +308,9 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(".category-btn");
 
   buttons.forEach((btn) => {
+
     btn.addEventListener("click", () => {
+
       buttons.forEach((b) =>
         b.classList.remove("active")
       );
@@ -338,7 +322,9 @@ document.addEventListener("DOMContentLoaded", () => {
           .toLowerCase();
 
       filterVendors(category);
+
     });
+
   });
 
   if (backBtn) {
@@ -349,4 +335,5 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   loadVendors();
+
 });
