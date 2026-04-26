@@ -48,10 +48,10 @@ const phoneInput =
     "phone"
   );
 
-const whatsappInput =
-  document.getElementById(
-    "whatsapp"
-  );
+// const whatsappInput =
+//   document.getElementById(
+//     "whatsapp"
+//   );
 
 const emailInput =
   document.getElementById(
@@ -151,12 +151,10 @@ async function loadVendor() {
       vendorData.businessName ||
       "";
 
-    phoneInput.value =
-      vendorData.phone || "";
-
-    whatsappInput.value =
-      vendorData.whatsapp ||
-      "";
+   
+    // whatsappInput.value =
+    //   vendorData.whatsapp ||
+    //   "";
 
     categoryInput.value =
       vendorData.category ||
@@ -241,8 +239,7 @@ form.addEventListener(
     const phone =
       phoneInput.value.trim();
 
-    const whatsapp =
-      whatsappInput.value.trim();
+    const whatsapp = phone;
 
     const email =
       emailInput.value.trim();
@@ -286,27 +283,42 @@ form.addEventListener(
     }
 
     // PHONE CHECK
-    const enteredPhone =
-      phone.replace(/\s/g,"");
+msg.style.color = "#1554d1";
+msg.textContent = "Verifying phone number...";
 
-    const savedPhone =
-      (
-        vendorData.phone ||
-        ""
-      ).replace(/\s/g,"");
+let enteredPhone =
+phone.replace(/\D/g, "");
 
-    if (
-      enteredPhone !==
-      savedPhone
-    ) {
+let savedPhone =
+(vendorData.phone || "")
+.replace(/\D/g, "");
 
-      msg.style.color = "red";
+// convert 0810... to 234810...
+if (enteredPhone.startsWith("0")) {
+  enteredPhone =
+  "234" + enteredPhone.slice(1);
+}
 
-      msg.textContent =
-        "Phone number does not match business record";
+if (savedPhone.startsWith("0")) {
+  savedPhone =
+  "234" + savedPhone.slice(1);
+}
 
-      return;
-    }
+// remove + if already entered
+if (enteredPhone.startsWith("234") === false &&
+enteredPhone.startsWith("810")) {
+  enteredPhone = "234" + enteredPhone;
+}
+
+if (enteredPhone !== savedPhone) {
+
+  msg.style.color = "red";
+
+  msg.textContent =
+  "The number entered does not match the registered business number.";
+
+  return;
+}
 
     try {
 

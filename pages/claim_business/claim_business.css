@@ -42,3 +42,15 @@ margin-top:15px;
 font-weight:bold;
 text-align:center;
 }
+
+#description{
+min-height:160px;
+width:100%;
+}
+
+#category{
+color:#999;
+background:#f8f8f8;
+cursor:not-allowed;
+font-weight:400;
+}
