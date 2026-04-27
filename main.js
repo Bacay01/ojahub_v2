@@ -95,6 +95,90 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // ===== HERO SECTION — IMAGE CAROUSEL =====
+
+  (function () {
+    const track = document.getElementById("carouselTrack");
+    if (!track) return;
+
+    const slides = Array.from(track.querySelectorAll(".carousel-slide"));
+    const dots = Array.from(document.querySelectorAll("#carouselDots .dot"));
+    let current = 0;
+    let timer = null;
+    const INTERVAL = 4000; // ms between slides
+
+    function goTo(index) {
+      slides[current].classList.remove("active");
+      slides[current].classList.add("exit");
+      dots[current].classList.remove("active");
+
+      // Clean up exit class after transition
+      const prev = current;
+      setTimeout(() => {
+        slides[prev].classList.remove("exit");
+      }, 900);
+
+      current = (index + slides.length) % slides.length;
+
+      slides[current].classList.add("active");
+      dots[current].classList.add("active");
+    }
+
+    function next() {
+      goTo(current + 1);
+    }
+
+    function startAuto() {
+      clearInterval(timer);
+      timer = setInterval(next, INTERVAL);
+    }
+
+    // Dot click
+    dots.forEach((dot) => {
+      dot.addEventListener("click", () => {
+        const idx = parseInt(dot.getAttribute("data-index"), 10);
+        if (idx === current) return;
+        goTo(idx);
+        startAuto(); // reset timer on manual click
+      });
+    });
+
+    // Pause on hover
+    const wrapper = document.querySelector(".carousel-wrapper");
+    if (wrapper) {
+      wrapper.addEventListener("mouseenter", () => clearInterval(timer));
+      wrapper.addEventListener("mouseleave", startAuto);
+    }
+
+    // Touch/swipe support
+    let touchStartX = 0;
+    if (wrapper) {
+      wrapper.addEventListener(
+        "touchstart",
+        (e) => {
+          touchStartX = e.changedTouches[0].clientX;
+        },
+        { passive: true },
+      );
+
+      wrapper.addEventListener(
+        "touchend",
+        (e) => {
+          const diff = touchStartX - e.changedTouches[0].clientX;
+          if (Math.abs(diff) > 40) {
+            diff > 0 ? goTo(current + 1) : goTo(current - 1);
+            startAuto();
+          }
+        },
+        { passive: true },
+      );
+    }
+
+    // Kick off
+    startAuto();
+  })();
+  // ===== END HERO SECTION JS =====
+
   // ===============================
   // CATEGORY + SEARCH FILTER
   // WITH PERSISTENT ACTIVE CATEGORY

@@ -53,8 +53,42 @@
           </p>
         </div>
 
+        <!-- ================= MARKETPLACE WRAPPER ================= -->
+<div class="mp-wrapper">
+
+  <!-- ================= SEARCH BAR ================= -->
+  <div class="mp-search-section">
+    <input 
+      type="text" 
+      id="mp-searchInput" 
+      class="mp-search-input"
+      placeholder="Search vendors..."
+    />
+  </div>
+
+  <!-- ================= CATEGORY FILTER ================= -->
+  <div class="mp-category-bar" id="mp-categoryBar">
+    <button class="mp-category-btn active" data-category="All">All</button>
+    <button class="mp-category-btn" data-category="Food">Food</button>
+    <button class="mp-category-btn" data-category="Fashion">Fashion</button>
+    <button class="mp-category-btn" data-category="Beauty">Beauty</button>
+    <button class="mp-category-btn" data-category="Phones">Phones</button>
+    <button class="mp-category-btn" data-category="Services">Services</button>
+    <button class="mp-category-btn" data-category="Others">Others</button>
+  </div>
+
+  <!-- ================= VENDOR GRID ================= -->
+  <div class="mp-grid" id="mp-vendorGrid"></div>
+
+  <!-- ================= LOAD MORE ================= -->
+  <div class="mp-loadmore-wrap">
+    <button id="mp-loadMoreBtn" class="mp-loadmore-btn">Load More</button>
+  </div>
+
+</div>
+
         <!-- FILTER SECTION -->
-        <section class="vendor-filter">
+        <!-- <section class="vendor-filter">
           <input
             type="text"
             id="searchInput"
@@ -74,19 +108,19 @@
             </button>
             <button class="category-btn" data-category="others">Others</button>
           </div>
-        </section>
+        </section> -->
 
         <!-- VENDORS GRID -->
-       <section class="vendors-section">
+       <!-- <section class="vendors-section">
           <h2>Featured Vendors</h2>
 
           <div class="vendors-scroll" id="vendorList"></div>
    
           </div>
-        </section>
+        </section> -->
 
         <!-- FULL DETAIL VIEW -->
-        <section class="vendor-detail hidden" id="vendorDetail">
+        <!-- <section class="vendor-detail hidden" id="vendorDetail">
           <button id="backBtn">← Back to Vendors</button>
 
           <div class="detail-card">
@@ -103,12 +137,13 @@
           </div>
         </section>
       </div>
-    </section>
+    </section> -->
 
     <!-- Footer placeholder -->
     <div id="footer"></div>
 
     <!-- <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> -->
+     <script src="main.js"></script>
     <script type="module" src="marketplace.js"></script>
   </body>
 </html>
