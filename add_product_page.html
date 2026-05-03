@@ -1,81 +1,74 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Add Product - OjaHub</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Product - OjaHub</title>
 
-  <!-- ✅ YOUR CSS -->
-  <link rel="stylesheet" href="add_product.css">
-</head>
-<body>
-
-  <!-- 🔥 TOPBAR -->
-  <div class="topbar">
-    <button class="back-btn" onclick="goBack()">←</button>
-    <h2>Add Product</h2>
-  </div>
-
-  <!-- 🔥 PAGE WRAPPER (NEW - SAFE) -->
-  <div class="page-wrapper">
-
-    <!-- 🔥 LEFT SIDE (FORM - UNTOUCHED) -->
-    <div class="form-container">
-
+    <!-- ✅ YOUR CSS -->
+    <link rel="stylesheet" href="add_product.css" />
+  </head>
+  <body>
+    <!-- 🔥 TOPBAR -->
+    <div class="topbar">
+      <button class="back-btn" onclick="goBack()">←</button>
       <h2>Add Product</h2>
-
-      <form id="productForm">
-
-        <div class="form-group">
-          <label>Product Name</label>
-          <input type="text" id="name" required>
-        </div>
-
-        <div class="form-group">
-          <label>Price</label>
-          <input type="number" id="price" required>
-        </div>
-
-        <div class="form-group">
-          <label>Description</label>
-          <textarea id="desc" rows="3"></textarea>
-        </div>
-
-        <div class="form-group">
-          <label>Category</label>
-          <select id="category">
-            <option value="food">Food</option>
-            <option value="fashion">Fashion</option>
-            <option value="beauty">Beauty</option>
-            <option value="phones">Phones</option>
-            <option value="services">Services</option>
-            <option value="others">Others</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>Upload Image</label>
-          <input type="file" id="image" accept="image/*">
-          <img id="preview">
-        </div>
-
-        <button type="submit">Upload Product</button>
-
-        <p id="loading" class="loading"></p>
-
-      </form>
     </div>
 
-    <!-- 🔥 RIGHT SIDE (PREVIEW - USES SAME ID, NO BREAK) -->
-    <div class="preview-side">
-      <h3>Preview</h3>
-      <img id="previewDisplay">
+    <!-- 🔥 PAGE WRAPPER (NEW - SAFE) -->
+    <div class="page-wrapper">
+      <!-- 🔥 LEFT SIDE (FORM - UNTOUCHED) -->
+      <div class="form-container">
+        <h2>Add Product</h2>
+
+        <form id="productForm">
+          <div class="form-group">
+            <label>Product Name</label>
+            <input type="text" id="name" required />
+          </div>
+
+          <div class="form-group">
+            <label>Price</label>
+            <input type="number" id="price" required />
+          </div>
+
+          <div class="form-group">
+            <label>Description</label>
+            <textarea id="desc" rows="3"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>Category</label>
+            <select id="category">
+              <option value="food">Food</option>
+              <option value="fashion">Fashion</option>
+              <option value="beauty">Beauty</option>
+              <option value="phones">Phones</option>
+              <option value="services">Services</option>
+              <option value="others">Others</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Upload Image</label>
+            <input type="file" id="image" accept="image/*" />
+            <img id="preview" />
+          </div>
+
+          <button type="submit">Upload Product</button>
+
+          <p id="loading" class="loading"></p>
+        </form>
+      </div>
+
+      <!-- 🔥 RIGHT SIDE (PREVIEW - USES SAME ID, NO BREAK) -->
+      <div class="preview-side">
+        <h3>Preview</h3>
+        <img id="previewDisplay" />
+      </div>
     </div>
 
-  </div>
-
-  <!-- ✅ YOUR JS -->
-  <script type="module" src="add-product.js"></script>
-
-</body>
+    <!-- ✅ YOUR JS -->
+    <script type="module" src="add-product.js"></script>
+  </body>
 </html>

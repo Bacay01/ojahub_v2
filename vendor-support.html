@@ -1,155 +1,158 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vendor Support - OjaHub</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vendor Support - OjaHub</title>
 
-  <!-- BOOTSTRAP -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- BOOTSTRAP -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
 
-  <!-- FONT AWESOME -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" rel="stylesheet">
+    <!-- FONT AWESOME -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      rel="stylesheet"
+    />
 
-  <!-- YOUR CSS -->
-  <link rel="stylesheet" href="style.css">
+    <!-- YOUR CSS -->
+    <link rel="stylesheet" href="style.css" />
 
-  <style>
+    <style>
       .guidelines-hero {
-  background: #f3f4f6;
-  padding: 80px 20px;
-}
+        background: #f3f4f6;
+        padding: 80px 20px;
+      }
 
-.guidelines-tag {
-  color: #ff7a00;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 2px;
-  margin-bottom: 10px;
-}
+      .guidelines-tag {
+        color: #ff7a00;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 2px;
+        margin-bottom: 10px;
+      }
 
-.guidelines-title {
-  font-size: 42px;
-  font-weight: 700;
-  color: #111827;
-  margin-bottom: 15px;
-}
+      .guidelines-title {
+        font-size: 42px;
+        font-weight: 700;
+        color: #111827;
+        margin-bottom: 15px;
+      }
 
-.guidelines-subtext {
-  max-width: 600px;
-  margin: 0 auto;
-  font-size: 16px;
-  color: #6b7280;
-  line-height: 1.6;
-}
+      .guidelines-subtext {
+        max-width: 600px;
+        margin: 0 auto;
+        font-size: 16px;
+        color: #6b7280;
+        line-height: 1.6;
+      }
 
+      .vendor-support {
+        padding: 60px 20px;
+        background: #ffffff;
+      }
 
-.vendor-support {
-  padding: 60px 20px;
-  background: #ffffff;
-}
+      /* GRID */
+      .support-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 25px;
+      }
 
-/* GRID */
-.support-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 25px;
-}
+      /* CARD */
+      .support-card {
+        border: 1px solid #e5e7eb;
+        border-radius: 16px;
+        padding: 25px;
+        background: #ffffff;
+        transition: 0.3s ease;
+      }
 
-/* CARD */
-.support-card {
-  border: 1px solid #e5e7eb;
-  border-radius: 16px;
-  padding: 25px;
-  background: #ffffff;
-  transition: 0.3s ease;
-}
+      /* ICON */
+      .support-icon {
+        width: 40px;
+        height: 40px;
+        background: #fff3eb;
+        color: #ff7a00;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        font-size: 18px;
+        margin-bottom: 15px;
+      }
 
-/* ICON */
-.support-icon {
-  width: 40px;
-  height: 40px;
-  background: #fff3eb;
-  color: #ff7a00;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 10px;
-  font-size: 18px;
-  margin-bottom: 15px;
-}
+      /* TEXT */
+      .support-card h3 {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: #111827;
+      }
 
-/* TEXT */
-.support-card h3 {
-  font-size: 16px;
-  font-weight: 600;
-  margin-bottom: 8px;
-  color: #111827;
-}
+      .support-card p {
+        font-size: 14px;
+        color: #6b7280;
+        line-height: 1.5;
+      }
 
-.support-card p {
-  font-size: 14px;
-  color: #6b7280;
-  line-height: 1.5;
-}
+      /* SUPPORT */
 
+      .support-cta {
+        padding: 50px 20px;
+      }
 
-/* SUPPORT */
+      .support-cta .container {
+        background: linear-gradient(135deg, #1a5cff, #002f9e);
+        border-radius: 20px;
+        padding: 50px 20px;
+        max-width: 1000px;
+      }
 
-.support-cta {
-  padding: 50px 20px;
-}
+      /* TITLE */
+      .support-cta-title {
+        color: #ffffff;
+        font-size: 28px;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
 
-.support-cta .container {
-  background: linear-gradient(135deg, #1a5cff, #002f9e);
-  border-radius: 20px;
-  padding: 50px 20px;
-  max-width: 1000px;
-}
+      /* TEXT */
+      .support-cta-text {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 14px;
+        max-width: 550px;
+        margin: 0 auto 25px;
+      }
 
-/* TITLE */
-.support-cta-title {
-  color: #ffffff;
-  font-size: 28px;
-  font-weight: 700;
-  margin-bottom: 10px;
-}
+      /* BUTTON */
+      .support-cta-btn {
+        display: inline-block;
+        background: #ff7a00;
+        color: #fff;
+        padding: 12px 28px;
+        border-radius: 999px;
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+      }
 
-/* TEXT */
-.support-cta-text {
-  color: rgba(255,255,255,0.8);
-  font-size: 14px;
-  max-width: 550px;
-  margin: 0 auto 25px;
-}
+      @media (max-width: 768px) {
+        .support-cta-title {
+          font-size: 22px;
+        }
 
-/* BUTTON */
-.support-cta-btn {
-  display: inline-block;
-  background: #ff7a00;
-  color: #fff;
-  padding: 12px 28px;
-  border-radius: 999px;
-  font-size: 14px;
-  font-weight: 600;
-  text-decoration: none;
-}
+        .support-cta-text {
+          font-size: 13px;
+        }
+      }
+    </style>
+  </head>
 
-@media (max-width: 768px) {
-  .support-cta-title {
-    font-size: 22px;
-  }
-
-  .support-cta-text {
-    font-size: 13px;
-  }
-}
-  </style>
-</head>
-
-<body>
-
-  <!-- Navbar -->
+  <body>
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg ojahub-navbar sticky-top">
       <div class="container">
         <!-- LOGO (TEXT NOW) -->
@@ -194,195 +197,175 @@
       </div>
     </nav>
 
+    <!-- PAGE -->
 
-  <!-- PAGE -->
-  
+    <!-- HEADER -->
+    <section class="guidelines-hero">
+      <div class="container text-center">
+        <p class="guidelines-tag">Vendor Help</p>
 
-      <!-- HEADER -->
-       <section class="guidelines-hero">
-  <div class="container text-center">
+        <h1 class="guidelines-title">Vendor Support</h1>
 
-    <p class="guidelines-tag">
-      Vendor Help
-    </p>
+        <p class="guidelines-subtext">
+          We're here to help you get the most out of OjaHub. Browse support
+          topics or reach out directly.
+        </p>
+      </div>
+    </section>
 
-    <h1 class="guidelines-title">
-      Vendor Support
-    </h1>
-
-    <p class="guidelines-subtext">
-      We're here to help you get the most out of OjaHub. 
-      Browse support topics or reach out directly.
-    </p>
-
-  </div>
-</section>
-
-      <!-- CONTENT -->
+    <!-- CONTENT -->
     <section class="vendor-support">
-  <div class="container">
+      <div class="container">
+        <div class="support-grid">
+          <!-- CARD 1 -->
+          <div class="support-card">
+            <div class="support-icon">⚙️</div>
+            <h3>Update My Profile</h3>
+            <p>
+              Need to change your business name, services, location, or WhatsApp
+              number? Send us the updated details and we’ll make the changes.
+            </p>
+          </div>
 
-    <div class="support-grid">
+          <!-- CARD 2 -->
+          <div class="support-card">
+            <div class="support-icon">⭐</div>
+            <h3>Manage Reviews</h3>
+            <p>
+              Received an unfair or fake review? Contact us with the details and
+              we’ll investigate and take appropriate action.
+            </p>
+          </div>
 
-      <!-- CARD 1 -->
-      <div class="support-card">
-        <div class="support-icon">⚙️</div>
-        <h3>Update My Profile</h3>
-        <p>
-          Need to change your business name, services, location, or WhatsApp number?
-          Send us the updated details and we’ll make the changes.
-        </p>
+          <!-- CARD 3 -->
+          <div class="support-card">
+            <div class="support-icon">🔄</div>
+            <h3>Reactivate My Listing</h3>
+            <p>
+              If your listing was suspended or deactivated, reach out to
+              understand why and how to get it back live.
+            </p>
+          </div>
+
+          <!-- CARD 4 -->
+          <div class="support-card">
+            <div class="support-icon">🛡️</div>
+            <h3>Report a Buyer</h3>
+            <p>
+              Experienced harassment or fraud from a buyer? Let us know so we
+              can take steps to protect you and the community.
+            </p>
+          </div>
+
+          <!-- CARD 5 -->
+          <div class="support-card">
+            <div class="support-icon">❓</div>
+            <h3>General Questions</h3>
+            <p>
+              Have any other questions about being a vendor on OjaHub? We’re
+              here to help you succeed.
+            </p>
+          </div>
+
+          <!-- CARD 6 -->
+          <div class="support-card">
+            <div class="support-icon">💬</div>
+            <h3>Feature Requests</h3>
+            <p>
+              Got ideas on how we can improve OjaHub for vendors? We’d love to
+              hear your suggestions.
+            </p>
+          </div>
+        </div>
       </div>
+    </section>
 
-      <!-- CARD 2 -->
-      <div class="support-card">
-        <div class="support-icon">⭐</div>
-        <h3>Manage Reviews</h3>
-        <p>
-          Received an unfair or fake review? Contact us with the details and we’ll
-          investigate and take appropriate action.
+    <!-- SUPPORT -->
+
+    <section class="support-cta">
+      <div class="container text-center">
+        <h2 class="support-cta-title">Need Help Right Now?</h2>
+
+        <p class="support-cta-text">
+          Our vendor support team is available on WhatsApp. Send us a message
+          and we’ll respond as quickly as possible.
         </p>
-      </div>
 
-      <!-- CARD 3 -->
-      <div class="support-card">
-        <div class="support-icon">🔄</div>
-        <h3>Reactivate My Listing</h3>
-        <p>
-          If your listing was suspended or deactivated, reach out to understand why
-          and how to get it back live.
-        </p>
-      </div>
-
-      <!-- CARD 4 -->
-      <div class="support-card">
-        <div class="support-icon">🛡️</div>
-        <h3>Report a Buyer</h3>
-        <p>
-          Experienced harassment or fraud from a buyer? Let us know so we can take
-          steps to protect you and the community.
-        </p>
-      </div>
-
-      <!-- CARD 5 -->
-      <div class="support-card">
-        <div class="support-icon">❓</div>
-        <h3>General Questions</h3>
-        <p>
-          Have any other questions about being a vendor on OjaHub? We’re here to
-          help you succeed.
-        </p>
-      </div>
-
-      <!-- CARD 6 -->
-      <div class="support-card">
-        <div class="support-icon">💬</div>
-        <h3>Feature Requests</h3>
-        <p>
-          Got ideas on how we can improve OjaHub for vendors? We’d love to hear your
-          suggestions.
-        </p>
-      </div>
-
-    </div>
-
-  </div>
-</section>
-
-
-<!-- SUPPORT -->
-
-<section class="support-cta">
-  <div class="container text-center">
-
-    <h2 class="support-cta-title">
-      Need Help Right Now?
-    </h2>
-
-    <p class="support-cta-text">
-      Our vendor support team is available on WhatsApp. Send us a message and
-      we’ll respond as quickly as possible.
-    </p>
-
-    <a href="https://wa.me/2348165410790?text=Hello%20OjaHub" class="support-cta-btn">
-      Contact Vendor Support
-    </a>
-
-  </div>
-</section>
-
-
-  <!-- FOOTER -->
-
-<footer class="footer">
-  <div class="container">
-
-    <!-- TOP GRID -->
-    <div class="footer-grid">
-
-      <!-- ABOUT -->
-      <div class="footer-col">
-        <h4>About OjaHub</h4>
-                <a href="about.html">What is OjaHub</a>
-
-        <a href="how-it-works.html">How it Works</a>
-
-        <a href="https://wa.me/2348165410790?text=Hello%20OjaHub" target="_blank">
-          Contact Us
+        <a
+          href="https://wa.me/2348165410790?text=Hello%20OjaHub"
+          class="support-cta-btn"
+        >
+          Contact Vendor Support
         </a>
       </div>
+    </section>
 
-      <!-- BUYERS -->
-      <div class="footer-col">
-        <h4>For Buyers</h4>
-        <a href="marketplace.html">Browse Vendors</a>
-        <a href="categories.html">Categories</a>
-        <a href="buying-safe.html">Buying Safely on OjaHub</a>
-        <a href="faqs.html">FAQs</a>
+    <!-- FOOTER -->
+
+    <footer class="footer">
+      <div class="container">
+        <!-- TOP GRID -->
+        <div class="footer-grid">
+          <!-- ABOUT -->
+          <div class="footer-col">
+            <h4>About OjaHub</h4>
+            <a href="about.html">What is OjaHub</a>
+
+            <a href="how-it-works.html">How it Works</a>
+
+            <a
+              href="https://wa.me/2348165410790?text=Hello%20OjaHub"
+              target="_blank"
+            >
+              Contact Us
+            </a>
+          </div>
+
+          <!-- BUYERS -->
+          <div class="footer-col">
+            <h4>For Buyers</h4>
+            <a href="marketplace.html">Browse Vendors</a>
+            <a href="categories.html">Categories</a>
+            <a href="buying-safe.html">Buying Safely on OjaHub</a>
+            <a href="faqs.html">FAQs</a>
+          </div>
+
+          <!-- VENDORS -->
+          <div class="footer-col">
+            <h4>For Vendors</h4>
+            <a href="signup.html">List Your Business</a>
+            <a href="vendor-guidelines.html">Vendor Guidelines</a>
+            <a href="vendor-support.html">Vendor Support</a>
+          </div>
+
+          <!-- SUPPORT -->
+          <div class="footer-col">
+            <h4>Support</h4>
+            <a href="help-center.html">Help Center</a>
+            <a href="terms.html">Terms of Use</a>
+            <a href="privacy.html">Privacy Policy</a>
+          </div>
+        </div>
+
+        <!-- LINE -->
+        <div class="footer-divider"></div>
+
+        <!-- BOTTOM TEXT -->
+        <div class="footer-bottom">
+          <p class="footer-desc">
+            OjaHub connects you with trusted vendors. All transactions and
+            communication happen directly between users and vendors.
+          </p>
+
+          <p class="footer-small">
+            OjaHub is a marketplace that connects users with independent
+            vendors. OjaHub does not handle payments or guarantee transactions.
+            Users are advised to verify vendors and transact responsibly.
+          </p>
+
+          <p class="footer-copy">© 2026 OjaHub. All rights reserved.</p>
+        </div>
       </div>
-
-      <!-- VENDORS -->
-      <div class="footer-col">
-        <h4>For Vendors</h4>
-        <a href="signup.html">List Your Business</a>
-        <a href="vendor-guidelines.html">Vendor Guidelines</a>
-        <a href="vendor-support.html">Vendor Support</a>
-      </div>
-
-      <!-- SUPPORT -->
-      <div class="footer-col">
-        <h4>Support</h4>
-        <a href="help-center.html">Help Center</a>
-        <a href="terms.html">Terms of Use</a>
-        <a href="privacy.html">Privacy Policy</a>
-      </div>
-
-    </div>
-
-    <!-- LINE -->
-    <div class="footer-divider"></div>
-
-    <!-- BOTTOM TEXT -->
-    <div class="footer-bottom">
-      <p class="footer-desc">
-        OjaHub connects you with trusted vendors. All transactions and communication
-        happen directly between users and vendors.
-      </p>
-
-      <p class="footer-small">
-        OjaHub is a marketplace that connects users with independent vendors. OjaHub does not
-        handle payments or guarantee transactions. Users are advised to verify vendors and transact responsibly.
-      </p>
-
-      <p class="footer-copy">
-        © 2026 OjaHub. All rights reserved.
-      </p>
-    </div>
-
-  </div>
-</footer>
-
-
-
-</body>
+    </footer>
+  </body>
 </html>
