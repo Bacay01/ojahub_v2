@@ -28,6 +28,8 @@ let detailImg;
 let detailName;
 let detailDesc;
 let detailLocation;
+let claimBtn;
+let productsWrap;
 
 // 🔥 LOAD VENDORS + PRODUCTS
 async function loadVendors() {
@@ -161,17 +163,19 @@ function attachViewDetails() {
       detailLocation.textContent = "📍 " + (card.dataset.location || "");
 
       detailDesc.innerHTML = `
-      <p>${card.dataset.desc || "No description"}</p>
-
-      <a href="../pages/claim_business/claim_business.html?vendorId=${card.dataset.id}"
-      class="claim-btn">
-      Claim This Business
-      </a>
+        <p>${card.dataset.desc || "No description"}</p>
       `;
+
+      claimBtn.href =
+       `../pages/claim_business/claim_business.html?vendorId=${card.dataset.id}`;
 
       const products = JSON.parse(card.dataset.products || "[]");
 
-      let productHTML = "<h3 style='margin-top:20px;'>Products</h3>";
+     let productHTML = `
+      <h3 style="margin-top:40px; margin-bottom:20px;">
+        Products
+      </h3>
+    `;
 
       if (products.length === 0) {
         productHTML += "<p>No products yet</p>";
@@ -192,7 +196,9 @@ Is it still available?`;
 
           const encoded = encodeURIComponent(message);
 
-          const link = phone ? `https://wa.me/${phone}?text=${encoded}` : "#";
+          const link = phone
+          ? `https://wa.me/${phone}?text=${encoded}`
+          : "#";
 
           productHTML += `
             <div class="product-card">
@@ -218,10 +224,13 @@ Is it still available?`;
 
               ${
                 phone
-                  ? `<a href="${link}" target="_blank" class="chat-btn">Chat on WhatsApp</a>`
-                  : `<button class="chat-btn disabled">No WhatsApp</button>`
-              }
-
+                  ? `<a href="${link}" target="_blank" class="chat-btn">
+                      Chat on WhatsApp
+                    </a>`
+                  : `<button class="chat-btn disabled">
+                      No WhatsApp
+                    </button>`
+                }
             </div>
           `;
         });
@@ -231,7 +240,7 @@ Is it still available?`;
         `;
       }
 
-      detailDesc.innerHTML += productHTML;
+      productsWrap.innerHTML = productHTML;
 
       vendorList.style.display = "none";
       detailSection.classList.remove("hidden");
@@ -268,9 +277,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   detailLocation = document.getElementById("detailLocation");
 
+  claimBtn = document.getElementById("claimBtn");
+
+productsWrap = document.getElementById("productsWrap");
+
   const backBtn = document.getElementById("backBtn");
 
-  const buttons = document.querySelectorAll(".category-btn");
+  const buttons = document.querySelectorAll(".cat-btn");
 
   buttons.forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -287,7 +300,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (backBtn) {
     backBtn.addEventListener("click", () => {
       detailSection.classList.add("hidden");
-      vendorList.style.display = "flex";
+      vendorList.style.display = "";
     });
   }
 

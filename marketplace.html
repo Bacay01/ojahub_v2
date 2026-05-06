@@ -76,32 +76,42 @@
         <!-- RESULTS INFO -->
         <div class="results-bar">
           <span id="resultsCount" class="results-count"
-            >Loading products...</span
+            >Loading vendors...</span
           >
           <div class="sort-wrap">
             <label for="sortSelect">Sort:</label>
             <select id="sortSelect" class="sort-select">
-              <option value="newest">Newest First</option>
-              <option value="price-low">Price: Low to High</option>
-              <option value="price-high">Price: High to Low</option>
-            </select>
+
+                <option value="az">
+                  A - Z
+                </option>
+              
+                <option value="za">
+                  Z - A
+                </option>
+
+                <option value="category">
+                  Category
+                </option>
+
+              </select>
           </div>
         </div>
 
         <!-- PRODUCTS GRID -->
-        <main class="products-section">
-          <div id="productsGrid" class="products-grid">
+        <!-- <main class="products-section">
+          <div id="productsGrid" class="products-grid"> -->
             <!-- Skeleton loaders -->
+            <!-- <div class="skeleton-card"></div>
             <div class="skeleton-card"></div>
             <div class="skeleton-card"></div>
             <div class="skeleton-card"></div>
             <div class="skeleton-card"></div>
             <div class="skeleton-card"></div>
-            <div class="skeleton-card"></div>
-          </div>
+          </div> -->
 
           <!-- EMPTY STATE -->
-          <div id="emptyState" class="empty-state" style="display: none">
+          <!-- <div id="emptyState" class="empty-state" style="display: none">
             <div class="empty-icon">🛍️</div>
             <h3>No products found</h3>
             <p>Try a different category or search term</p>
@@ -109,10 +119,10 @@
               Show All Products
             </button>
           </div>
-        </main>
+        </main> -->
 
         <!-- PRODUCT MODAL -->
-        <div
+        <!-- <div
           id="productModal"
           class="modal-overlay"
           style="display: none"
@@ -144,7 +154,10 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
+
+
+
 
         <!-- HOW IT WORKS SECTION -->
         <!-- <section class="marketplace-section">
@@ -218,33 +231,49 @@
         </section> -->
 
         <!-- VENDORS GRID -->
-        <!-- <section class="vendors-section">
-          <h2>Featured Vendors</h2>
+        <section class="vendors-section">
+  <h2>Featured Vendors</h2>
 
-          <div class="vendors-scroll" id="vendorList"></div>
-   
-          </div>
-        </section> -->
+  <div class="vendors-scroll" id="vendorList"></div>
+
+</section>
 
         <!-- FULL DETAIL VIEW -->
-        <!-- <section class="vendor-detail hidden" id="vendorDetail">
-          <button id="backBtn">← Back to Vendors</button>
+        <section class="vendor-detail hidden" id="vendorDetail">
 
-          <div class="detail-card">
-            <img id="detailImg" />
+  <button id="backBtn">
+    ← Back to Vendors
+  </button>
 
-            <div class="detail-content">
-              <span id="detailTag" class="card-content-tag"></span>
-              <h1 id="detailName"></h1>
-              <p id="detailDesc"></p>
-              <p id="detailLocation"></p>
+  <div class="detail-card">
 
-              <a id="detailWhatsapp" target="_blank">Contact Vendor</a>
-            </div>
-          </div>
-        </section>
-      </div>
-    </section> -->
+    <img id="detailImg" />
+
+    <div class="detail-content">
+
+      <span id="detailTag" class="card-content-tag"></span>
+
+      <h1 id="detailName"></h1>
+
+      <p id="detailLocation"></p>
+
+      <div id="detailDesc"></div>
+
+      <a id="detailWhatsapp" target="_blank" class="hidden">
+        Contact Vendor
+      </a>
+
+      <a id="claimBtn" class="claim-btn">
+        Claim This Business
+      </a>
+
+      <div id="productsWrap"></div>
+
+    </div>
+
+  </div>
+
+</section>
 
         <!-- Footer placeholder -->
         <div id="footer"></div>
@@ -252,7 +281,6 @@
         <!-- <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> -->
         <script src="main.js"></script>
         <script type="module" src="marketplace.js"></script>
-      </body>
-    </html>
+      
   </body>
 </html>
