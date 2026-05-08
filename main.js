@@ -58,8 +58,8 @@ async function loadComponent(elementId, filePath) {
 
 // Load components first
 Promise.all([
-  loadComponent("header", "/pages/components/header.html"),
-  loadComponent("footer", "/pages/components/footer.html"),
+  loadComponent("header", "pages/components/header.html"),
+  loadComponent("footer", "pages/components/footer.html"),
 ]).then(() => {
   // Fire event AFTER both are injected
   document.dispatchEvent(new Event("componentsLoaded"));
