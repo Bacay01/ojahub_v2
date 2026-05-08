@@ -1,46 +1,58 @@
+<!-- Overlay (mobile only) -->
+<div class="nav-overlay" id="navOverlay"></div>
+
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg ojahub-navbar sticky-top">
-  <div class="container">
-    <!-- LOGO (TEXT NOW) -->
-    <a class="navbar-brand ojahub-logo" href="/index.html">
+<nav class="ojahub-navbar">
+  <div class="nav-container">
+    <!-- LOGO -->
+    <a class="ojahub-logo" href="/index.html">
       <span class="logo-blue">Oja</span><span class="logo-orange">Hub</span>
     </a>
 
-    <!-- TOGGLER -->
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarContent"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <!-- NAV CONTENT -->
-    <div class="collapse navbar-collapse" id="navbarContent">
-      <!-- PUSH EVERYTHING RIGHT -->
-      <div class="ms-auto d-flex align-items-center gap-4">
-        <!-- LINKS -->
-        <ul class="navbar-nav d-flex flex-row gap-4">
-          <li class="nav-item">
-            <a class="nav-link" href="/index.html">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/marketplace.html">Marketplace</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/categories.html">Categories</a>
-          </li>
-        </ul>
-
-        <!-- BROWSE -->
-        <a href="/marketplace.html" class="btn browse-btn">Browse Vendors</a>
-
-        <!-- CTA -->
-        <a href="/pages/signup/signup.html" class="btn cta-btn"
+    <!-- ===================== -->
+    <!-- DESKTOP NAV (hidden on mobile) -->
+    <!-- ===================== -->
+    <div class="desktop-nav">
+      <ul class="nav-links">
+        <li><a class="nav-link" href="/index.html">Home</a></li>
+        <li><a class="nav-link" href="/marketplace.html">Marketplace</a></li>
+        <li><a class="nav-link" href="/categories.html">Categories</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="/marketplace.html" class="browse-btn">Browse Vendors</a>
+        <a href="/pages/signup/signup.html" class="cta-btn"
           >List Your Business</a
         >
       </div>
     </div>
+
+    <!-- ===================== -->
+    <!-- HAMBURGER (hidden on desktop) -->
+    <!-- ===================== -->
+    <button
+      class="hamburger"
+      id="hamburger"
+      aria-label="Toggle navigation"
+      aria-expanded="false"
+    >
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
   </div>
 </nav>
+
+<!-- ===================== -->
+<!-- MOBILE MENU DRAWER (outside nav, hidden on desktop) -->
+<!-- ===================== -->
+<div class="mobile-menu" id="mobileMenu">
+  <ul class="mobile-nav-links">
+    <li><a class="nav-link" href="/index.html">Home</a></li>
+    <li><a class="nav-link" href="/marketplace.html">Marketplace</a></li>
+    <li><a class="nav-link" href="/categories.html">Categories</a></li>
+  </ul>
+  <div class="mobile-nav-actions">
+    <a href="/marketplace.html" class="browse-btn">Browse Vendors</a>
+    <a href="/pages/signup/signup.html" class="cta-btn">List Your Business</a>
+  </div>
+</div>
