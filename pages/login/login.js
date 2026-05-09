@@ -1,10 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
-  loadComponent("header", "../components/header.html");
-  loadComponent("footer", "../components/footer.html");
-});
-
 // FIREBASE
-
 
 // 🔥 FIREBASE AUTH
 import { auth } from "../../js/firebase.js";

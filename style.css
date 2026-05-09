@@ -216,6 +216,13 @@ body {
   z-index: 998;
   opacity: 0;
   transition: opacity 0.3s ease;
+  pointer-events: none; /* ADD THIS */
+}
+
+/* Only allow clicks when visible */
+.nav-overlay.visible {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 /* ============================================================
@@ -265,7 +272,9 @@ body {
   /* Show overlay (block so transition works) */
   .nav-overlay {
     display: block;
+    pointer-events: none; /* ADD THIS */
   }
+
   .nav-overlay.visible {
     opacity: 1;
     pointer-events: auto;
