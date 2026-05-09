@@ -356,3 +356,90 @@ document.addEventListener("componentsLoaded", () => {
     if (el) el.href = href;
   });
 });
+
+// HERO TYPING AND CURSOR EFFECT
+const lines = [
+  "Find Trusted",
+  "Vendors Near You",
+  '<span class="hero-headline-accent">in Seconds</span>',
+];
+
+const typedText = document.getElementById("typedText");
+const cursor = document.getElementById("cursor");
+const headline = document.getElementById("heroHeadline");
+
+let lineIndex = 0;
+let charIndex = 0;
+
+function typeEffect() {
+  if (lineIndex < lines.length) {
+    const currentLine = lines[lineIndex];
+
+    // Accent line
+    if (currentLine.includes("span")) {
+      cursor.classList.add("accent-cursor");
+
+      const tempDiv = document.createElement("div");
+      tempDiv.innerHTML = currentLine;
+
+      const span = tempDiv.querySelector("span");
+      const text = span.textContent;
+
+      let accentSpan = document.querySelector(".hero-headline-accent");
+
+      if (!accentSpan) {
+        typedText.innerHTML += '<span class="hero-headline-accent"></span>';
+
+        accentSpan = document.querySelector(".hero-headline-accent");
+      }
+
+      if (charIndex < text.length) {
+        accentSpan.textContent += text.charAt(charIndex);
+
+        charIndex++;
+        setTimeout(typeEffect, 70);
+      } else {
+        lineIndex++;
+        charIndex = 0;
+      }
+    } else {
+      cursor.classList.remove("accent-cursor");
+
+      if (charIndex < currentLine.length) {
+        typedText.innerHTML += currentLine.charAt(charIndex);
+
+        charIndex++;
+        setTimeout(typeEffect, 70);
+      } else {
+        typedText.innerHTML += "<br>";
+
+        lineIndex++;
+        charIndex = 0;
+
+        setTimeout(typeEffect, 200);
+      }
+    }
+  } else {
+    headline.classList.add("typing-complete");
+  }
+}
+
+window.addEventListener("load", typeEffect);
+
+const elements = document.querySelectorAll(".anim");
+
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("show");
+        observer.unobserve(entry.target); // animate once
+      }
+    });
+  },
+  {
+    threshold: 0.15,
+  },
+);
+
+elements.forEach((el) => observer.observe(el));

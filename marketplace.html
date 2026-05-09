@@ -254,5 +254,60 @@
     <!-- <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> -->
     <script src="main.js"></script>
     <script type="module" src="marketplace.js"></script>
+
+    <script>
+      const categoryButtons = document.querySelectorAll(".cat-btn");
+      const vendorCards = document.querySelectorAll(".vendor-card");
+      const resultsCount = document.getElementById("resultsCount");
+      const sortSelect = document.getElementById("sortSelect");
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const selectedCategory = urlParams.get("category") || "all";
+      const searchQuery = (urlParams.get("q") || "").toLowerCase();
+
+      function filterVendors(category = "all", query = "") {
+        let visibleCount = 0;
+
+        vendorCards.forEach((card) => {
+          const cardCategory = card.dataset.category || "";
+          const cardText = card.textContent.toLowerCase();
+
+          const matchesCategory =
+            category === "all" || cardCategory === category;
+          const matchesQuery = !query || cardText.includes(query);
+
+          if (matchesCategory && matchesQuery) {
+            card.style.display = "block";
+            visibleCount++;
+          } else {
+            card.style.display = "none";
+          }
+        });
+
+        resultsCount.textContent = `${visibleCount} result${visibleCount !== 1 ? "s" : ""} found`;
+      }
+
+      categoryButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          categoryButtons.forEach((btn) => btn.classList.remove("active"));
+          button.classList.add("active");
+
+          const category = button.dataset.category;
+          filterVendors(category, searchQuery);
+        });
+      });
+
+      // Activate category from index.html
+      const activeBtn = document.querySelector(
+        `.cat-btn[data-category="${selectedCategory}"]`,
+      );
+
+      if (activeBtn) {
+        categoryButtons.forEach((btn) => btn.classList.remove("active"));
+        activeBtn.classList.add("active");
+      }
+
+      filterVendors(selectedCategory, searchQuery);
+    </script>
   </body>
 </html>
