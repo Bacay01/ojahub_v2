@@ -217,14 +217,12 @@ document.addEventListener("DOMContentLoaded", () => {
   // ===============================
   const vendorList = document.getElementById("vendorList");
   const vendorDetail = document.getElementById("vendorDetail");
-
   const detailImg = document.getElementById("detailImg");
   const detailName = document.getElementById("detailName");
   const detailDesc = document.getElementById("detailDesc");
   const detailLocation = document.getElementById("detailLocation");
   const detailWhatsapp = document.getElementById("detailWhatsapp");
   const detailTag = document.getElementById("detailTag");
-
   const backBtn = document.getElementById("backBtn");
 
   document.addEventListener("click", (e) => {
@@ -233,6 +231,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const card = btn.closest(".vendor-card");
     if (!card) return;
+
+    if (!detailImg || !detailName || !vendorList || !vendorDetail) return;
 
     const name = card.dataset.name || "Business Name";
     const desc = card.dataset.desc || "No description available.";
@@ -262,6 +262,129 @@ document.addEventListener("DOMContentLoaded", () => {
       vendorDetail.classList.add("hidden");
       vendorList.classList.remove("hidden");
       window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
+  // ===============================
+  // HERO TYPING EFFECT
+  // ===============================
+  const typedText = document.getElementById("typedText");
+  const cursor = document.getElementById("cursor");
+  const headline = document.getElementById("heroHeadline");
+
+  if (typedText && cursor && headline) {
+    const lines = [
+      "Find Trusted",
+      "Vendors Near You",
+      '<span class="hero-headline-accent">in Seconds</span>',
+    ];
+
+    let lineIndex = 0;
+    let charIndex = 0;
+
+    function typeEffect() {
+      if (lineIndex < lines.length) {
+        const currentLine = lines[lineIndex];
+
+        if (currentLine.includes("span")) {
+          cursor.classList.add("accent-cursor");
+
+          const tempDiv = document.createElement("div");
+          tempDiv.innerHTML = currentLine;
+
+          const span = tempDiv.querySelector("span");
+          const text = span.textContent;
+
+          let accentSpan = document.querySelector(".hero-headline-accent");
+
+          if (!accentSpan) {
+            typedText.innerHTML += '<span class="hero-headline-accent"></span>';
+            accentSpan = document.querySelector(".hero-headline-accent");
+          }
+
+          if (charIndex < text.length) {
+            accentSpan.textContent += text.charAt(charIndex);
+            charIndex++;
+            setTimeout(typeEffect, 70);
+          } else {
+            lineIndex++;
+            charIndex = 0;
+          }
+        } else {
+          cursor.classList.remove("accent-cursor");
+
+          if (charIndex < currentLine.length) {
+            typedText.innerHTML += currentLine.charAt(charIndex);
+            charIndex++;
+            setTimeout(typeEffect, 70);
+          } else {
+            typedText.innerHTML += "<br>";
+            lineIndex++;
+            charIndex = 0;
+            setTimeout(typeEffect, 200);
+          }
+        }
+      } else {
+        headline.classList.add("typing-complete");
+      }
+    }
+
+    window.addEventListener("load", typeEffect);
+  }
+
+  // ===============================
+  // INTERSECTION OBSERVER
+  // ===============================
+  const elements = document.querySelectorAll(".anim");
+
+  if (elements.length > 0) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 },
+    );
+
+    elements.forEach((el) => observer.observe(el));
+  }
+
+  // ===============================
+  // FEEDBACK CARDS + WHATSAPP
+  // ===============================
+  const feedbackCards = document.querySelectorAll(".feedback-card");
+  const feedbackBtnWA = document.querySelector(".feedback-btn");
+  const feedbackMessage = document.getElementById("feedbackMessage");
+
+  let selectedFeedback = "";
+
+  if (feedbackCards.length > 0) {
+    feedbackCards.forEach((card) => {
+      card.addEventListener("click", () => {
+        feedbackCards.forEach((c) => c.classList.remove("active"));
+        card.classList.add("active");
+        selectedFeedback = card.querySelector("p").textContent;
+      });
+    });
+  }
+
+  if (feedbackBtnWA) {
+    feedbackBtnWA.addEventListener("click", () => {
+      const extraMessage = feedbackMessage ? feedbackMessage.value : "";
+
+      const finalMessage = `Hello OjaHub
+
+Feedback: ${selectedFeedback}
+
+Additional Message:
+${extraMessage}`;
+
+      const whatsappURL = `https://wa.me/2348165410790?text=${encodeURIComponent(finalMessage)}`;
+      window.open(whatsappURL, "_blank");
     });
   }
 });
@@ -356,90 +479,3 @@ document.addEventListener("componentsLoaded", () => {
     if (el) el.href = href;
   });
 });
-
-// HERO TYPING AND CURSOR EFFECT
-const lines = [
-  "Find Trusted",
-  "Vendors Near You",
-  '<span class="hero-headline-accent">in Seconds</span>',
-];
-
-const typedText = document.getElementById("typedText");
-const cursor = document.getElementById("cursor");
-const headline = document.getElementById("heroHeadline");
-
-let lineIndex = 0;
-let charIndex = 0;
-
-function typeEffect() {
-  if (lineIndex < lines.length) {
-    const currentLine = lines[lineIndex];
-
-    // Accent line
-    if (currentLine.includes("span")) {
-      cursor.classList.add("accent-cursor");
-
-      const tempDiv = document.createElement("div");
-      tempDiv.innerHTML = currentLine;
-
-      const span = tempDiv.querySelector("span");
-      const text = span.textContent;
-
-      let accentSpan = document.querySelector(".hero-headline-accent");
-
-      if (!accentSpan) {
-        typedText.innerHTML += '<span class="hero-headline-accent"></span>';
-
-        accentSpan = document.querySelector(".hero-headline-accent");
-      }
-
-      if (charIndex < text.length) {
-        accentSpan.textContent += text.charAt(charIndex);
-
-        charIndex++;
-        setTimeout(typeEffect, 70);
-      } else {
-        lineIndex++;
-        charIndex = 0;
-      }
-    } else {
-      cursor.classList.remove("accent-cursor");
-
-      if (charIndex < currentLine.length) {
-        typedText.innerHTML += currentLine.charAt(charIndex);
-
-        charIndex++;
-        setTimeout(typeEffect, 70);
-      } else {
-        typedText.innerHTML += "<br>";
-
-        lineIndex++;
-        charIndex = 0;
-
-        setTimeout(typeEffect, 200);
-      }
-    }
-  } else {
-    headline.classList.add("typing-complete");
-  }
-}
-
-window.addEventListener("load", typeEffect);
-
-const elements = document.querySelectorAll(".anim");
-
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("show");
-        observer.unobserve(entry.target); // animate once
-      }
-    });
-  },
-  {
-    threshold: 0.15,
-  },
-);
-
-elements.forEach((el) => observer.observe(el));

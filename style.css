@@ -1519,23 +1519,37 @@ body {
 
 /* SECTION */
 .cta-section {
-  padding: 80px 0;
+  padding: 50px 0;
 }
 
 /* GRID */
 .cta-grid {
   display: flex;
+  justify-content: center;
   gap: 30px;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
+}
+
+/* GRID */
+.cta-grid {
+  display: flex;
+  gap: 20px;
+  align-items: stretch;
 }
 
 /* CARD BASE */
 .cta-card {
   flex: 1;
-  min-width: 300px;
-  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 35px 25px;
   border-radius: 20px;
   color: #fff;
+  min-height: 220px;
+  box-sizing: border-box;
+  text-align: center;
 }
 
 /* BLUE CARD */
@@ -1553,27 +1567,33 @@ body {
   font-size: 24px;
   font-weight: 700;
   margin-bottom: 10px;
+  line-height: 1.3;
 }
 
 .cta-card p {
   font-size: 15px;
   opacity: 0.9;
   margin-bottom: 25px;
+  line-height: 1.6;
+  max-width: 380px;
 }
 
 /* BUTTON */
 .cta-btn-white {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   background: #fff;
   color: #111;
   padding: 12px 22px;
-  border-radius: 999px;
+  border-radius: 10px;
   text-decoration: none;
-  font-weight: 500;
-  transition: 0.3s;
+  font-weight: 600;
+  transition: 0.3s ease;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  white-space: nowrap;
 }
 
-/* HOVER */
 .cta-btn-white:hover {
   background: #f3f4f6;
   transform: translateY(-2px);
@@ -1582,7 +1602,35 @@ body {
 /* MOBILE */
 @media (max-width: 768px) {
   .cta-grid {
+    display: flex;
     flex-direction: column;
+    gap: 20px;
+  }
+
+  .cta-card {
+    width: 100%;
+    min-height: 260px;
+    padding: 30px 20px;
+    box-sizing: border-box;
+    justify-content: space-between;
+  }
+
+  .cta-card h2 {
+    font-size: 22px;
+  }
+
+  .cta-card p {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  .cta-btn-white {
+    width: auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 20px;
+    white-space: nowrap;
   }
 }
 
@@ -1614,6 +1662,33 @@ body {
   border: 1px solid #eee;
   border-radius: 12px;
   text-align: left;
+}
+
+.feedback-card {
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.feedback-card.active {
+  border: 2px solid #25d366;
+  background: #f0fff4;
+}
+
+#feedbackMessage {
+  width: 100%;
+  min-height: 120px;
+  padding: 15px;
+  margin-top: 20px;
+  border-radius: 10px;
+  border: 2px solid #ffcc80; /* light orange border */
+  outline: none;
+  resize: none;
+  background: #fffaf3;
+}
+
+#feedbackMessage:focus {
+  border-color: #ffb74d;
+  box-shadow: 0 0 5px rgba(255, 183, 77, 0.4);
 }
 
 /* ITEMS */
@@ -2186,7 +2261,7 @@ body {
 
 /* HELP US IMPROVE OJA HUB */
 .help-us-improve {
-  padding: 80px 20px;
+  padding: 50px 20px;
   background: #f9fafb;
 }
 
@@ -2288,17 +2363,17 @@ body {
     padding: 15px;
   }
 
-  .feedback-btn {
+  /* .feedback-btn {
     width: 100%;
     max-width: 300px;
-  }
+  } */
 }
 
 /* CONTACT SECTION */
 .contact-hero {
   background: #f9fafb;
   text-align: center;
-  padding: 64px 24px 72px;
+  padding-top: 8rem;
 }
 
 .contact-hero .eyebrow {
@@ -2441,10 +2516,22 @@ body {
   line-height: 1.55;
 }
 
+@media (max-width: 768px) {
+  .response-time span {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+}
+
 /* Responsive tweaks */
 @media (max-width: 600px) {
   .contact-hero {
-    padding: 40px 16px 48px;
+    padding-top: 7rem;
+  }
+
+  .contact-hero p {
+    width: 80%;
   }
 
   .contact-body {
@@ -2461,7 +2548,11 @@ body {
 .buying-safe-hero {
   background: #f9fafb;
   text-align: center;
-  padding: 80px 24px 100px;
+  padding-top: 7rem;
+}
+
+.buying-safe-hero p {
+  width: 90%;
 }
 
 .buying-safe-hero-label {

@@ -178,7 +178,7 @@ function attachViewDetails() {
       detailName.textContent = vendorName;
       detailLocation.textContent = "📍 " + (card.dataset.location || "");
       detailDesc.innerHTML = `<p>${card.dataset.desc || "No description"}</p>`;
-      claimBtn.href = `../pages/claim_business/claim_business.html?vendorId=${card.dataset.id}`;
+      claimBtn.href = `pages/claim_business/claim_business.html?vendorId=${card.dataset.id}`;
 
       const products = JSON.parse(card.dataset.products || "[]");
 

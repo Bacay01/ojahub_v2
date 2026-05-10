@@ -22,7 +22,7 @@ body {
   font-weight: 700;
   letter-spacing: 2px;
   margin-bottom: 12px;
-  padding-top: 4rem;
+  padding-top: 2rem;
 }
 
 .hero h1 {
@@ -76,14 +76,14 @@ body {
 
 /* FORM SECTION */
 .form-section {
-  padding: 60px 20px;
+  padding: 40px 20px;
 }
 
 .form-card {
   max-width: 750px;
   margin: auto;
   background: #fff;
-  padding: 40px;
+  padding: 40px 20px;
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
 }
@@ -91,6 +91,10 @@ body {
 .form-card h2 {
   text-align: center;
   margin-bottom: 5px;
+}
+
+.form-card p {
+  width: 90%;
 }
 
 .form-subtext {

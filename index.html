@@ -236,6 +236,159 @@
     </section>
     <!-- ===== END HERO SECTION ===== -->
 
+    <!-- ── Ticker Strip ── -->
+    <style>
+      .ticker-wrap {
+        width: 100%;
+        background: #0f172a;
+        padding: 14px 0;
+        overflow: hidden;
+        position: relative;
+      }
+      .ticker-wrap::before,
+      .ticker-wrap::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        width: 80px;
+        height: 100%;
+        z-index: 2;
+        pointer-events: none;
+      }
+      .ticker-wrap::before {
+        left: 0;
+        background: linear-gradient(to right, #0f172a, transparent);
+      }
+      .ticker-wrap::after {
+        right: 0;
+        background: linear-gradient(to left, #0f172a, transparent);
+      }
+
+      .ticker-track {
+        display: flex;
+        width: max-content;
+        animation: ticker-scroll 32s linear infinite;
+      }
+      .ticker-track:hover {
+        animation-play-state: paused;
+      }
+
+      @keyframes ticker-scroll {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+
+      .ticker-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 0 36px;
+        white-space: nowrap;
+        font-family: "Inter", sans-serif;
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: 0.02em;
+        color: #cbd5e1;
+      }
+      .ticker-item .dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: #f97316;
+        flex-shrink: 0;
+      }
+      .ticker-item strong {
+        color: #ffffff;
+        font-weight: 600;
+      }
+      .ticker-item .badge {
+        background: #f97316;
+        color: #ffffff;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        padding: 2px 7px;
+        border-radius: 20px;
+        text-transform: uppercase;
+      }
+    </style>
+
+    <div class="ticker-wrap" role="marquee" aria-label="Platform highlights">
+      <div class="ticker-track">
+        <div class="ticker-item">
+          <span class="dot"></span><strong>1,200+</strong> verified vendors
+          across Nigeria
+        </div>
+        <div class="ticker-item">
+          <span class="dot"></span>Find food, fashion &amp; beauty vendors
+          <strong>near you</strong>
+        </div>
+        <div class="ticker-item">
+          <span class="dot"></span><span class="badge">New</span>&nbsp; Gadget
+          vendors now on OjaHub
+        </div>
+        <div class="ticker-item">
+          <span class="dot"></span>Trusted by
+          <strong>10,000+ happy customers</strong>
+        </div>
+        <div class="ticker-item">
+          <span class="dot"></span>List your business — it's
+          <strong>free to start</strong>
+        </div>
+        <div class="ticker-item">
+          <span class="dot"></span>Browse vendors in
+          <strong>Ibadan, Ogbomosho &amp; Beyound</strong>
+        </div>
+        <div class="ticker-item">
+          <span class="dot"></span>Quality assured.
+          <strong>Fast &amp; easy</strong> experience
+        </div>
+        <div class="ticker-item">
+          <span class="dot"></span><span class="badge">Hot</span>&nbsp; Fashion
+          vendors trending this week
+        </div>
+
+        <!-- Duplicate set for seamless loop -->
+        <div class="ticker-item">
+          <span class="dot"></span><strong>1,200+</strong> verified vendors
+          across Nigeria
+        </div>
+        <div class="ticker-item">
+          <span class="dot"></span>Find food, fashion &amp; beauty vendors
+          <strong>near you</strong>
+        </div>
+        <div class="ticker-item">
+          <span class="dot"></span><span class="badge">New</span>&nbsp; Gadget
+          vendors now on OjaHub
+        </div>
+        <div class="ticker-item">
+          <span class="dot"></span>Trusted by
+          <strong>10,000+ happy customers</strong>
+        </div>
+        <div class="ticker-item">
+          <span class="dot"></span>List your business — it's
+          <strong>free to start</strong>
+        </div>
+        <div class="ticker-item">
+          <span class="dot"></span>Browse vendors in
+          <strong>Ibadan, Lagos &amp; Abuja</strong>
+        </div>
+        <div class="ticker-item">
+          <span class="dot"></span>Quality assured.
+          <strong>Fast &amp; easy</strong> experience
+        </div>
+        <div class="ticker-item">
+          <span class="dot"></span><span class="badge">Hot</span>&nbsp; Fashion
+          vendors trending this week
+        </div>
+      </div>
+    </div>
+    <!-- ── End Ticker ── -->
+
     <!--CATEGORY -->
 
     <section class="category-section">
@@ -883,7 +1036,10 @@
           <!-- LEFT CARD -->
           <div class="cta-card cta-blue anim anim-fade-up delay-2">
             <h2>Ready to Find the Right Vendor?</h2>
-            <p>Browse hundreds of trusted businesses near you.</p>
+            <p>
+              Explore trusted local businesses, discover reliable services, and
+              connect with vendors that match your needs quickly and easily.
+            </p>
 
             <a href="marketplace.html" class="cta-btn-white">
               Browse Vendors <i class="fa-solid fa-arrow-right"></i>
@@ -893,7 +1049,10 @@
           <!-- RIGHT CARD -->
           <div class="cta-card cta-orange anim anim-fade-up delay-2">
             <h2>Do You Own a Business?</h2>
-            <p>Join Oja Hub and connect with more customers</p>
+            <p>
+              Showcase your business on Oja Hub, reach more customers, and grow
+              your visibility within your local community.
+            </p>
 
             <a href="signup.html" class="cta-btn-white">
               List Your Business <i class="fa-solid fa-arrow-right"></i>
@@ -917,7 +1076,7 @@
 
         <!-- OPTIONS -->
         <div class="feedback-options">
-          <div class="feedback-card anim anim-zoom delay-1">
+          <div class="feedback-card anim anim-zoom delay-1 active">
             <i class="fas fa-check-circle"></i>
             <p>I found what I needed</p>
           </div>
@@ -932,6 +1091,12 @@
             <p>Needs improvement</p>
           </div>
         </div>
+
+        <!-- EXTRA MESSAGE -->
+        <textarea
+          id="feedbackMessage"
+          placeholder="Add more details..."
+        ></textarea>
 
         <!-- BUTTON -->
         <button class="feedback-btn anim anim-zoom delay-1">
