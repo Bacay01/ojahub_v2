@@ -1,27 +1,52 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Products</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Products</title>
 
-  <link rel="stylesheet" href="my_product.css">
-</head>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="../../style.css" />
 
-<body>
+    <link rel="stylesheet" href="my_product.css" />
+  </head>
 
-  <div class="header">
-    <button class="back-btn" onclick="goBack()">← Back</button>
-    <h2>My Products</h2>
+  <body>
+    <!-- Header -->
+    <div id="header"></div>
 
-    <button class="add-btn" onclick="window.location.href='../../add_product_page.html'">
-      + Add Product
-    </button>
-  </div>
+    <div class="my-product-container">
+      <div class="header">
+        <button class="back-btn" onclick="goBack()">← Back</button>
+        <h2>My Products</h2>
 
-  <div id="productsContainer"></div>
+        <button
+          class="add-btn"
+          onclick="window.location.href = '../../add_product_page.html'"
+        >
+          + Add Product
+        </button>
+      </div>
 
-  <script type="module" src="my_product.js"></script>
+      <div id="productsContainer"></div>
+    </div>
 
-</body>
+    <!-- Footer -->
+    <div id="footer"></div>
+    <script src="../../main.js"></script>
+
+    <script type="module" src="my_product.js"></script>
+  </body>
 </html>

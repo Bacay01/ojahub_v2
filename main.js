@@ -22,7 +22,7 @@ const isGitHub =
   window.location.hostname !== "localhost";
 
 const componentBase = isGitHub
-  ? "pages/components/"
+  ? "/ojahub_v2/pages/components/"
   : (() => {
       const depth = window.location.pathname.split("/").filter(Boolean).length;
       return "../".repeat(Math.max(0, depth - 1)) + "pages/components/";

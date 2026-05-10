@@ -2,7 +2,11 @@ body {
   font-family: Arial, sans-serif;
   background: #f7f9fc;
   margin: 0;
-  padding: 20px;
+  /* padding: 20px; */
+}
+
+.my-product-container {
+  padding: 6rem 2rem 3rem 2rem;
 }
 
 /* HEADER */
@@ -39,7 +43,7 @@ body {
   background: #fff;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.05);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
   transition: 0.2s;
 }
 
@@ -94,8 +98,6 @@ body {
 .delete-btn:hover {
   opacity: 0.8;
 }
-
-
 
 .back-btn {
   background: #1a5cff; /* OjaHub blue */
