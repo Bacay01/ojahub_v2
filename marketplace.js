@@ -20,113 +20,270 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// 🔥 TARGETS
+// 🔥 DOM REFS (set in DOMContentLoaded)
 let vendorList;
 let detailSection;
 let detailImg;
 let detailName;
 let detailDesc;
 let detailLocation;
+let detailTag;
+let detailWhatsapp;
 let claimBtn;
 let productsWrap;
 
-// 🔥 ACTIVE FILTERS — single source of truth
+// 🔥 ACTIVE FILTERS
 let activeCategory = "all";
 let activeQuery = "";
 
+// ─────────────────────────────────────────────
+// 🎨 INITIALS AVATAR GENERATOR
+// Returns a data: URL SVG avatar showing business
+// name initials. Colour is deterministic per name.
+// ─────────────────────────────────────────────
+const AVATAR_PALETTE = [
+  ["#FF6D00", "#fff"], // OjaHub orange  / white text
+  ["#1565C0", "#fff"], // deep blue      / white text
+  ["#2E7D32", "#fff"], // forest green   / white text
+  ["#6A1B9A", "#fff"], // purple         / white text
+  ["#AD1457", "#fff"], // deep pink      / white text
+  ["#00838F", "#fff"], // teal           / white text
+  ["#E65100", "#fff"], // burnt orange   / white text
+  ["#283593", "#fff"], // indigo         / white text
+];
+
+function getInitials(name) {
+  name = name || "";
+  const words = name.trim().split(/\s+/).filter(Boolean);
+  if (words.length === 0) return "OJ";
+  if (words.length === 1) return words[0].substring(0, 2).toUpperCase();
+  return (words[0][0] + words[1][0]).toUpperCase();
+}
+
+function nameToColor(name) {
+  name = name || "";
+  let hash = 0;
+  for (let i = 0; i < name.length; i++) {
+    hash = name.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  const idx = Math.abs(hash) % AVATAR_PALETTE.length;
+  return AVATAR_PALETTE[idx];
+}
+
+function makeAvatarUrl(businessName) {
+  businessName = businessName || "";
+  var initials = getInitials(businessName);
+  var colorPair = nameToColor(businessName);
+  var bg = colorPair[0];
+  var fg = colorPair[1];
+
+  // Single string concat — no array join breaking SVG attributes
+  var svg =
+    '<svg xmlns="http://www.w3.org/2000/svg" width="400" height="240" viewBox="0 0 400 240">' +
+    '<rect width="400" height="240" fill="' +
+    bg +
+    '"/>' +
+    '<pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse">' +
+    '<circle cx="2" cy="2" r="1.5" fill="' +
+    fg +
+    '" fill-opacity="0.08"/>' +
+    "</pattern>" +
+    '<rect width="400" height="240" fill="url(#dots)"/>' +
+    '<text x="200" y="118" font-family="Arial,sans-serif" font-size="80" font-weight="800" fill="' +
+    fg +
+    '" text-anchor="middle" dominant-baseline="middle" letter-spacing="4">' +
+    initials +
+    "</text>" +
+    '<text x="200" y="218" font-family="Arial,sans-serif" font-size="12" font-weight="600" fill="' +
+    fg +
+    '" fill-opacity="0.45" text-anchor="middle">OjaHub Marketplace</text>' +
+    "</svg>";
+
+  // Use btoa (base64) — never throws URI errors unlike encodeURIComponent
+  try {
+    return "data:image/svg+xml;base64," + btoa(svg);
+  } catch (e) {
+    var fallback =
+      '<svg xmlns="http://www.w3.org/2000/svg" width="400" height="240">' +
+      '<rect width="400" height="240" fill="' +
+      bg +
+      '"/>' +
+      "</svg>";
+    return "data:image/svg+xml;base64," + btoa(fallback);
+  }
+}
+
+function getVendorImage(data) {
+  return (
+    data.imageUrl ||
+    data.logoUrl ||
+    data.profileImage ||
+    makeAvatarUrl(data.businessName || "")
+  );
+}
+
+// ─────────────────────────────────────────────
 // 🔥 LOAD VENDORS + PRODUCTS
+// ─────────────────────────────────────────────
 async function loadVendors() {
   try {
-    const vendorSnapshot = await getDocs(collection(db, "vendors"));
-    const productSnapshot = await getDocs(collection(db, "products"));
+    const [vendorSnapshot, productSnapshot] = await Promise.all([
+      getDocs(collection(db, "vendors")),
+      getDocs(collection(db, "products")),
+    ]);
 
     const products = [];
-    productSnapshot.forEach((productDoc) => {
-      products.push(productDoc.data());
-    });
+    productSnapshot.forEach((d) => products.push({ id: d.id, ...d.data() }));
 
     const vendors = [];
-    vendorSnapshot.forEach((vendorDoc) => {
-      vendors.push({ id: vendorDoc.id, ...vendorDoc.data() });
-    });
+    vendorSnapshot.forEach((d) => vendors.push({ id: d.id, ...d.data() }));
 
-    // 🔥 CATEGORY + A-Z
+    // Sort: category → then A-Z
     vendors.sort((a, b) => {
       const catA = (a.category || "").toLowerCase();
       const catB = (b.category || "").toLowerCase();
-      if (catA < catB) return -1;
-      if (catA > catB) return 1;
+      if (catA !== catB) return catA.localeCompare(catB);
       return (a.businessName || "").localeCompare(b.businessName || "");
     });
 
     let html = "";
 
     vendors.forEach((data) => {
+      // Match products to this vendor
       const vendorProducts = products.filter((p) => {
-        const productVendor = (p.vendorName || "").trim().toLowerCase();
-        const businessVendor = (data.businessName || "").trim().toLowerCase();
+        const pVendor = (p.vendorName || "").trim().toLowerCase();
+        const bName = (data.businessName || "").trim().toLowerCase();
         return (
           p.vendorId === data.id ||
-          productVendor === businessVendor ||
-          productVendor.includes(businessVendor) ||
-          businessVendor.includes(productVendor)
+          pVendor === bName ||
+          pVendor.includes(bName) ||
+          bName.includes(pVendor)
         );
       });
 
-      const searchableText = [
+      // WhatsApp check
+      const rawPhone = (data.whatsapp || "").replace(/\D/g, "");
+      const hasWhatsapp = rawPhone.length > 0;
+
+      // Vendor logo/banner — real image or generated initials avatar
+      const vendorLogo = getVendorImage(data);
+
+      const categoryLabel = data.category || "Vendor";
+      const cityLabel = data.city || "";
+      const subCat = data.subCategory ? " · " + data.subCategory : "";
+
+      // Searchable text blob
+      const searchable = [
         data.businessName || "",
         data.category || "",
+        data.subCategory || "",
         data.description || "",
         data.city || "",
+        data.state || "",
       ]
         .join(" ")
         .toLowerCase();
 
-      html += `
-        <div class="vendor-card"
-          data-id="${data.id}"
-          data-category="${(data.category || "").toLowerCase()}"
-          data-name="${data.businessName || ""}"
-          data-desc="${data.description || ""}"
-          data-location="${data.city || ""}"
-          data-image="${data.imageUrl || ""}"
-          data-whatsapp="${data.whatsapp || ""}"
-          data-searchable="${searchableText}"
-          data-products='${JSON.stringify(vendorProducts)}'
-        >
-          <img
-            src="${data.imageUrl || "https://via.placeholder.com/400x300?text=No+Image"}"
-            alt="${data.businessName || "Vendor"}"
-          />
-          <div class="card-content">
-            <span class="card-content-tag">${data.category || "Vendor"}</span>
-            <h3>${data.businessName || "No Name"}</h3>
-            <p class="tagline">${data.description || "No description"}</p>
-            <p class="location">📍 ${data.city || ""}</p>
-            <button class="view-btn" type="button">View Details</button>
-          </div>
-        </div>
-      `;
+      html +=
+        '<div class="vendor-card"' +
+        ' data-id="' +
+        data.id +
+        '"' +
+        ' data-category="' +
+        categoryLabel.toLowerCase() +
+        '"' +
+        ' data-name="' +
+        (data.businessName || "").replace(/"/g, "&quot;") +
+        '"' +
+        ' data-desc="' +
+        (data.description || "").replace(/"/g, "&quot;") +
+        '"' +
+        ' data-location="' +
+        cityLabel +
+        '"' +
+        ' data-image="' +
+        vendorLogo +
+        '"' +
+        ' data-whatsapp="' +
+        (data.whatsapp || "") +
+        '"' +
+        ' data-searchable="' +
+        searchable +
+        '"' +
+        " data-products='" +
+        JSON.stringify(vendorProducts).replace(/'/g, "&#39;") +
+        "'" +
+        ">";
+
+      html +=
+        '<div class="vendor-card-img-wrap">' +
+        '<img src="' +
+        vendorLogo +
+        '" alt="' +
+        (data.businessName || "Vendor") +
+        '" class="vendor-card-img" />' +
+        "</div>";
+
+      html += '<div class="card-content">';
+      html +=
+        '<div class="card-badges">' +
+        '<span class="badge-verified">' +
+        '<i class="fa-solid fa-circle-check"></i> Verified · ' +
+        cityLabel +
+        "</span>" +
+        "</div>";
+
+      html +=
+        '<h3 class="card-business-name">' +
+        (data.businessName || "No Name") +
+        "</h3>";
+      html += '<p class="card-meta">' + categoryLabel + subCat + "</p>";
+
+      if (cityLabel) {
+        html +=
+          '<p class="card-location"><i class="fa-solid fa-location-dot"></i> ' +
+          cityLabel +
+          "</p>";
+      }
+
+      html += '<div class="card-tags-row">';
+      if (hasWhatsapp) {
+        html +=
+          '<span class="tag-whatsapp"><i class="fa-brands fa-whatsapp"></i> Replies on WhatsApp</span>';
+      } else {
+        html += '<span class="tag-no-wa">No WhatsApp</span>';
+      }
+      html += '<span class="tag-price">Price on request</span>';
+      html += "</div>";
+
+      html +=
+        '<button class="view-btn" type="button">' +
+        '<i class="fa-regular fa-eye"></i> View Details' +
+        "</button>";
+
+      html += "</div></div>";
     });
 
     vendorList.innerHTML = html;
 
     applyFilters();
-
     attachViewDetails();
 
-    // ==============================
-    // 🎬 ANIMATE CARDS AFTER RENDER
-    // ==============================
     if (window.OjaAnimations) {
       window.OjaAnimations.observeCards("#vendorList");
     }
   } catch (error) {
-    console.error(error);
+    console.error("loadVendors error:", error);
+    if (vendorList) {
+      vendorList.innerHTML =
+        '<p class="error-msg">Failed to load vendors. Please refresh.</p>';
+    }
   }
 }
 
-// 🔥 UNIFIED FILTER — handles both category AND search together
+// ─────────────────────────────────────────────
+// 🔥 UNIFIED FILTER
+// ─────────────────────────────────────────────
 function applyFilters() {
   const cards = document.querySelectorAll(".vendor-card");
   const resultsCount = document.getElementById("resultsCount");
@@ -138,7 +295,6 @@ function applyFilters() {
 
     const matchesCategory =
       activeCategory === "all" || cardCategory.includes(activeCategory);
-
     const matchesQuery =
       activeQuery === "" || cardSearchable.includes(activeQuery);
 
@@ -151,11 +307,14 @@ function applyFilters() {
   });
 
   if (resultsCount) {
-    resultsCount.textContent = `${visible} vendor${visible !== 1 ? "s" : ""} found`;
+    resultsCount.textContent =
+      visible + " vendor" + (visible !== 1 ? "s" : "") + " found";
   }
 }
 
-// 🔥 VIEW DETAILS
+// ─────────────────────────────────────────────
+// 🔥 VIEW DETAILS — opens full detail panel
+// ─────────────────────────────────────────────
 function attachViewDetails() {
   const cards = document.querySelectorAll(".vendor-card");
 
@@ -164,63 +323,140 @@ function attachViewDetails() {
     if (!button) return;
 
     button.addEventListener("click", () => {
-      detailDesc.innerHTML = "";
-
-      const vendorName = card.dataset.name || "";
-      let phone = (card.dataset.whatsapp || "").replace(/\D/g, "");
-      if (phone.startsWith("0")) {
-        phone = "234" + phone.substring(1);
-      }
-
-      detailImg.src =
-        card.dataset.image ||
-        "https://via.placeholder.com/400x300?text=No+Image";
-      detailName.textContent = vendorName;
-      detailLocation.textContent = "📍 " + (card.dataset.location || "");
-      detailDesc.innerHTML = `<p>${card.dataset.desc || "No description"}</p>`;
-      claimBtn.href = `pages/claim_business/claim_business.html?vendorId=${card.dataset.id}`;
-
-      const products = JSON.parse(card.dataset.products || "[]");
-
-      let productHTML = `<h3 style="margin-top:40px; margin-bottom:20px;">Products</h3>`;
-
-      if (products.length === 0) {
-        productHTML += "<p>No products yet</p>";
-      } else {
-        productHTML += `<div class="product-grid">`;
-
-        products.forEach((p) => {
-          const message = `Hello, I saw this product on OjaHub.\n\nProduct: ${p.name || ""}\nPrice: ₦${p.price || ""}\nDescription: ${p.description || ""}\n\nIs it still available?`;
-          const encoded = encodeURIComponent(message);
-          const link = phone ? `https://wa.me/${phone}?text=${encoded}` : "#";
-
-          productHTML += `
-            <div class="product-card">
-              <img src="${p.imageUrl || "https://via.placeholder.com/300x200?text=No+Image"}">
-              <span class="product-tag">${p.category || "Product"}</span>
-              <h4>${p.name || "No Name"}</h4>
-              <p class="price">₦${p.price || "0"}</p>
-              <p class="desc">${p.description || "No description"}</p>
-              ${
-                phone
-                  ? `<a href="${link}" target="_blank" class="chat-btn">Chat on WhatsApp</a>`
-                  : `<button class="chat-btn disabled">No WhatsApp</button>`
-              }
-            </div>
-          `;
-        });
-
-        productHTML += `</div>`;
-      }
-
-      productsWrap.innerHTML = productHTML;
-      vendorList.style.display = "none";
-      detailSection.classList.remove("hidden");
+      openVendorDetail(card);
     });
   });
 }
 
+function openVendorDetail(card) {
+  const vendorName = card.dataset.name || "";
+  const rawPhone = (card.dataset.whatsapp || "").replace(/\D/g, "");
+  let phone = rawPhone;
+  if (phone.startsWith("0")) phone = "234" + phone.substring(1);
+
+  const categoryLabel = card.dataset.category || "Vendor";
+
+  // ── Hero image: use stored image, or generate avatar as fallback
+  // Avatar SVG is a data: URL so it never fails to load — no onerror needed
+  const storedImage = card.dataset.image;
+  detailImg.src = storedImage || makeAvatarUrl(vendorName);
+  detailImg.alt = vendorName;
+
+  // ── Category badge
+  detailTag.textContent =
+    categoryLabel.charAt(0).toUpperCase() + categoryLabel.slice(1);
+
+  // ── Name, location, description
+  detailName.textContent = vendorName;
+  detailLocation.innerHTML =
+    '<i class="fa-solid fa-location-dot"></i> ' + (card.dataset.location || "");
+  detailDesc.innerHTML =
+    "<p>" + (card.dataset.desc || "No description available.") + "</p>";
+
+  // ── WhatsApp link
+  if (phone) {
+    detailWhatsapp.href = "https://wa.me/" + phone;
+    detailWhatsapp.classList.remove("hidden");
+    detailWhatsapp.innerHTML =
+      '<i class="fa-brands fa-whatsapp"></i> Contact Vendor';
+  } else {
+    detailWhatsapp.classList.add("hidden");
+  }
+
+  // ── Claim button
+  claimBtn.href =
+    "pages/claim_business/claim_business.html?vendorId=" + card.dataset.id;
+
+  // ── Products
+  const products = JSON.parse(card.dataset.products || "[]");
+  buildProductGrid(products, phone);
+
+  // ── Show detail, hide list
+  vendorList.style.display = "none";
+  detailSection.classList.remove("hidden");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+// ─────────────────────────────────────────────
+// 🔥 BUILD PRODUCT GRID (clean, card-based)
+// ─────────────────────────────────────────────
+function buildProductGrid(products, phone) {
+  if (products.length === 0) {
+    productsWrap.innerHTML =
+      '<div class="products-section-header"><h3>Products</h3></div>' +
+      '<p class="no-products-msg">This vendor hasn\'t listed any products yet.</p>';
+    return;
+  }
+
+  let html =
+    '<div class="products-section-header">' +
+    '<h3>Products <span class="products-count">' +
+    products.length +
+    "</span></h3>" +
+    "</div>" +
+    '<div class="products-grid-clean">';
+
+  products.forEach((p) => {
+    const productImg =
+      p.imageUrl ||
+      p.image ||
+      "https://via.placeholder.com/300x200?text=No+Image";
+
+    const productName = p.name || "Untitled Product";
+    const productPrice = p.price
+      ? "₦" + Number(p.price).toLocaleString()
+      : "Price on request";
+    const productDesc = p.description || "";
+    const productCat = p.category || "Product";
+
+    const message =
+      "Hello, I saw this product on OjaHub.\n\nProduct: " +
+      productName +
+      "\nPrice: " +
+      productPrice +
+      "\nDescription: " +
+      productDesc +
+      "\n\nIs it still available?";
+    const encoded = encodeURIComponent(message);
+    const waLink = phone ? "https://wa.me/" + phone + "?text=" + encoded : "#";
+
+    html += '<div class="product-card-clean">';
+    html += '<div class="product-card-img-wrap">';
+    html +=
+      '<img src="' +
+      productImg +
+      '" alt="' +
+      productName +
+      '" class="product-card-img"' +
+      " onerror=\"this.src='https://via.placeholder.com/300x200?text=No+Image'\" />";
+    html += '<span class="product-cat-badge">' + productCat + "</span>";
+    html += "</div>";
+    html += '<div class="product-card-body">';
+    html += '<h4 class="product-card-name">' + productName + "</h4>";
+    html += '<p class="product-card-price">' + productPrice + "</p>";
+    if (productDesc) {
+      html += '<p class="product-card-desc">' + productDesc + "</p>";
+    }
+    if (phone) {
+      html +=
+        '<a href="' +
+        waLink +
+        '" target="_blank" class="product-wa-btn">' +
+        '<i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp</a>';
+    } else {
+      html +=
+        '<button class="product-wa-btn disabled" disabled>No WhatsApp</button>';
+    }
+    html += "</div></div>";
+  });
+
+  html += "</div>";
+  productsWrap.innerHTML = html;
+}
+
+// ─────────────────────────────────────────────
 // 🔥 DOM READY
+// ─────────────────────────────────────────────
 document.addEventListener("DOMContentLoaded", () => {
   vendorList = document.getElementById("vendorList");
   detailSection = document.getElementById("vendorDetail");
@@ -228,24 +464,27 @@ document.addEventListener("DOMContentLoaded", () => {
   detailName = document.getElementById("detailName");
   detailDesc = document.getElementById("detailDesc");
   detailLocation = document.getElementById("detailLocation");
+  detailTag = document.getElementById("detailTag");
+  detailWhatsapp = document.getElementById("detailWhatsapp");
   claimBtn = document.getElementById("claimBtn");
   productsWrap = document.getElementById("productsWrap");
 
   const backBtn = document.getElementById("backBtn");
-  const buttons = document.querySelectorAll(".cat-btn");
+  const catButtons = document.querySelectorAll(".cat-btn");
   const searchInput = document.getElementById("searchInput");
+  const sortSelect = document.getElementById("sortSelect");
 
-  // 🔥 CATEGORY BUTTONS
-  buttons.forEach((btn) => {
+  // ── Category filter
+  catButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
-      buttons.forEach((b) => b.classList.remove("active"));
+      catButtons.forEach((b) => b.classList.remove("active"));
       btn.classList.add("active");
       activeCategory = (btn.dataset.category || "all").toLowerCase();
       applyFilters();
     });
   });
 
-  // 🔥 SEARCH INPUT — fires on every keystroke
+  // ── Search
   if (searchInput) {
     searchInput.addEventListener("input", () => {
       activeQuery = searchInput.value.trim().toLowerCase();
@@ -253,13 +492,78 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 🔥 BACK BUTTON
+  // ── Sort
+  if (sortSelect) {
+    sortSelect.addEventListener("change", () => {
+      sortVendorCards(sortSelect.value);
+    });
+  }
+
+  // ── Back button
   if (backBtn) {
     backBtn.addEventListener("click", () => {
       detailSection.classList.add("hidden");
       vendorList.style.display = "";
+      window.scrollTo({ top: 0, behavior: "smooth" });
     });
   }
 
-  loadVendors();
+  // ── Handle ?category= and ?q= from URL (e.g. coming from homepage)
+  const urlParams = new URLSearchParams(window.location.search);
+  const urlCategory = (urlParams.get("category") || "all").toLowerCase();
+  const urlQuery = (urlParams.get("q") || "").toLowerCase();
+
+  if (urlCategory !== "all") {
+    const matchBtn = document.querySelector(
+      '.cat-btn[data-category="' + urlCategory + '"]',
+    );
+    if (matchBtn) {
+      catButtons.forEach((b) => b.classList.remove("active"));
+      matchBtn.classList.add("active");
+    }
+    activeCategory = urlCategory;
+  }
+
+  if (urlQuery) {
+    activeQuery = urlQuery;
+    if (searchInput) searchInput.value = urlQuery;
+  }
+
+  // ── Auto-open a vendor if ?vendor=ID came from homepage ──
+  const vendorIdFromUrl = urlParams.get("vendor");
+
+  if (vendorIdFromUrl) {
+    // loadVendors() is async — wait for it, then find & open the card
+    loadVendors().then(() => {
+      const card = document.querySelector(
+        '.vendor-card[data-id="' + vendorIdFromUrl + '"]',
+      );
+      if (card) openVendorDetail(card);
+    });
+  } else {
+    loadVendors();
+  }
 });
+
+// ─────────────────────────────────────────────
+// 🔥 SORT VENDOR CARDS IN DOM
+// ─────────────────────────────────────────────
+function sortVendorCards(mode) {
+  if (!vendorList) return;
+  const cards = Array.from(vendorList.querySelectorAll(".vendor-card"));
+
+  cards.sort((a, b) => {
+    const nameA = (a.dataset.name || "").toLowerCase();
+    const nameB = (b.dataset.name || "").toLowerCase();
+    const catA = (a.dataset.category || "").toLowerCase();
+    const catB = (b.dataset.category || "").toLowerCase();
+
+    if (mode === "az") return nameA.localeCompare(nameB);
+    if (mode === "za") return nameB.localeCompare(nameA);
+    if (mode === "category")
+      return catA.localeCompare(catB) || nameA.localeCompare(nameB);
+    return 0;
+  });
+
+  cards.forEach((card) => vendorList.appendChild(card));
+}

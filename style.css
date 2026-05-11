@@ -977,12 +977,12 @@ body {
 /* CATEGORY */
 
 .category-section {
-  padding: 80px 0;
+  /* padding: 80px 0; */
   background: #f9fafb;
 }
 
 .categories-section .container {
-  padding-top: 3rem;
+  padding: 3rem 1rem;
 }
 
 /* HEADER */
@@ -1095,6 +1095,7 @@ body {
 .featured-header {
   text-align: center;
   margin-bottom: 40px;
+  padding-top: 2rem;
 }
 
 .section-header {
@@ -1359,10 +1360,17 @@ body {
   background: #ffffff;
 }
 
+.simple-process {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
 /* HEADER */
 .how-it-works-header {
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 4rem;
+  background: #f3f4f6;
+  padding: 7rem 0 4rem 0;
 }
 
 .how-it-works-header h2 {
@@ -1891,6 +1899,7 @@ body {
   align-items: center;
   position: relative;
   z-index: 1;
+  padding-top: 3rem;
 }
 
 /* LEFT COLUMN */
@@ -2075,18 +2084,12 @@ body {
 .how-it-works-section {
   font-family: "Plus Jakarta Sans", sans-serif;
   background: #ffffff;
-  padding: 5rem 1.5rem;
+  /* padding: 5rem 1.5rem; */
 }
 
 .how-it-works-container {
   max-width: 1000px;
   margin: 0 auto;
-}
-
-/* HEADER */
-.how-it-works-header {
-  text-align: center;
-  margin-bottom: 4rem;
 }
 
 .how-it-works-eyebrow {
@@ -2129,11 +2132,12 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.5px;
-  background: #e2e8f0; /* gap colour between cells */
+  background: #e2e8f0;
   border: 1.5px solid #e2e8f0;
   border-radius: 16px;
   overflow: hidden;
   margin-bottom: 2rem;
+  margin: 7rem 1rem 4rem 1rem;
 }
 
 .how-it-works-step {
@@ -2215,8 +2219,9 @@ body {
   border-radius: 12px;
   padding: 1.25rem 1.5rem;
   display: flex;
+  align-items: center;
   gap: 1rem;
-  align-items: flex-start;
+  margin: 5rem 1rem 4rem 1rem;
 }
 
 .how-it-works-note-icon {
@@ -2246,9 +2251,9 @@ body {
 
 /* RESPONSIVE */
 @media (max-width: 640px) {
-  .how-it-works-section {
-    padding: 3.5rem 1.25rem;
-  }
+  /* .how-it-works-section {
+    padding: 4rem 1.25rem;
+  } */
 
   .how-it-works-header {
     margin-bottom: 2.5rem;
@@ -2371,9 +2376,9 @@ body {
 
 /* CONTACT SECTION */
 .contact-hero {
-  background: #f9fafb;
+  background: #f3f4f6;
   text-align: center;
-  padding-top: 8rem;
+  padding: 7rem 0 4rem 0;
 }
 
 .contact-hero .eyebrow {
@@ -2546,9 +2551,9 @@ body {
 
 /* BUYING SAFE SECTION */
 .buying-safe-hero {
-  background: #f9fafb;
+  background: #f3f4f6;
   text-align: center;
-  padding-top: 7rem;
+  padding: 7rem 0 4rem 0;
 }
 
 .buying-safe-hero p {
@@ -3360,12 +3365,17 @@ body {
 .categories-section,
 .info-section {
   width: 100%;
-  padding: 80px 20px;
+  /* padding: 80px 20px; */
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
+}
+
+.categories-hero {
+  background: #f3f4f6;
+  padding: 7rem 0 3rem 0;
 }
 
 .section-label {
@@ -3462,6 +3472,7 @@ body {
   grid-template-columns: 1.1fr 0.9fr;
   gap: 40px;
   align-items: center;
+  padding: 4rem 1rem;
 }
 
 .info-content h2 {
@@ -3499,10 +3510,28 @@ body {
 
 .stats-box {
   background: linear-gradient(135deg, #0d6efd, #ff7a00);
+  background-size: 200% 200%;
+
   color: white;
   padding: 40px 28px;
   border-radius: 28px;
   box-shadow: 0 20px 40px rgba(13, 110, 253, 0.18);
+
+  animation: gradientMove 6s ease infinite;
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: left center;
+  }
+
+  50% {
+    background-position: right center;
+  }
+
+  100% {
+    background-position: left center;
+  }
 }
 
 .stats-box h3 {
@@ -3560,14 +3589,17 @@ body {
   }
 
   .info-wrapper {
-    gap: 30px;
+    gap: 50px;
   }
 }
 
 @media (max-width: 767px) {
-  .categories-section,
-  .info-section {
-    padding: 60px 16px;
+  .section-title {
+    font-size: 30px;
+  }
+
+  .section-text {
+    width: 90%;
   }
 
   .category-grid,
@@ -3581,6 +3613,10 @@ body {
 
   .stats-box {
     padding: 28px 22px;
+  }
+
+  .stats-box h3 {
+    font-size: 1.4rem;
   }
 }
 
@@ -4305,4 +4341,531 @@ body {
     transform: none !important;
     transition: none !important;
   }
+}
+
+/* ═══════════════════════════════════════════════════
+   MARKETPLACE — VENDOR CARDS (homepage-style)
+   Add these rules to your style.css
+   ═══════════════════════════════════════════════════ */
+
+/* ── Grid / scroll container ─────────────────────── */
+.vendors-scroll {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  padding: 0 0 40px;
+}
+
+/* ── Card shell ──────────────────────────────────── */
+.vendor-card {
+  background: #ffffff;
+  border: 1px solid #e8e8e8;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.vendor-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* ── Card image ──────────────────────────────────── */
+.vendor-card-img-wrap {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background: #f5f5f5;
+}
+
+.vendor-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.vendor-card:hover .vendor-card-img {
+  transform: scale(1.04);
+}
+
+/* ── Card content area ───────────────────────────── */
+.card-content {
+  padding: 16px 18px 20px;
+}
+
+/* ── Verified badge ──────────────────────────────── */
+.card-badges {
+  margin-bottom: 8px;
+}
+
+.badge-verified {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #fff8f0;
+  border: 1px solid #ffe0b2;
+  color: #e65100;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.badge-verified i {
+  color: #ff6d00;
+  font-size: 11px;
+}
+
+/* ── Business name ───────────────────────────────── */
+.card-business-name {
+  font-size: 17px;
+  font-weight: 700;
+  color: #111;
+  margin: 6px 0 2px;
+  line-height: 1.3;
+}
+
+/* ── Category + sub-category ─────────────────────── */
+.card-meta {
+  font-size: 13px;
+  color: #666;
+  margin: 0 0 4px;
+}
+
+/* ── Location ────────────────────────────────────── */
+.card-location {
+  font-size: 13px;
+  color: #888;
+  margin: 0 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.card-location i {
+  color: #ff6d00;
+  font-size: 12px;
+}
+
+/* ── WhatsApp + price tags row ───────────────────── */
+.card-tags-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.tag-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border: 1.5px solid #25d366;
+  color: #128c3e;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: #f0fff4;
+}
+
+.tag-whatsapp i {
+  color: #25d366;
+  font-size: 13px;
+}
+
+.tag-price {
+  display: inline-flex;
+  align-items: center;
+  border: 1.5px solid #ddd;
+  color: #444;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: #fafafa;
+}
+
+.tag-no-wa {
+  display: inline-flex;
+  align-items: center;
+  border: 1.5px solid #ddd;
+  color: #999;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: #fafafa;
+}
+
+/* ── View Details button ─────────────────────────── */
+.view-btn {
+  width: 100%;
+  padding: 12px;
+  background: #ff6d00;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  transition:
+    background 0.2s ease,
+    transform 0.1s ease;
+}
+
+.view-btn:hover {
+  background: #e65100;
+  transform: translateY(-1px);
+}
+
+.view-btn:active {
+  transform: translateY(0);
+}
+
+/* ═══════════════════════════════════════════════════
+   VENDOR DETAIL PAGE
+   ═══════════════════════════════════════════════════ */
+
+.vendor-detail {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px 24px 60px;
+}
+
+.vendor-detail.hidden {
+  display: none;
+}
+
+/* ── Back button ─────────────────────────────────── */
+#backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #ff6d00;
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 28px;
+  transition: background 0.2s ease;
+}
+
+#backBtn:hover {
+  background: #e65100;
+}
+
+/* ── Detail card layout ──────────────────────────── */
+.detail-card {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 40px;
+  align-items: start;
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+}
+
+@media (max-width: 768px) {
+  .detail-card {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Detail image (vendor logo/banner) ───────────── */
+#detailImg {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── Detail content ──────────────────────────────── */
+.detail-content {
+  padding: 28px 32px 28px 0;
+}
+
+@media (max-width: 768px) {
+  .detail-content {
+    padding: 20px 20px 28px;
+  }
+}
+
+/* ── Category tag in detail ──────────────────────── */
+#detailTag {
+  display: inline-block;
+  background: #ff6d00;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 14px;
+  border-radius: 20px;
+  text-transform: capitalize;
+  margin-bottom: 12px;
+}
+
+/* ── Detail headings ─────────────────────────────── */
+#detailName {
+  font-size: 28px;
+  font-weight: 800;
+  color: #111;
+  margin: 0 0 8px;
+  line-height: 1.2;
+}
+
+#detailLocation {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+#detailLocation i {
+  color: #ff6d00;
+}
+
+#detailDesc {
+  font-size: 15px;
+  color: #444;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+/* ── WhatsApp button in detail ───────────────────── */
+#detailWhatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #25d366;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.2s ease;
+  margin-bottom: 12px;
+}
+
+#detailWhatsapp:hover {
+  background: #128c3e;
+}
+
+#detailWhatsapp.hidden {
+  display: none;
+}
+
+/* ── Claim button in detail ──────────────────────── */
+.claim-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: #ff6d00;
+  border: 2px solid #ff6d00;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  margin-left: 10px;
+  transition: all 0.2s ease;
+}
+
+.claim-btn:hover {
+  background: #ff6d00;
+  color: #fff;
+}
+
+/* ═══════════════════════════════════════════════════
+   PRODUCTS SECTION (inside detail view)
+   ═══════════════════════════════════════════════════ */
+
+#productsWrap {
+  margin-top: 48px;
+  grid-column: 1 / -1; /* span full width inside detail-card if needed */
+}
+
+/* Put productsWrap BELOW the detail-card by placing it outside */
+/* (see HTML note below) */
+
+.products-section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.products-section-header h3 {
+  font-size: 22px;
+  font-weight: 800;
+  color: #111;
+  margin: 0;
+}
+
+.products-count {
+  background: #ff6d00;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 2px 9px;
+  border-radius: 20px;
+}
+
+.no-products-msg {
+  color: #999;
+  font-size: 15px;
+  padding: 20px 0;
+}
+
+/* ── Product cards grid ──────────────────────────── */
+.products-grid-clean {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+/* ── Single product card ─────────────────────────── */
+.product-card-clean {
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card-clean:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* ── Product image ───────────────────────────────── */
+.product-card-img-wrap {
+  position: relative;
+  width: 100%;
+  height: 190px;
+  overflow: hidden;
+  background: #f5f5f5;
+}
+
+.product-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.product-card-clean:hover .product-card-img {
+  transform: scale(1.04);
+}
+
+/* ── Category badge on image ─────────────────────── */
+.product-cat-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(255, 109, 0, 0.9);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ── Product body ────────────────────────────────── */
+.product-card-body {
+  padding: 14px 16px 18px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.product-card-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: #111;
+  margin: 0 0 6px;
+  line-height: 1.3;
+}
+
+.product-card-price {
+  font-size: 18px;
+  font-weight: 800;
+  color: #ff6d00;
+  margin: 0 0 8px;
+}
+
+.product-card-desc {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.6;
+  margin: 0 0 14px;
+  flex: 1;
+
+  /* Clamp to 3 lines */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ── WhatsApp button on product card ─────────────── */
+.product-wa-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  background: #25d366;
+  color: #fff;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  margin-top: auto;
+}
+
+.product-wa-btn:hover {
+  background: #128c3e;
+}
+
+.product-wa-btn.disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* ── Error message ───────────────────────────────── */
+.error-msg {
+  text-align: center;
+  color: #e53935;
+  padding: 40px;
+  font-size: 15px;
 }

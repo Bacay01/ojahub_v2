@@ -18,10 +18,20 @@
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      media="print"
+      onload="this.media = 'all'"
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      />
+    </noscript>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+    <link rel="preload" as="image" href="images/hero-img-1.png" />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -174,10 +184,30 @@
 
           <div class="hero-social-proof anim anim-left delay-1">
             <div class="avatars">
-              <img src="images/profile-img-1.png" alt="User" class="avatar" />
-              <img src="images/profile-img-2.png" alt="User" class="avatar" />
-              <img src="images/hero-img-3.png" alt="User" class="avatar" />
-              <img src="images/profile-img-4.png" alt="User" class="avatar" />
+              <img
+                src="images/profile-img-1.png"
+                alt="User"
+                class="avatar"
+                loading="lazy"
+              />
+              <img
+                src="images/profile-img-2.png"
+                alt="User"
+                class="avatar"
+                loading="lazy"
+              />
+              <img
+                src="images/hero-img-3.png"
+                alt="User"
+                class="avatar"
+                loading="lazy"
+              />
+              <img
+                src="images/profile-img-4.png"
+                alt="User"
+                class="avatar"
+                loading="lazy"
+              />
             </div>
             <p class="social-proof-text">
               Join thousands of happy users and vendors growing and winning
@@ -189,19 +219,33 @@
         <!-- RIGHT SIDE — IMAGE CAROUSEL -->
         <div class="hero-right anim anim-up">
           <div class="carousel-wrapper">
-            <div class="carousel-track" id="carouselTrack">
-              <div class="carousel-slide active">
-                <img src="images/hero-img-1.png" alt="OjaHub Vendor" />
-              </div>
-              <div class="carousel-slide">
-                <img src="images/hero-img-2.png" alt="OjaHub Vendor" />
-              </div>
-              <div class="carousel-slide">
-                <img src="images/hero-img-3.png" alt="Marketplace Vendor" />
-              </div>
-              <div class="carousel-slide">
-                <img src="images/hero-img-4.png" alt="Marketplace Products" />
-              </div>
+            <div class="carousel-slide active">
+              <img
+                src="images/hero-img-1.png"
+                alt="OjaHub Vendor"
+                fetchpriority="high"
+              />
+            </div>
+            <div class="carousel-slide">
+              <img
+                src="images/hero-img-1.png"
+                loading="lazy"
+                alt="OjaHub Vendor"
+              />
+            </div>
+            <div class="carousel-slide">
+              <img
+                src="images/hero-img-3.png"
+                loading="lazy"
+                alt="Marketplace Vendor"
+              />
+            </div>
+            <div class="carousel-slide">
+              <img
+                src="images/hero-img-4.png"
+                loading="lazy"
+                alt="Marketplace Products"
+              />
             </div>
 
             <!-- Carousel Dots -->
@@ -506,431 +550,11 @@
         <a href="marketplace.html" class="btn-outline">Browse all vendors</a>
       </div>
 
-      <div class="vendor-grid">
-        <!-- Card 1 -->
-        <div class="featured-vendors-card anim anim-up">
-          <img
-            class="featured-vendors-card-img"
-            src="images/TIJ LAUDRY.jpg"
-            alt="Laundry"
-          />
-          <div class="featured-vendors-card-body">
-            <span class="verified-badge">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="3"
-              >
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-              Verified · Ogbomosho
-            </span>
-            <p class="featured-vendors-card-name">TIJ Laundry</p>
-            <p class="featured-vendors-card-category">Services · Laundry</p>
-            <p class="featured-vendors-card-location">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z" />
-                <circle cx="12" cy="10" r="3" />
-              </svg>
-              Ogbomosho
-            </p>
-            <div class="featured-vendors-card-tags">
-              <span class="tag replies-tag">Replies on WhatsApp</span>
-              <span class="tag price-tag">Price on request</span>
-            </div>
-          </div>
-          <div class="featured-vendors-card-footer">
-            <a href="#" class="btn-veiw-details">
-              <i class="fa-regular fa-eye"></i>
-              View Details
-            </a>
-          </div>
-        </div>
+      <!-- Give your grid an id and remove all hardcoded cards -->
+      <div class="vendor-grid" id="vendorGrid"></div>
 
-        <!-- Card 2 -->
-        <div class="featured-vendors-card anim anim-up">
-          <img
-            class="featured-vendors-card-img"
-            src="images/wealth 1.jpg"
-            alt="Phones"
-          />
-          <div class="featured-vendors-card-body">
-            <span class="verified-badge">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="3"
-              >
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-              Verified · Ogbomosho
-            </span>
-            <p class="featured-vendors-card-name">Wealth Phone &amp; Gadgets</p>
-            <p class="featured-vendors-card-category">Phones &amp; Gadgets</p>
-            <p class="featured-vendors-card-location">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z" />
-                <circle cx="12" cy="10" r="3" />
-              </svg>
-              Stadium Road, Ogbomosho
-            </p>
-            <div class="featured-vendors-card-tags">
-              <span class="tag replies-tag">Replies on WhatsApp</span>
-              <span class="tag price-tag">Price on request</span>
-            </div>
-          </div>
-          <div class="featured-vendors-card-footer">
-            <a href="#" class="btn-veiw-details">
-              <i class="fa-regular fa-eye"></i>
-              View Details
-            </a>
-          </div>
-        </div>
-
-        <!-- Card 3 -->
-        <div class="featured-vendors-card anim anim-up">
-          <img
-            class="featured-vendors-card-img"
-            src="images/chen 2.jpg"
-            alt="Fashion"
-          />
-          <div class="featured-vendors-card-body">
-            <span class="verified-badge">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="3"
-              >
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-              Verified · Ogbomosho
-            </span>
-            <p class="featured-vendors-card-name">Trendy Luxe By Chen</p>
-            <p class="featured-vendors-card-category">
-              Fashion · Clothing Brand
-            </p>
-            <p class="featured-vendors-card-location">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z" />
-                <circle cx="12" cy="10" r="3" />
-              </svg>
-              Yoaco Phase 2
-            </p>
-            <div class="featured-vendors-card-tags">
-              <span class="tag replies-tag">Replies on WhatsApp</span>
-              <span class="tag price-tag">Price on request</span>
-            </div>
-          </div>
-          <div class="featured-vendors-card-footer">
-            <a href="#" class="btn-veiw-details">
-              <i class="fa-regular fa-eye"></i>
-              View Details
-            </a>
-          </div>
-        </div>
-
-        <!-- Card 4 -->
-        <div class="featured-vendors-card anim anim-up">
-          <img
-            class="featured-vendors-card-img"
-            src="images/NK'S AURUM.jpg"
-            alt="Beauty"
-          />
-          <div class="featured-vendors-card-body">
-            <span class="verified-badge">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="3"
-              >
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-              Verified · Ogbomosho
-            </span>
-            <p class="featured-vendors-card-name">Nurturing Nature Beauty</p>
-            <p class="featured-vendors-card-category">Beauty · Skincare</p>
-            <p class="featured-vendors-card-location">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z" />
-                <circle cx="12" cy="10" r="3" />
-              </svg>
-              Ogbomosho
-            </p>
-            <div class="featured-vendors-card-tags">
-              <span class="tag replies-tag">Replies on WhatsApp</span>
-              <span class="tag price-tag">Price on request</span>
-            </div>
-          </div>
-          <div class="featured-vendors-card-footer">
-            <a href="#" class="btn-veiw-details">
-              <i class="fa-regular fa-eye"></i>
-              View Details
-            </a>
-          </div>
-        </div>
-
-        <!-- Card 5 -->
-        <div class="featured-vendors-card anim anim-up">
-          <img
-            class="featured-vendors-card-img"
-            src="images/Bee’s cafe and bistro (bees treat).jpeg"
-            alt="Cafe"
-          />
-          <div class="featured-vendors-card-body">
-            <span class="verified-badge">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="3"
-              >
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-              Verified · Ogbomosho
-            </span>
-            <p class="featured-vendors-card-name">The Cafe and Bistro</p>
-            <p class="featured-vendors-card-category">
-              Food &amp; Drinks · Restaurant
-            </p>
-            <p class="featured-vendors-card-location">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z" />
-                <circle cx="12" cy="10" r="3" />
-              </svg>
-              Ogbomosho
-            </p>
-            <div class="featured-vendors-card-tags">
-              <span class="tag replies-tag">Replies on WhatsApp</span>
-              <span class="tag price-tag">Price on request</span>
-            </div>
-          </div>
-          <div class="featured-vendors-card-footer">
-            <a href="#" class="btn-veiw-details">
-              <i class="fa-regular fa-eye"></i>
-              View Details
-            </a>
-          </div>
-        </div>
-
-        <!-- Card 6 -->
-        <div class="featured-vendors-card anim anim-up">
-          <img
-            class="featured-vendors-card-img"
-            src="images/AKIN DECOR.jpg"
-            alt="Food"
-          />
-          <div class="featured-vendors-card-body">
-            <span class="verified-badge">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="3"
-              >
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-              Verified · Ogbomosho
-            </span>
-            <p class="featured-vendors-card-name">Mama's Kitchen</p>
-            <p class="featured-vendors-card-category">
-              Food &amp; Drinks · Home Cooking
-            </p>
-            <p class="featured-vendors-card-location">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z" />
-                <circle cx="12" cy="10" r="3" />
-              </svg>
-              Ring Road, Ogbomosho
-            </p>
-            <div class="featured-vendors-card-tags">
-              <span class="tag replies-tag">Replies on WhatsApp</span>
-              <span class="tag price-tag">Price on request</span>
-            </div>
-          </div>
-          <div class="featured-vendors-card-footer">
-            <a href="#" class="btn-veiw-details">
-              <i class="fa-regular fa-eye"></i>
-              View Details
-            </a>
-          </div>
-        </div>
-
-        <!-- Card 7 -->
-        <div class="featured-vendors-card anim anim-up">
-          <img
-            class="featured-vendors-card-img"
-            src="images/stream-surface.jpg"
-            alt="Phones"
-          />
-          <div class="featured-vendors-card-body">
-            <span class="verified-badge">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="3"
-              >
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-              Verified · Ogbomosho
-            </span>
-            <p class="featured-vendors-card-name">
-              Stream and Surface Innovations
-            </p>
-            <p class="featured-vendors-card-category">Repair & Service</p>
-            <p class="featured-vendors-card-location">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z" />
-                <circle cx="12" cy="10" r="3" />
-              </svg>
-              Stadium Road, Ogbomosho
-            </p>
-            <div class="featured-vendors-card-tags">
-              <span class="tag replies-tag">Replies on WhatsApp</span>
-              <span class="tag price-tag">Price on request</span>
-            </div>
-          </div>
-          <div class="featured-vendors-card-footer">
-            <a href="#" class="btn-veiw-details">
-              <i class="fa-regular fa-eye"></i>
-              View Details
-            </a>
-          </div>
-        </div>
-
-        <!-- Card 8-->
-        <div class="featured-vendors-card anim anim-up">
-          <img
-            class="featured-vendors-card-img"
-            src="images/dammy-stitches.jpeg"
-            alt="Phones"
-          />
-          <div class="featured-vendors-card-body">
-            <span class="verified-badge">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="3"
-              >
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-              Verified · Ogbomosho
-            </span>
-            <p class="featured-vendors-card-name">Dammy Stitches</p>
-            <p class="featured-vendors-card-category">
-              Fashion · Crochet & Handmade/p>
-            </p>
-            <p class="featured-vendors-card-location">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z" />
-                <circle cx="12" cy="10" r="3" />
-              </svg>
-              Under G, Ogbomosho
-            </p>
-            <div class="featured-vendors-card-tags">
-              <span class="tag replies-tag">Replies on WhatsApp</span>
-              <span class="tag price-tag">Price on request</span>
-            </div>
-          </div>
-          <div class="featured-vendors-card-footer">
-            <a href="#" class="btn-veiw-details">
-              <i class="fa-regular fa-eye"></i>
-              View Details
-            </a>
-          </div>
-        </div>
-
-        <!-- Card 9-->
-        <div class="featured-vendors-card anim anim-up">
-          <img
-            class="featured-vendors-card-img"
-            src="images/footies-by-fida.jpg"
-            alt="Phones"
-          />
-          <div class="featured-vendors-card-body">
-            <span class="verified-badge">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="3"
-              >
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-              Verified · Ogbomosho
-            </span>
-            <p class="featured-vendors-card-name">Footies By Fida</p>
-            <p class="featured-vendors-card-category">Fashion · Footwear</p>
-            <p class="featured-vendors-card-location">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z" />
-                <circle cx="12" cy="10" r="3" />
-              </svg>
-              Felele, Ibadan
-            </p>
-            <div class="featured-vendors-card-tags">
-              <span class="tag replies-tag">Replies on WhatsApp</span>
-              <span class="tag price-tag">Price on request</span>
-            </div>
-          </div>
-          <div class="featured-vendors-card-footer">
-            <a href="#" class="btn-veiw-details">
-              <i class="fa-regular fa-eye"></i>
-              View Details
-            </a>
-          </div>
-        </div>
-      </div>
+      <!-- Add AFTER your existing <script src="main.js"></script> -->
+      <script type="module" src="featured-vendors.js"></script>
     </section>
 
     <!-- How it Works -->
@@ -938,7 +562,7 @@
     <section class="how-it-works">
       <div class="container">
         <!-- HEADER -->
-        <div class="how-it-works-header anim anim-zoom delay-1">
+        <div class="simple-process anim anim-zoom delay-1">
           <p class="section-tag">Simple Process</p>
           <h2>How Oja Hub Works</h2>
           <p class="section-subtitle">
@@ -1054,7 +678,7 @@
               your visibility within your local community.
             </p>
 
-            <a href="signup.html" class="cta-btn-white">
+            <a href="pages/signup/signup.html" class="cta-btn-white">
               List Your Business <i class="fa-solid fa-arrow-right"></i>
             </a>
           </div>
@@ -1110,6 +734,7 @@
     <div id="footer"></div>
     <!-- <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> -->
     <script src="main.js"></script>
+    <script type="module" src="featured-vendors.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"

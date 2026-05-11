@@ -17,7 +17,7 @@
     <style>
       .guidelines-hero {
         background: #f3f4f6;
-        padding: 80px 20px;
+        padding: 7rem 0 3rem 0;
       }
 
       .guidelines-tag {
@@ -36,7 +36,7 @@
       }
 
       .guidelines-subtext {
-        max-width: 600px;
+        width: 40%;
         margin: 0 auto;
         font-size: 16px;
         color: #6b7280;
@@ -80,10 +80,18 @@
 
       /* ===== RESPONSIVENESS ===== */
 
-      /* 320px */
-      @media (max-width: 320px) {
-        .terms-section {
-          padding: 50px 15px;
+      /* 768px */
+      @media (max-width: 768px) {
+        .terms-container {
+          max-width: 100%;
+        }
+
+        .guidelines-title {
+          font-size: 35px;
+        }
+
+        .guidelines-subtext {
+          width: 100%;
         }
       }
 
@@ -94,10 +102,10 @@
         }
       }
 
-      /* 768px */
-      @media (max-width: 768px) {
-        .terms-container {
-          max-width: 100%;
+      /* 320px */
+      @media (max-width: 320px) {
+        .terms-section {
+          padding: 50px 15px;
         }
       }
     </style>
@@ -110,13 +118,14 @@
     <!-- HEADER -->
     <section class="guidelines-hero">
       <div class="container text-center">
-        <p class="guidelines-tag">Support Hub</p>
+        <p class="guidelines-tag">Terms & Policies</p>
 
-        <h1 class="guidelines-title">Help Center</h1>
+        <h1 class="guidelines-title">Terms of Use</h1>
 
         <p class="guidelines-subtext">
-          Find guides, answers, and resources to help you navigate OjaHub with
-          confidence.
+          Please read these terms carefully before using OjaHub. They explain
+          your rights, responsibilities, and how the platform operates for both
+          buyers and vendors.
         </p>
       </div>
     </section>
@@ -191,7 +200,7 @@
           via WhatsApp or through our Contact Us page.
         </p>
 
-        <p class="last-updated"><i>Last updated: April 2026 </i></p>
+        <p class="last-updated"><i>Last updated: May 2026 </i></p>
       </div>
     </section>
 

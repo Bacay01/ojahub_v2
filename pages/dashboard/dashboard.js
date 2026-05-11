@@ -2,14 +2,14 @@ import { auth, db } from "../../js/firebase.js";
 
 import {
   onAuthStateChanged,
-  signOut
+  signOut,
 } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-auth.js";
 
 import {
   doc,
   getDoc,
   collection,
-  getDocs
+  getDocs,
 } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-firestore.js";
 
 // 🔥 ELEMENTS
@@ -33,14 +33,12 @@ const vendorImage = document.getElementById("vendorImage");
 
 // 🔥 AUTH CHECK
 onAuthStateChanged(auth, async (user) => {
-
   if (!user) {
     window.location.href = "../login/login.html";
     return;
   }
 
   try {
-
     if (vendorEmail) {
       vendorEmail.textContent = user.email;
     }
@@ -52,26 +50,18 @@ onAuthStateChanged(auth, async (user) => {
     const directSnap = await getDoc(directRef);
 
     if (directSnap.exists()) {
-
       data = directSnap.data();
-
     } else {
-
       // 🔥 CHECK CLAIMED ACCOUNT
-      const snapshot = await getDocs(
-        collection(db, "vendors")
-      );
+      const snapshot = await getDocs(collection(db, "vendors"));
 
       snapshot.forEach((item) => {
-
         const vendor = item.data();
 
         if (vendor.ownerUid === user.uid) {
           data = vendor;
         }
-
       });
-
     }
 
     if (!data) {
@@ -81,125 +71,96 @@ onAuthStateChanged(auth, async (user) => {
 
     // 🔥 BASIC INFO
     if (businessName) {
-      businessName.textContent =
-        data.businessName || "N/A";
+      businessName.textContent = data.businessName || "N/A";
     }
 
     if (businessNameCard) {
-      businessNameCard.textContent =
-        data.businessName || "N/A";
+      businessNameCard.textContent = data.businessName || "N/A";
     }
 
     if (ownerName) {
-      ownerName.textContent =
-        data.ownerName || "N/A";
+      ownerName.textContent = data.ownerName || "N/A";
     }
 
     if (category) {
-      category.textContent =
-        data.category || "N/A";
+      category.textContent = data.category || "N/A";
     }
 
     if (city) {
-      city.textContent =
-        data.city || "N/A";
+      city.textContent = data.city || "N/A";
     }
 
     if (phone) {
-      phone.textContent =
-        data.phone || "N/A";
+      phone.textContent = data.phone || "N/A";
     }
 
     if (state) {
-      state.textContent =
-        data.state || "N/A";
+      state.textContent = data.state || "N/A";
     }
 
     if (address) {
-      address.textContent =
-        data.address || "N/A";
+      address.textContent = data.address || "N/A";
     }
 
     if (subCategory) {
-      subCategory.textContent =
-        data.subCategory || "N/A";
+      subCategory.textContent = data.subCategory || "N/A";
     }
 
     if (description) {
-      description.textContent =
-        data.description ||
-        "No description yet.";
+      description.textContent = data.description || "No description yet.";
     }
 
     // 🔥 WHATSAPP FIX
     if (whatsappLink) {
-
       if (data.whatsapp) {
-
-        let number =
-          data.whatsapp.replace(/\D/g, "");
+        let number = data.whatsapp.replace(/\D/g, "");
 
         if (number.startsWith("0")) {
-          number =
-            "234" + number.substring(1);
+          number = "234" + number.substring(1);
         }
 
-        whatsappLink.href =
-          "https://wa.me/" + number;
+        whatsappLink.href = "https://wa.me/" + number;
 
         whatsappLink.target = "_blank";
 
-        whatsappLink.textContent =
-          "Chat on WhatsApp";
-
+        whatsappLink.textContent = "Chat on WhatsApp";
       } else {
-
         whatsappLink.removeAttribute("href");
 
-        whatsappLink.textContent =
-          "No WhatsApp";
-
+        whatsappLink.textContent = "No WhatsApp";
       }
-
     }
 
     // 🔥 IMAGE
-  if (vendorImage) {
-  vendorImage.src =
-    data.imageUrl ||
-    data.logoUrl ||
-    data.profileImage ||
-    "https://ui-avatars.com/api/?name=" +
-    encodeURIComponent(data.businessName || "OjaHub");
-}
+    if (vendorImage) {
+      vendorImage.src =
+        data.imageUrl ||
+        data.logoUrl ||
+        data.profileImage ||
+        "https://ui-avatars.com/api/?name=" +
+          encodeURIComponent(data.businessName || "OjaHub");
+    }
 
+    // 🔥 WELCOME NAME
+    const welcomeName = document.getElementById("welcomeName");
+    if (welcomeName) {
+      welcomeName.textContent = data.businessName || data.ownerName || "";
+    }
   } catch (error) {
-
     console.error(error);
     alert("Failed to load dashboard");
-
   }
-
 });
 
 // 🔥 LOGOUT
 if (logoutBtn) {
-
   logoutBtn.addEventListener("click", async () => {
-
     try {
-
       await signOut(auth);
 
-      window.location.href =
-        "../login/login.html";
-
+      window.location.href = "../login/login.html";
     } catch (error) {
-
       alert("Logout failed");
-
     }
-
   });
-
 }

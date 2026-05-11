@@ -225,8 +225,9 @@
     <section class="vendor-detail hidden" id="vendorDetail">
       <button id="backBtn">← Back to Vendors</button>
 
+      <!-- Top card: vendor logo + basic info side by side -->
       <div class="detail-card">
-        <img id="detailImg" />
+        <img id="detailImg" alt="" />
 
         <div class="detail-content">
           <span id="detailTag" class="card-content-tag"></span>
@@ -237,15 +238,17 @@
 
           <div id="detailDesc"></div>
 
-          <a id="detailWhatsapp" target="_blank" class="hidden">
-            Contact Vendor
-          </a>
-
-          <a id="claimBtn" class="claim-btn"> Claim This Business </a>
-
-          <div id="productsWrap"></div>
+          <div
+            style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px"
+          >
+            <a id="detailWhatsapp" target="_blank" class="hidden"></a>
+            <a id="claimBtn" class="claim-btn">Claim This Business</a>
+          </div>
         </div>
       </div>
+
+      <!-- Products section — full width, below the hero card -->
+      <div id="productsWrap"></div>
     </section>
 
     <!-- Footer placeholder -->

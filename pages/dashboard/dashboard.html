@@ -30,7 +30,12 @@
     <div class="dashboard-layout">
       <aside class="sidebar">
         <div class="vendor-mini-card">
-          <div class="vendor-avatar">V</div>
+          <img
+            class="vendor-avatar"
+            id="vendorImage"
+            src=""
+            alt="Vendor logo"
+          />
           <div>
             <h3 id="businessName">Loading...</h3>
             <p id="vendorEmail">Loading...</p>
@@ -53,7 +58,9 @@
       <main class="main-content">
         <header class="topbar">
           <div>
-            <p class="welcome-text">Welcome back 👋</p>
+            <p class="welcome-text">
+              Welcome back, <span id="welcomeName"></span> 👋
+            </p>
             <h1>Vendor Dashboard</h1>
           </div>
           <a href="../../add_product_page.html" class="primary-btn"

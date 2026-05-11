@@ -23,7 +23,7 @@
     <style>
       .guidelines-hero {
         background: #f3f4f6;
-        padding: 80px 20px;
+        padding: 7rem 0 3rem 0;
       }
 
       .guidelines-tag {
@@ -117,35 +117,19 @@
 
       /* ===== RESPONSIVENESS ===== */
 
-      /* 📱 320px */
-      @media (max-width: 320px) {
-        .help-grid {
-          grid-template-columns: 1fr;
-        }
-
-        .help-center {
-          padding: 50px 0;
-        }
-      }
-
-      /* 📱 425px */
-      @media (max-width: 425px) {
-        .help-grid {
-          grid-template-columns: 1fr;
-        }
-      }
-
-      /* 📱 768px */
       @media (max-width: 768px) {
         .help-grid {
           grid-template-columns: repeat(2, 1fr);
         }
+
+        .guidelines-title {
+          font-size: 35px;
+        }
       }
 
-      /* 💻 1440px */
-      @media (min-width: 1200px) {
+      @media (max-width: 500px) {
         .help-grid {
-          grid-template-columns: repeat(3, 1fr);
+          grid-template-columns: 1fr;
         }
       }
     </style>
