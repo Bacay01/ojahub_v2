@@ -25,25 +25,55 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
-// 🔥 PASSWORD TOGGLE (FIXED FOR YOUR HTML)
-const togglePassword = document.getElementById("togglePassword");
+// 🐵 MONKEY PASSWORD TOGGLE
 const passwordInput = document.getElementById("password");
+const toggleBtn = document.getElementById("togglePassword");
+const wrap = document.querySelector(".password-wrap");
 
-if (togglePassword && passwordInput) {
-  togglePassword.addEventListener("click", () => {
-    const type = passwordInput.type;
+let keysHeld = 0;
 
-    if (type === "password") {
-      passwordInput.type = "text";
-      togglePassword.textContent = "🙈";
-    } else {
-      passwordInput.type = "password";
-      togglePassword.textContent = "👁️";
+if (passwordInput && toggleBtn && wrap) {
+  // Key pressed → cover eyes immediately
+  passwordInput.addEventListener("keydown", () => {
+    keysHeld++;
+    wrap.classList.add("pw-typing");
+  });
+
+  // Key released → uncover as soon as no keys are held
+  passwordInput.addEventListener("keyup", () => {
+    keysHeld = Math.max(0, keysHeld - 1);
+    if (keysHeld === 0) {
+      wrap.classList.remove("pw-typing");
     }
+  });
+
+  // Safety: if focus leaves the field, always uncover
+  passwordInput.addEventListener("blur", () => {
+    keysHeld = 0;
+    wrap.classList.remove("pw-typing");
+  });
+
+  // Click → peek / hide
+  toggleBtn.addEventListener("click", () => {
+    const isPassword = passwordInput.type === "password";
+    passwordInput.type = isPassword ? "text" : "password";
+    wrap.classList.toggle("pw-visible", isPassword);
   });
 }
 
-// 🔥 FORM
+// 📁 FILE INPUT LABEL UPDATE
+const fileInput = document.getElementById("imageFile");
+const fileText = document.querySelector(".file-text");
+
+if (fileInput && fileText) {
+  fileInput.addEventListener("change", () => {
+    fileText.textContent = fileInput.files[0]
+      ? fileInput.files[0].name
+      : "Choose image file";
+  });
+}
+
+// 🔥 FORM SUBMIT
 const form = document.getElementById("signupForm");
 
 form.addEventListener("submit", async (e) => {
@@ -68,7 +98,6 @@ form.addEventListener("submit", async (e) => {
     // 🔥 CLOUDINARY UPLOAD
     let imageUrl = "";
 
-    // 🔥 CLOUDINARY UPLOAD (STRICT VERSION)
     if (!file) {
       alert("Please upload a business image");
       return;
@@ -103,6 +132,7 @@ form.addEventListener("submit", async (e) => {
       alert("Something went wrong uploading image");
       return;
     }
+
     // 🔥 CREATE AUTH USER
     const userCredential = await createUserWithEmailAndPassword(
       auth,

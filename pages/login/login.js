@@ -1,5 +1,3 @@
-// FIREBASE
-
 // 🔥 FIREBASE AUTH
 import { auth } from "../../js/firebase.js";
 import {
@@ -18,20 +16,48 @@ const db = getFirestore();
 
 // 🔥 DOM
 const loginForm = document.getElementById("loginForm");
-const toggleLoginPassword = document.getElementById("toggleLoginPassword");
 const loginPassword = document.getElementById("loginPassword");
+const toggleLoginPassword = document.getElementById("toggleLoginPassword");
 const forgotPasswordLink = document.getElementById("forgotPasswordLink");
 const message = document.getElementById("message");
 
-// 🔥 SHOW / HIDE PASSWORD
-if (toggleLoginPassword && loginPassword) {
-  toggleLoginPassword.addEventListener("click", () => {
-    const type = loginPassword.getAttribute("type");
+// 🐵 MONKEY — big display above card (mirrors typing state)
+const monkeyDisplay = document.getElementById("monkeyDisplay");
+const passwordWrap = document.getElementById("passwordWrap");
 
-    loginPassword.setAttribute(
-      "type",
-      type === "password" ? "text" : "password",
-    );
+let keysHeld = 0;
+
+if (loginPassword) {
+  // Key down → cover both monkeys immediately
+  loginPassword.addEventListener("keydown", () => {
+    keysHeld++;
+    if (monkeyDisplay) monkeyDisplay.classList.add("typing");
+    if (passwordWrap) passwordWrap.classList.add("pw-typing");
+  });
+
+  // Key up → uncover when all keys released
+  loginPassword.addEventListener("keyup", () => {
+    keysHeld = Math.max(0, keysHeld - 1);
+    if (keysHeld === 0) {
+      if (monkeyDisplay) monkeyDisplay.classList.remove("typing");
+      if (passwordWrap) passwordWrap.classList.remove("pw-typing");
+    }
+  });
+
+  // Blur → always uncover
+  loginPassword.addEventListener("blur", () => {
+    keysHeld = 0;
+    if (monkeyDisplay) monkeyDisplay.classList.remove("typing");
+    if (passwordWrap) passwordWrap.classList.remove("pw-typing");
+  });
+}
+
+// 🐵 TOGGLE BUTTON — peek / hide
+if (toggleLoginPassword && loginPassword && passwordWrap) {
+  toggleLoginPassword.addEventListener("click", () => {
+    const isPassword = loginPassword.type === "password";
+    loginPassword.type = isPassword ? "text" : "password";
+    passwordWrap.classList.toggle("pw-visible", isPassword);
   });
 }
 
@@ -62,7 +88,6 @@ if (loginForm) {
 
       snapshot.forEach((item) => {
         const data = item.data();
-
         if ((data.email || "").toLowerCase() === user.email.toLowerCase()) {
           currentVendor = data;
         }
@@ -87,7 +112,7 @@ if (loginForm) {
         );
       }
 
-      showMessage("Login successful", "green");
+      showMessage("Login successful ✓", "green");
 
       setTimeout(() => {
         window.location.href = "../dashboard/dashboard.html";
@@ -113,7 +138,7 @@ if (forgotPasswordLink) {
 
     try {
       await sendPasswordResetEmail(auth, email);
-      showMessage("Reset link sent to your email", "green");
+      showMessage("Reset link sent to your email ✓", "green");
     } catch (error) {
       console.error(error);
       showMessage(error.message, "red");
