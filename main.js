@@ -380,6 +380,10 @@ document.addEventListener("componentsLoaded", () => {
       ? "/ojahub_v2"
       : "";
 
+  // SET LOGO
+  const logoImg = document.getElementById("logo-img");
+  if (logoImg) logoImg.src = r + "/images/ojahub-logo.png";
+
   const links = {
     "nav-home": r + "/index.html",
     "nav-home2": r + "/index.html",

@@ -1,18 +1,6 @@
 // ═══════════════════════════════════════════════════════════
 // OJAHUB — HOMEPAGE FEATURED VENDORS (live from Firebase)
 // ═══════════════════════════════════════════════════════════
-// HOW TO USE:
-//   1. In index.html, give your vendor grid div this id:
-//        <div class="vendor-grid" id="vendorGrid"> ... </div>
-//      and DELETE all the hardcoded cards inside it.
-//
-//   2. Add this script tag at the bottom of index.html
-//      (AFTER the existing <script src="main.js"></script>):
-//        <script type="module" src="featured-vendors.js"></script>
-//
-//   3. That's it — 9 random vendors from Firebase will load
-//      automatically, styled exactly like your hardcoded cards.
-// ═══════════════════════════════════════════════════════════
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
 import {
@@ -33,7 +21,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// ── Avatar system (same logic as marketplace.js) ─────────
+// ── Avatar system ─────────────────────────────────────────
 const AVATAR_PALETTE = [
   ["#FF6D00", "#fff"],
   ["#1565C0", "#fff"],
@@ -113,15 +101,7 @@ function getVendorImage(data) {
   );
 }
 
-// ── Pick N random items from array ───────────────────────
-function pickRandom(arr, n) {
-  return arr
-    .slice()
-    .sort(() => Math.random() - 0.5)
-    .slice(0, n);
-}
-
-// ── Detect base path (works on localhost AND GitHub Pages) ─
+// ── Detect base path ──────────────────────────────────────
 function getBasePath() {
   const isGitHub =
     window.location.hostname !== "127.0.0.1" &&
@@ -129,7 +109,7 @@ function getBasePath() {
   return isGitHub ? "/ojahub_v2" : "";
 }
 
-// ── Build one card using your exact homepage CSS classes ──
+// ── Build one vendor card ─────────────────────────────────
 function buildCard(data) {
   const name = data.businessName || "No Name";
   const category = data.category || "Vendor";
@@ -139,7 +119,6 @@ function buildCard(data) {
   const hasWA = !!(data.whatsapp || "").replace(/\D/g, "");
   const base = getBasePath();
 
-  // "View Details" goes to marketplace.html and auto-opens this vendor
   const detailUrl =
     base + "/marketplace.html?vendor=" + encodeURIComponent(data.id);
 
@@ -191,20 +170,62 @@ function buildCard(data) {
   );
 }
 
-// ── Main: fetch vendors, pick 9, render ──────────────────
+// ── Update category counts on homepage ───────────────────
+function updateCategoryCounts(vendors) {
+  const categoryCounts = {};
+  vendors.forEach((v) => {
+    const cat = (v.category || "others").toLowerCase();
+    categoryCounts[cat] = (categoryCounts[cat] || 0) + 1;
+  });
+
+  const categorySlug = [
+    "food",
+    "fashion",
+    "beauty",
+    "phones",
+    "services",
+    "others",
+  ];
+
+  categorySlug.forEach((slug) => {
+    const link = document.querySelector(
+      `a[href="marketplace.html?category=${slug}"]`,
+    );
+    if (!link) return;
+
+    const paragraphs = link.querySelectorAll("p");
+    // second <p> is the count (index 1)
+    const countEl = paragraphs[1];
+    if (!countEl) return;
+
+    const count = categoryCounts[slug] || 0;
+    countEl.textContent = count + (count === 1 ? " vendor" : " vendors");
+  });
+}
+
+// ── Main: fetch vendors + products, render ───────────────
 async function loadFeaturedVendors() {
   const grid = document.getElementById("vendorGrid");
   if (!grid) return;
 
-  // Show skeleton placeholders while loading
   grid.innerHTML = '<div class="featured-vendors-card skeleton"></div>'.repeat(
     9,
   );
 
   try {
-    const snapshot = await getDocs(collection(db, "vendors"));
+    const [vendorSnapshot, productSnapshot] = await Promise.all([
+      getDocs(collection(db, "vendors")),
+      getDocs(collection(db, "products")),
+    ]);
+
+    const products = [];
+    productSnapshot.forEach((d) => products.push({ id: d.id, ...d.data() }));
+
     const vendors = [];
-    snapshot.forEach((d) => vendors.push({ id: d.id, ...d.data() }));
+    vendorSnapshot.forEach((d) => vendors.push({ id: d.id, ...d.data() }));
+
+    // UPDATE CATEGORY COUNTS
+    updateCategoryCounts(vendors);
 
     if (vendors.length === 0) {
       grid.innerHTML =
@@ -212,10 +233,32 @@ async function loadFeaturedVendors() {
       return;
     }
 
-    const featured = pickRandom(vendors, Math.min(9, vendors.length));
+    // Count products per vendor
+    vendors.forEach((vendor) => {
+      vendor._productCount = products.filter((p) => {
+        const pVendor = (p.vendorName || "").trim().toLowerCase();
+        const bName = (vendor.businessName || "").trim().toLowerCase();
+        return (
+          p.vendorId === vendor.id ||
+          pVendor === bName ||
+          pVendor.includes(bName) ||
+          bName.includes(pVendor)
+        );
+      }).length;
+    });
+
+    // Sort by product count descending, then A-Z
+    vendors.sort((a, b) => {
+      if (b._productCount !== a._productCount)
+        return b._productCount - a._productCount;
+      return (a.businessName || "").localeCompare(b.businessName || "");
+    });
+
+    // Take top 9
+    const featured = vendors.slice(0, Math.min(9, vendors.length));
     grid.innerHTML = featured.map(buildCard).join("");
 
-    // Re-run the intersection observer from main.js so cards animate in
+    // Re-run intersection observer so cards animate in
     const newCards = grid.querySelectorAll(".anim");
     if (newCards.length > 0) {
       const observer = new IntersectionObserver(

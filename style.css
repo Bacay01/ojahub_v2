@@ -798,7 +798,7 @@ body {
     0 6px 20px rgba(0, 0, 0, 0.08);
 }
 
-.carousel-track {
+#carouselTrack {
   position: relative;
   width: 100%;
   height: 100%;

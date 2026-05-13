@@ -140,9 +140,38 @@ async function loadVendors() {
 
     // Sort: category → then A-Z
     vendors.sort((a, b) => {
+      // Count products per vendor
+      const productsA = products.filter((p) => {
+        const pVendor = (p.vendorName || "").trim().toLowerCase();
+        const bName = (a.businessName || "").trim().toLowerCase();
+        return (
+          p.vendorId === a.id ||
+          pVendor === bName ||
+          pVendor.includes(bName) ||
+          bName.includes(pVendor)
+        );
+      }).length;
+
+      const productsB = products.filter((p) => {
+        const pVendor = (p.vendorName || "").trim().toLowerCase();
+        const bName = (b.businessName || "").trim().toLowerCase();
+        return (
+          p.vendorId === b.id ||
+          pVendor === bName ||
+          pVendor.includes(bName) ||
+          bName.includes(pVendor)
+        );
+      }).length;
+
+      // Vendors with products rank first
+      if (productsB !== productsA) return productsB - productsA;
+
+      // Then by category
       const catA = (a.category || "").toLowerCase();
       const catB = (b.category || "").toLowerCase();
       if (catA !== catB) return catA.localeCompare(catB);
+
+      // Then A-Z
       return (a.businessName || "").localeCompare(b.businessName || "");
     });
 

@@ -23,6 +23,22 @@ const db = getFirestore(app);
 // ── CURRENT USER ──
 const currentUser = JSON.parse(localStorage.getItem("currentuser"));
 
+// ────────────────────────────────────────────────────────────────
+// CACHE-BUST after a save.
+//
+// edit_product.js navigates back with ?updated=1 in the URL.
+// We strip that flag from the address bar, then do a hard reload
+// (bypasses both browser cache and the Firestore SDK's in-memory
+// cache) so getDocs below always fetches fresh data from the server.
+// The reload runs the whole script again — the second time around
+// ?updated is gone, so we skip this block and continue normally.
+// ────────────────────────────────────────────────────────────────
+const urlParams = new URLSearchParams(window.location.search);
+if (urlParams.get("updated") === "1") {
+  window.history.replaceState(null, "", window.location.pathname);
+  window.location.reload(true);
+}
+
 // ── FORMAT PRICE ──
 function formatPrice(price) {
   if (!price && price !== 0) return "—";
@@ -35,13 +51,11 @@ function ucFirst(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-// ── BUILD ONE CARD (DOM, no template literals with vars) ──
+// ── BUILD ONE CARD ──
 function buildCard(docId, data) {
-  // Wrapper
   const card = document.createElement("div");
   card.className = "mp-card";
 
-  // ── IMAGE SECTION ──
   const imgWrap = document.createElement("div");
   imgWrap.className = "mp-card-img-wrap";
 
@@ -49,14 +63,12 @@ function buildCard(docId, data) {
   img.src = data.imageUrl || "";
   img.alt = data.name || "Product image";
   img.loading = "lazy";
-  // Fallback if image fails
   img.onerror = function () {
     this.src =
       "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23f1f3f5'/%3E%3Ctext x='50%25' y='50%25' font-size='14' fill='%239ca3af' text-anchor='middle' dominant-baseline='middle'%3ENo image%3C/text%3E%3C/svg%3E";
   };
   imgWrap.appendChild(img);
 
-  // Category badge
   if (data.category) {
     const badge = document.createElement("span");
     badge.className = "mp-card-badge";
@@ -64,7 +76,6 @@ function buildCard(docId, data) {
     imgWrap.appendChild(badge);
   }
 
-  // Status badge
   const statusBadge = document.createElement("span");
   const status = data.status || "published";
   statusBadge.className = "mp-card-status " + status;
@@ -73,7 +84,6 @@ function buildCard(docId, data) {
 
   card.appendChild(imgWrap);
 
-  // ── BODY ──
   const body = document.createElement("div");
   body.className = "mp-card-body";
 
@@ -96,16 +106,14 @@ function buildCard(docId, data) {
 
   card.appendChild(body);
 
-  // ── FOOTER ACTIONS ──
   const footer = document.createElement("div");
   footer.className = "mp-card-footer";
 
   const editBtn = document.createElement("button");
   editBtn.className = "mp-btn-edit";
   editBtn.innerHTML = "<i class='bi bi-pencil'></i> Edit";
-  // Edit can be wired up to an edit page later
   editBtn.onclick = function () {
-    alert("Edit feature coming soon!");
+    window.location.href = "../../edit_product.html?id=" + docId;
   };
   footer.appendChild(editBtn);
 
@@ -118,7 +126,6 @@ function buildCard(docId, data) {
   footer.appendChild(delBtn);
 
   card.appendChild(footer);
-
   return card;
 }
 
@@ -130,7 +137,7 @@ async function loadMyProducts() {
     container.innerHTML = "";
     const msg = document.createElement("p");
     msg.style.cssText =
-      "grid-column:1/-1; text-align:center; color:#9ca3af; padding:40px 0;";
+      "grid-column:1/-1;text-align:center;color:#9ca3af;padding:40px 0;";
     msg.textContent = "Please login to view your products.";
     container.appendChild(msg);
     return;
@@ -139,17 +146,15 @@ async function loadMyProducts() {
   try {
     const snapshot = await getDocs(collection(db, "products"));
 
-    // Clear skeletons
     container.innerHTML = "";
 
-    let total = 0;
-    let published = 0;
-    let drafts = 0;
+    let total = 0,
+      published = 0,
+      drafts = 0;
 
     snapshot.forEach(function (document) {
       const data = document.data();
 
-      // Filter: show only this vendor's products
       const isMine =
         !data.vendorName ||
         data.vendorName.trim().toLowerCase() ===
@@ -158,17 +163,12 @@ async function loadMyProducts() {
       if (!isMine) return;
 
       total++;
-      if ((data.status || "published") === "draft") {
-        drafts++;
-      } else {
-        published++;
-      }
+      if ((data.status || "published") === "draft") drafts++;
+      else published++;
 
-      const card = buildCard(document.id, data);
-      container.appendChild(card);
+      container.appendChild(buildCard(document.id, data));
     });
 
-    // Update stats
     const totalEl = document.getElementById("totalCount");
     const publishedEl = document.getElementById("publishedCount");
     const draftEl = document.getElementById("draftCount");
@@ -177,7 +177,6 @@ async function loadMyProducts() {
     if (publishedEl) publishedEl.textContent = published;
     if (draftEl) draftEl.textContent = drafts;
 
-    // Empty state
     if (total === 0) {
       const empty = document.createElement("div");
       empty.className = "mp-empty";
@@ -211,7 +210,7 @@ async function loadMyProducts() {
     container.innerHTML = "";
     const msg = document.createElement("p");
     msg.style.cssText =
-      "grid-column:1/-1; text-align:center; color:#ef4444; padding:40px 0;";
+      "grid-column:1/-1;text-align:center;color:#ef4444;padding:40px 0;";
     msg.textContent = "Failed to load products. Please refresh and try again.";
     container.appendChild(msg);
   }
