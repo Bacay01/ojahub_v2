@@ -163,6 +163,17 @@
                 contenteditable="true"
                 data-placeholder="Describe your product, features, benefits, etc..."
               ></div>
+              <p
+                id="descCounter"
+                style="
+                  font-size: 12px;
+                  color: #9ca3af;
+                  text-align: right;
+                  margin-top: 4px;
+                "
+              >
+                150 characters remaining
+              </p>
               <!-- Hidden textarea to hold plain text for form submission -->
               <textarea id="descHidden" style="display: none"></textarea>
             </div>
@@ -171,7 +182,7 @@
             <div class="form-row">
               <label class="ap-label">
                 Product Images
-                <span
+                <!-- <span
                   style="
                     color: var(--text-muted);
                     font-weight: 400;
@@ -179,7 +190,7 @@
                     margin-left: 4px;
                   "
                   >Upload up to 5 images</span
-                >
+                > -->
               </label>
               <div class="ap-upload-zone" id="uploadZone">
                 <input type="file" id="image" accept="image/*" multiple />

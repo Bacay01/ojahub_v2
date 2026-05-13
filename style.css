@@ -1808,6 +1808,11 @@ body {
   color: #64748b;
 }
 
+.footer-copy a {
+  text-decoration: none;
+  color: #64748b;
+}
+
 /* MOBILE */
 @media (max-width: 768px) {
   .footer-grid {
@@ -2107,14 +2112,14 @@ body {
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #e56700;
+  color: #ff7a00;
   margin-bottom: 1rem;
 }
 
 .how-it-works-eyebrow-line {
   width: 24px;
   height: 1.5px;
-  background: #e56700;
+  background: #ff7a00;
   display: inline-block;
 }
 
@@ -4875,4 +4880,20 @@ body {
   color: #e53935;
   padding: 40px;
   font-size: 15px;
+}
+
+/* removes all the clamping and lets the full description show */
+/* .product-card-desc {
+  display: block;
+  -webkit-line-clamp: unset;
+  overflow: visible;
+  max-height: none;
+} */
+
+.product-card-desc {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+  overflow: hidden;
+  max-height: none;
 }

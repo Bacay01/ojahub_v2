@@ -748,14 +748,14 @@ input.has-prefix:focus {
 /* =============================================
    FOOTER
    ============================================= */
-.site-footer {
+/* .site-footer {
   text-align: center;
   padding: 28px 24px;
   font-size: 13px;
   color: var(--text-muted);
   border-top: 1px solid var(--border);
   margin-top: 60px;
-}
+} */
 
 /* =============================================
    RESPONSIVE

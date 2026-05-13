@@ -8,7 +8,14 @@ import {
   getDoc,
   updateDoc,
 } from "https://www.gstatic.com/firebasejs/12.12.0/firebase-firestore.js";
+import {
+  getAuth,
+  onAuthStateChanged,
+} from "https://www.gstatic.com/firebasejs/12.12.0/firebase-auth.js";
 
+// ─────────────────────────────────────────────
+// INIT  (same config as add-product.js)
+// ─────────────────────────────────────────────
 const firebaseConfig = {
   apiKey: "AIzaSyAZRPoc-FkbdQ8ZNSkGIYFukU1TG-FJF6s",
   authDomain: "ojahub-c10d9.firebaseapp.com",
@@ -18,11 +25,18 @@ const firebaseConfig = {
   appId: "1:896902243220:web:7259724fe7865c281aa581",
 };
 
-const app = initializeApp(firebaseConfig);
+// getApps check prevents "duplicate app" error if Firebase is already
+// initialized by another script on the same page (e.g. main.js)
+import {
+  getApps,
+  getApp,
+} from "https://www.gstatic.com/firebasejs/12.12.0/firebase-app.js";
+const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const auth = getAuth(app);
 
 // ─────────────────────────────────────────────
-// READ PRODUCT ID FROM URL  ?id=XXXX
+// PRODUCT ID FROM URL
 // ─────────────────────────────────────────────
 const params = new URLSearchParams(window.location.search);
 const productId = params.get("id");
@@ -70,7 +84,22 @@ let existingImages = [];
 let selectedFiles = [];
 
 // ─────────────────────────────────────────────
-// LOAD PRODUCT FROM FIRESTORE
+// WAIT FOR AUTH SESSION BEFORE LOADING
+// Without this, auth.currentUser is null on page
+// load and Firestore rejects the updateDoc call.
+// ─────────────────────────────────────────────
+onAuthStateChanged(auth, function (user) {
+  if (!user) {
+    alert("You must be logged in to edit products.");
+    window.location.href = "pages/my_product/my_product.html";
+    return;
+  }
+  // Auth is confirmed — safe to load and later write
+  loadProduct();
+});
+
+// ─────────────────────────────────────────────
+// LOAD PRODUCT
 // ─────────────────────────────────────────────
 async function loadProduct() {
   try {
@@ -106,7 +135,7 @@ async function loadProduct() {
 }
 
 // ─────────────────────────────────────────────
-// RENDER EXISTING IMAGE THUMBNAILS
+// RENDER EXISTING THUMBNAILS
 // ─────────────────────────────────────────────
 function renderExistingThumbs() {
   existingThumbs.innerHTML = "";
@@ -128,19 +157,19 @@ function renderExistingThumbs() {
     img.src = url;
     img.alt = "existing";
 
-    const removeBtn = document.createElement("button");
-    removeBtn.className = "ap-thumb-remove";
-    removeBtn.innerHTML = "<i class='bi bi-x'></i>";
-    removeBtn.title = "Remove this image";
-    removeBtn.type = "button";
-    removeBtn.onclick = function () {
+    const btn = document.createElement("button");
+    btn.className = "ap-thumb-remove";
+    btn.innerHTML = "<i class='bi bi-x'></i>";
+    btn.title = "Remove";
+    btn.type = "button";
+    btn.onclick = function () {
       existingImages.splice(i, 1);
       renderExistingThumbs();
       syncPreviewImage();
     };
 
     wrap.appendChild(img);
-    wrap.appendChild(removeBtn);
+    wrap.appendChild(btn);
     existingThumbs.appendChild(wrap);
   });
 
@@ -176,7 +205,7 @@ function renderNewThumbs() {
 }
 
 // ─────────────────────────────────────────────
-// SYNC PREVIEW IMAGE
+// PREVIEW IMAGE
 // ─────────────────────────────────────────────
 function syncPreviewImage() {
   if (existingImages.length > 0) {
@@ -194,7 +223,7 @@ function syncPreviewImage() {
 }
 
 // ─────────────────────────────────────────────
-// LIVE PREVIEW SYNC
+// LIVE PREVIEW
 // ─────────────────────────────────────────────
 function syncPreview() {
   const name = nameInput.value.trim();
@@ -266,7 +295,7 @@ descEditor.addEventListener("keyup", function () {
 });
 
 // ─────────────────────────────────────────────
-// IMAGE UPLOAD — NEW FILES
+// IMAGE UPLOAD
 // ─────────────────────────────────────────────
 imageInput.addEventListener("change", function (e) {
   const remaining = 5 - existingImages.length;
@@ -305,15 +334,18 @@ async function uploadToCloudinary(file) {
   fd.append("upload_preset", "ojahub_upload");
   const res = await fetch(
     "https://api.cloudinary.com/v1_1/ds3zdc11c/image/upload",
-    { method: "POST", body: fd },
+    {
+      method: "POST",
+      body: fd,
+    },
   );
   const data = await res.json();
-  if (!data.secure_url) throw new Error("Image upload failed");
+  if (!data.secure_url) throw new Error("Cloudinary upload failed");
   return data.secure_url;
 }
 
 // ─────────────────────────────────────────────
-// SAVE HANDLER
+// SAVE
 // ─────────────────────────────────────────────
 async function handleSave(forceDraft = false) {
   const name = nameInput.value.trim();
@@ -328,7 +360,13 @@ async function handleSave(forceDraft = false) {
   if (existingImages.length === 0 && selectedFiles.length === 0)
     return alert("Please keep or add at least one image.");
 
-  // Lock UI
+  // Auth must still be valid at save time
+  const user = auth.currentUser;
+  if (!user) {
+    alert("Session expired. Please log in again.");
+    return;
+  }
+
   loadingMsg.textContent = selectedFiles.length
     ? "Uploading images… ⏳"
     : "Saving changes… ⏳";
@@ -337,16 +375,14 @@ async function handleSave(forceDraft = false) {
   saveBtn.innerHTML = `<span class="ap-spinner"></span> Saving…`;
 
   try {
-    // Upload any new files to Cloudinary first
+    // Upload new images to Cloudinary
     const newUrls = [];
     for (const file of selectedFiles) {
-      const url = await uploadToCloudinary(file);
-      newUrls.push(url);
+      newUrls.push(await uploadToCloudinary(file));
     }
 
     const allImages = [...existingImages, ...newUrls];
 
-    // Write to Firestore and WAIT for the server to confirm
     await updateDoc(doc(db, "products", productId), {
       name,
       price: Number(price),
@@ -358,35 +394,56 @@ async function handleSave(forceDraft = false) {
       updatedAt: new Date(),
     });
 
-    loadingMsg.textContent = "";
-
-    // ── Navigate back with ?updated=1 so my_product.js
-    //    knows to skip the cache and force a fresh server fetch ──
+    // Navigate back — ?updated=1 triggers a hard reload in my_product.js
     window.location.href = "pages/my_product/my_product.html?updated=1";
   } catch (err) {
     console.error("Save error:", err);
-    loadingMsg.textContent = "Something went wrong. Please try again.";
+    loadingMsg.textContent =
+      err.code === "permission-denied"
+        ? "Permission denied — check your Firestore rules."
+        : "Something went wrong. Please try again.";
     saveBtn.disabled = false;
     saveDraftBtn.disabled = false;
     saveBtn.innerHTML = `<i class="bi bi-check2-circle"></i> Save Changes`;
   }
 }
 
-saveBtn.addEventListener("click", function () {
-  handleSave(false);
-});
-saveDraftBtn.addEventListener("click", function () {
-  handleSave(true);
-});
+saveBtn.addEventListener("click", () => handleSave(false));
+saveDraftBtn.addEventListener("click", () => handleSave(true));
 
 // ─────────────────────────────────────────────
-// BACK  (cancel — no update flag)
+// BACK
 // ─────────────────────────────────────────────
 window.goBack = function () {
   window.location.href = "pages/my_product/my_product.html";
 };
 
-// ─────────────────────────────────────────────
-// INIT
-// ─────────────────────────────────────────────
-loadProduct();
+const DESC_LIMIT = 150; // characters — adjust to your taste
+
+descEditor.addEventListener("input", () => {
+  const text = descEditor.innerText.trim();
+
+  // Enforce limit
+  if (text.length > DESC_LIMIT) {
+    descEditor.innerText = text.slice(0, DESC_LIMIT);
+    // Move cursor to end
+    const range = document.createRange();
+    const sel = window.getSelection();
+    range.selectNodeContents(descEditor);
+    range.collapse(false);
+    sel.removeAllRanges();
+    sel.addRange(range);
+  }
+
+  // Update counter
+  const remaining = DESC_LIMIT - Math.min(text.length, DESC_LIMIT);
+  document.getElementById("descCounter").textContent =
+    remaining + " characters remaining";
+
+  // Update preview
+  const preview = descEditor.innerText.trim();
+  previewDesc.textContent =
+    preview ||
+    "This is a short description of your product. It will appear here for buyers to preview.";
+  descHidden.value = preview;
+});

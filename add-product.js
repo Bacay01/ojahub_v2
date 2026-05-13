@@ -65,13 +65,43 @@ priceInput.addEventListener("input", () => {
     : "₦" + v.toLocaleString("en-NG", { minimumFractionDigits: 2 });
 });
 
+const DESC_LIMIT = 150; // characters — adjust to your taste
+
 descEditor.addEventListener("input", () => {
   const text = descEditor.innerText.trim();
+
+  // Enforce limit
+  if (text.length > DESC_LIMIT) {
+    descEditor.innerText = text.slice(0, DESC_LIMIT);
+    // Move cursor to end
+    const range = document.createRange();
+    const sel = window.getSelection();
+    range.selectNodeContents(descEditor);
+    range.collapse(false);
+    sel.removeAllRanges();
+    sel.addRange(range);
+  }
+
+  // Update counter
+  const remaining = DESC_LIMIT - Math.min(text.length, DESC_LIMIT);
+  document.getElementById("descCounter").textContent =
+    remaining + " characters remaining";
+
+  // Update preview
+  const preview = descEditor.innerText.trim();
   previewDesc.textContent =
-    text ||
+    preview ||
     "This is a short description of your product. It will appear here for buyers to preview.";
-  descHidden.value = text;
+  descHidden.value = preview;
 });
+
+// descEditor.addEventListener("input", () => {
+//   const text = descEditor.innerText.trim();
+//   previewDesc.textContent =
+//     text ||
+//     "This is a short description of your product. It will appear here for buyers to preview.";
+//   descHidden.value = text;
+// });
 
 categoryInput.addEventListener("change", () => {
   const opt = categoryInput.options[categoryInput.selectedIndex];
